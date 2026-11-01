@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactList from '../components/ContactList.astro';
+import { site } from '../data/site';
+
+const description = 'Beastry 是一个开源软件社区。动物意象的产品线，认真对待每个项目与贡献者。';
+---
+
+<Base title="关于" description={description}>
+  <article class="page">
+    <div class="wrap prose">
+      <p class="kicker">About · Community</p>
+      <h1>关于 Beastry</h1>
+      <p>
+        Beastry 是一个开源软件社区，家在
+        <a href={site.url}>beastry.app</a>。我们做给自己也希望别人用得上的工具：截图、家居、记忆、密钥、收藏、信件和压缩包。
+      </p>
+      <p lang="en">
+        Beastry is an open-source software community. The work matters, and so do the people who
+        contribute to it.
+      </p>
+
+      <h2>动物意象</h2>
+      <p>
+        产品线上有动物。Octoshot 的正式图标是一只原创章鱼；LetterBee 的名字里有蜜蜂。本站其余图形，包括这两处的简笔画，都是占位，用来在网格里把项目分开。正式 logo 以各仓库为准，之后会换上。
+      </p>
+
+      <h2>参与</h2>
+      <p>
+        到 <a href={site.github}>GitHub 上的 Beastry</a> 看仓库。每个项目按自己的 README 接受 issue 和 pull request，许可证也各自保留。
+        Stow 在转入组织之前，代码仍在
+        <a href="https://github.com/skyswordw/stow">skyswordw/stow</a>。
+      </p>
+      <p>想找人聊天，写信到 <a href="mailto:community@beastry.app">community@beastry.app</a>。</p>
+
+      <h2>安全</h2>
+      <p>
+        如果你发现漏洞，请寄到 <a href="mailto:security@beastry.app">security@beastry.app</a>，我们希望你负责任地披露。AgentKey 这类密钥工具尚未经过独立安全审计，使用前请读它自己的说明。
+      </p>
+
+      <h2>联系</h2>
+      <ContactList />
+    </div>
+  </article>
+</Base>

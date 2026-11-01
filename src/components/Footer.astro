@@ -1,0 +1,29 @@
+---
+import { site } from '../data/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <p class="footer-name">Beastry</p>
+      <p class="muted">开源软件社区 · Open-source software community</p>
+    </div>
+    <ul class="footer-links">
+      {
+        site.emails.map((email) => (
+          <li>
+            <a href={`mailto:${email.address}`}>{email.address}</a>
+          </li>
+        ))
+      }
+      <li>
+        <a href={site.x.href} rel="noreferrer">X {site.x.handle}</a>
+      </li>
+      <li>
+        <a href={site.github} rel="noreferrer">GitHub</a>
+      </li>
+    </ul>
+    <p class="legal">© {year} Beastry. 各项目保留自己的许可证。</p>
+  </div>
+</footer>

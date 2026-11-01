@@ -1,0 +1,56 @@
+---
+import Base from '../layouts/Base.astro';
+import Mark from '../components/Mark.astro';
+import { products } from '../data/site';
+
+const description =
+  'Beastry 的开源项目：Octoshot、MijiaBar、记忆面包、AgentKey、Splatty、LetterBee、Stow。';
+---
+
+<Base title="项目" description={description}>
+  <article class="page">
+    <div class="wrap">
+      <p class="kicker">Projects</p>
+      <h1>项目</h1>
+      <p class="lede">现在挂在这个名字下的软件。点名字进入代码仓库。</p>
+      <p class="lede en" lang="en">The software under this name today. Each title opens its repository.</p>
+
+      <ol class="project-list">
+        {
+          products.map((product) => (
+            <li class="project" id={product.slug} style={`--wash: ${product.wash}; --wash-dark: ${product.washDark};`}>
+              <span class="mark">
+                <Mark name={product.mark} label={product.markLabel} />
+              </span>
+              <div class="project-main">
+                <h2>
+                  <a href={product.href} rel="noreferrer">
+                    {product.name}
+                  </a>
+                  {product.aka && <span class="aka">{product.aka}</span>}
+                  <span class="project-platform">{product.platform}</span>
+                </h2>
+                <p>{product.summaryZh}</p>
+                <p class="muted" lang="en">
+                  {product.summaryEn}
+                </p>
+                <p class="detail">{product.detailZh}</p>
+                <p class="detail muted" lang="en">
+                  {product.detailEn}
+                </p>
+                {product.noteZh && (
+                  <p class="note">
+                    {product.noteZh}
+                    <span class="en" lang="en">
+                      {product.noteEn}
+                    </span>
+                  </p>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </article>
+</Base>

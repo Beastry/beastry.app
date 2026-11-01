@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import ProductCard from '../components/ProductCard.astro';
+import ContactList from '../components/ContactList.astro';
+import { products, site } from '../data/site';
+
+const description =
+  'Beastry 是开源软件社区。动物意象的产品线：Octoshot、MijiaBar、记忆面包、AgentKey、Splatty、LetterBee 与 Stow。';
+---
+
+<Base description={description}>
+  <section class="hero">
+    <div class="wrap">
+      <p class="kicker">Beastry · 开源软件社区 <span lang="en">· Open source</span></p>
+      <h1>一只动物，<br />一件认真的事。</h1>
+      <p class="lede">
+        我们做开源软件。产品带着动物意象，代码和写代码的人，都被认真对待。
+      </p>
+      <p class="lede en" lang="en">
+        An open-source community. One creature for each project, and care for the people who build it.
+      </p>
+      <div class="hero-actions">
+        <a class="button primary" href="#work">看项目</a>
+        <a class="button ghost" href={site.github} rel="noreferrer">GitHub 组织</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="work" aria-labelledby="work-title">
+    <div class="wrap">
+      <h2 class="section-title" id="work-title">作品 · Projects</h2>
+      <ul class="product-grid">
+        {products.map((product, index) => <ProductCard product={product} index={index} />)}
+      </ul>
+      <p class="footnote">
+        页面上的动物图形是占位，方便认项目。正式标志以各仓库为准。
+        <span lang="en">The animal drawings are stand-ins until each project’s own logo is used.</span>
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <h2 class="section-title" id="contact-title">联系 · Contact</h2>
+      <ContactList />
+    </div>
+  </section>
+</Base>
