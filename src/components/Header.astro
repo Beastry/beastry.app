@@ -1,0 +1,90 @@
+---
+import { site } from '../data/site';
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const links = [
+  { href: '/projects', label: '项目' },
+  { href: '/about', label: '关于' },
+  { href: '/#contact', label: '联系' },
+];
+---
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="wordmark" href="/" aria-label="Beastry 首页">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M10.2 14.2 8 7.5l6.2 4.2" fill="currentColor"></path>
+        <path d="M21.8 14.2 24 7.5l-6.2 4.2" fill="currentColor"></path>
+        <circle cx="16" cy="18.5" r="7.2" fill="none" stroke="currentColor" stroke-width="1.7"></circle>
+      </svg>
+      <span>Beastry</span>
+    </a>
+    <nav class="nav" aria-label="主导航">
+      {
+        links.map((link) => (
+          <a href={link.href} aria-current={path === link.href ? 'page' : undefined}>
+            {link.label}
+          </a>
+        ))
+      }
+      <a href={site.github} rel="noreferrer">GitHub</a>
+      <button type="button" class="theme-btn" id="theme-toggle" aria-label="切换深色或浅色">
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M15.5 3.5a8.2 8.2 0 1 0 5 12.2A7.2 7.2 0 0 1 15.5 3.5z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linejoin="round"></path>
+        </svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="3.4" fill="none" stroke="currentColor" stroke-width="1.7"></circle>
+          <path
+            d="M12 3.5v2.2M12 18.3v2.2M3.5 12h2.2M18.3 12h2.2M6 6l1.6 1.6M16.4 16.4 18 18M18 6l-1.6 1.6M7.6 16.4 6 18"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"></path>
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const root = document.documentElement;
+  const button = document.getElementById('theme-toggle');
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
+
+  function preferred(): 'light' | 'dark' {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function current(): 'light' | 'dark' {
+    const set = root.dataset.theme;
+    if (set === 'light' || set === 'dark') return set;
+    return preferred();
+  }
+
+  function sync() {
+    const mode = current();
+    if (themeMeta) themeMeta.setAttribute('content', mode === 'dark' ? '#12110f' : '#f3ecdf');
+    if (!button) return;
+    const nextLabel = mode === 'dark' ? '切换到浅色' : '切换到深色';
+    button.setAttribute('aria-label', nextLabel);
+  }
+
+  button?.addEventListener('click', () => {
+    const next = current() === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try {
+      localStorage.setItem('theme', next);
+    } catch {
+      /* private mode */
+    }
+    sync();
+  });
+
+  sync();
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', sync);
+</script>

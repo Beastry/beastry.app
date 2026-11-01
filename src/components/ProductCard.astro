@@ -1,0 +1,47 @@
+---
+import Mark from './Mark.astro';
+import { indexLabel, type Product } from '../data/site';
+
+interface Props {
+  product: Product;
+  index: number;
+}
+
+const { product, index } = Astro.props;
+---
+
+<li>
+  <a
+    class="card"
+    href={product.href}
+    style={`--wash: ${product.wash}; --wash-dark: ${product.washDark};`}
+    rel="noreferrer"
+  >
+    <div class="card-top">
+      <span class="mark">
+        <Mark name={product.mark} label={product.markLabel} />
+      </span>
+      <span class="index">{indexLabel(index)}</span>
+    </div>
+    <h3>
+      {product.name}
+      {product.aka && <span class="aka">{product.aka}</span>}
+    </h3>
+    <p class="summary">{product.summaryZh}</p>
+    <p class="summary en" lang="en">{product.summaryEn}</p>
+    {
+      product.noteZh && (
+        <p class="note">
+          {product.noteZh}
+          <span class="en" lang="en">
+            {product.noteEn}
+          </span>
+        </p>
+      )
+    }
+    <p class="card-meta">
+      <span>{product.platform}</span>
+      <span class="go">GitHub <span aria-hidden="true">↗</span></span>
+    </p>
+  </a>
+</li>

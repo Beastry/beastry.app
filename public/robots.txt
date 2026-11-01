@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://beastry.app/sitemap-index.xml
