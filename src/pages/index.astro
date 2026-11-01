@@ -10,19 +10,41 @@ const description =
 
 <Base description={description}>
   <section class="hero">
-    <div class="wrap">
-      <p class="kicker">Beastry · 开源软件社区 <span lang="en">· Open source</span></p>
-      <h1>一只动物，<br />一件认真的事。</h1>
-      <p class="lede">
-        我们做开源软件。产品带着动物意象，代码和写代码的人，都被认真对待。
-      </p>
-      <p class="lede en" lang="en">
-        An open-source community. One creature for each project, and care for the people who build it.
-      </p>
-      <div class="hero-actions">
-        <a class="button primary" href="#work">看项目</a>
-        <a class="button ghost" href={site.github} rel="noreferrer">GitHub 组织</a>
+    <div class="wrap hero-grid">
+      <div>
+        <p class="kicker">Beastry · 开源软件社区 <span lang="en">· Open source</span></p>
+        <h1>开源软件社区，<br />温暖一点。</h1>
+        <p class="lede">
+          我们做开源软件。产品带着动物意象，粉彩卡片和认真写的代码，都希望让人觉得亲近。
+        </p>
+        <p class="lede en" lang="en">
+          An open-source community with a softer edge — one creature for each project, and care for the people who build it.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#work">看项目</a>
+          <a class="button ghost" href={site.github} rel="noreferrer">GitHub 组织</a>
+        </div>
       </div>
+      <figure class="hero-visual">
+        <img
+          src="/brand/logo-lockup.jpg"
+          width="1024"
+          height="1024"
+          alt="Beastry 字标与珊瑚小标记"
+          loading="eager"
+          decoding="async"
+        />
+      </figure>
+    </div>
+    <div class="wrap mascot-band">
+      <img
+        src="/brand/mascots-row.jpg"
+        width="1536"
+        height="640"
+        alt="Beastry 产品吉祥物横排示意"
+        loading="lazy"
+        decoding="async"
+      />
     </div>
   </section>
 
@@ -33,8 +55,8 @@ const description =
         {products.map((product, index) => <ProductCard product={product} index={index} />)}
       </ul>
       <p class="footnote">
-        页面上的动物图形是占位，方便认项目。正式标志以各仓库为准。
-        <span lang="en">The animal drawings are stand-ins until each project’s own logo is used.</span>
+        上方吉祥物与卡片色是品牌 v1 示意；正式标志以各仓库为准。
+        <span lang="en">Mascots and pastel tiles are brand v1 stand-ins until each project ships its own mark.</span>
       </p>
     </div>
   </section>

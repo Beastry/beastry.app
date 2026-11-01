@@ -69,8 +69,8 @@ export const products: Product[] = [
       'A native macOS capture tool. Region, window, fullscreen, scrolling capture, and recording, with on-device AI. The release build targets Apple Silicon.',
     href: 'https://github.com/Beastry/Octoshot',
     platform: 'macOS',
-    wash: '#d5ebe6',
-    washDark: '#17302c',
+    wash: '#D6ECE7',
+    washDark: '#1A3530',
   },
   {
     slug: 'mijiabar',
@@ -87,8 +87,8 @@ export const products: Product[] = [
     platform: 'macOS',
     noteZh: '非官方，与小米公司无关。',
     noteEn: 'Unofficial. Not affiliated with Xiaomi.',
-    wash: '#f3ddd0',
-    washDark: '#3a261c',
+    wash: '#FFD6C7',
+    washDark: '#3A261C',
   },
   {
     slug: 'jiyi-mianbao',
@@ -104,8 +104,8 @@ export const products: Product[] = [
       'Turn a Bilibili video into a timestamped Anki deck and Xiaohongshu cards. Local subtitle files work too.',
     href: 'https://github.com/Beastry/jiyi-mianbao',
     platform: 'Python',
-    wash: '#f3e6c8',
-    washDark: '#332a16',
+    wash: '#FFE8B8',
+    washDark: '#332A16',
   },
   {
     slug: 'agentkey',
@@ -122,8 +122,8 @@ export const products: Product[] = [
     platform: 'Apple',
     noteZh: '尚未安全审计。',
     noteEn: 'Not yet security-audited.',
-    wash: '#f6d9c6',
-    washDark: '#3a2418',
+    wash: '#E7E2F6',
+    washDark: '#2A2438',
   },
   {
     slug: 'splatty',
@@ -140,8 +140,8 @@ export const products: Product[] = [
     platform: 'iPhone · Mac',
     noteZh: '早期版本，接口还会变。',
     noteEn: 'Early build. Interfaces may change.',
-    wash: '#dce8cf',
-    washDark: '#24301c',
+    wash: '#D6E9F6',
+    washDark: '#1C2A33',
   },
   {
     slug: 'letterbee',
@@ -157,8 +157,8 @@ export const products: Product[] = [
       'A web app for writing, sending, waiting, and opening letters. The wait is part of the message.',
     href: 'https://github.com/Beastry/LetterBee',
     platform: 'Web',
-    wash: '#f6e7b8',
-    washDark: '#332c14',
+    wash: '#FFE8B8',
+    washDark: '#332C14',
   },
   {
     slug: 'stow',
@@ -175,8 +175,8 @@ export const products: Product[] = [
     platform: 'macOS',
     noteZh: '转入组织前，仓库仍在 skyswordw/stow。',
     noteEn: 'Still at skyswordw/stow until the org transfer.',
-    wash: '#eadfce',
-    washDark: '#2c261c',
+    wash: '#FFD6C7',
+    washDark: '#2C261C',
   },
 ];
 

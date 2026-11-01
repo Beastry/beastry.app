@@ -12,11 +12,7 @@ const links = [
 <header class="site-header">
   <div class="wrap header-inner">
     <a class="wordmark" href="/" aria-label="Beastry 首页">
-      <svg viewBox="0 0 32 32" aria-hidden="true">
-        <path d="M10.2 14.2 8 7.5l6.2 4.2" fill="currentColor"></path>
-        <path d="M21.8 14.2 24 7.5l-6.2 4.2" fill="currentColor"></path>
-        <circle cx="16" cy="18.5" r="7.2" fill="none" stroke="currentColor" stroke-width="1.7"></circle>
-      </svg>
+      <img class="brand-mark" src="/brand/mark.jpg" width="64" height="64" alt="" />
       <span>Beastry</span>
     </a>
     <nav class="nav" aria-label="主导航">
@@ -68,7 +64,7 @@ const links = [
 
   function sync() {
     const mode = current();
-    if (themeMeta) themeMeta.setAttribute('content', mode === 'dark' ? '#12110f' : '#f3ecdf');
+    if (themeMeta) themeMeta.setAttribute('content', mode === 'dark' ? '#2a2421' : '#fff6ee');
     if (!button) return;
     const nextLabel = mode === 'dark' ? '切换到浅色' : '切换到深色';
     button.setAttribute('aria-label', nextLabel);
