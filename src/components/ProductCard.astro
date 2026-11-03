@@ -1,6 +1,6 @@
 ---
 import Mark from './Mark.astro';
-import { indexLabel, type Product } from '../data/site';
+import { indexLabel, statusMeta, type Product } from '../data/site';
 
 interface Props {
   product: Product;
@@ -8,6 +8,8 @@ interface Props {
 }
 
 const { product, index } = Astro.props;
+const status = statusMeta[product.status];
+const external = product.href.startsWith('http');
 ---
 
 <li>
@@ -15,13 +17,16 @@ const { product, index } = Astro.props;
     class="card"
     href={product.href}
     style={`--wash: ${product.wash}; --wash-dark: ${product.washDark};`}
-    rel="noreferrer"
+    rel={external ? 'noreferrer' : undefined}
   >
     <div class="card-top">
       <span class="mark">
         <Mark name={product.mark} label={product.markLabel} />
       </span>
       <span class="index">{indexLabel(index)}</span>
+    </div>
+    <div class="card-badges">
+      <span class={`status status-${product.status}`}>{status.zh}<span class="en" lang="en"> · {status.en}</span></span>
     </div>
     <h3>
       {product.name}
@@ -41,7 +46,7 @@ const { product, index } = Astro.props;
     }
     <p class="card-meta">
       <span>{product.platform}</span>
-      <span class="go">GitHub <span aria-hidden="true">↗</span></span>
+      <span class="go">{external ? 'GitHub' : '站点'} <span aria-hidden="true">↗</span></span>
     </p>
   </a>
 </li>

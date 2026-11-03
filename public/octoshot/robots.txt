@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://beastry.app/octoshot/sitemap-index.xml

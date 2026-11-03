@@ -2,10 +2,14 @@
 import Base from '../layouts/Base.astro';
 import ProductCard from '../components/ProductCard.astro';
 import ContactList from '../components/ContactList.astro';
-import { products, site } from '../data/site';
+import { productsByStatus, site, statusMeta } from '../data/site';
+
+const beta = productsByStatus('beta');
+const developing = productsByStatus('developing');
+const onhold = productsByStatus('onhold');
 
 const description =
-  'Beastry 是开源软件社区。动物意象的产品线：Octoshot、MijiaBar、记忆面包、AgentKey、Splatty、LetterBee 与 Stow。';
+  'Beastry 是开源软件社区。公测：Stow、MijiaBar、Octoshot；另有开发中与搁置项目。想法收集见 Beastry/ideas。';
 ---
 
 <Base description={description}>
@@ -15,13 +19,14 @@ const description =
         <p class="kicker">Beastry · 开源软件社区 <span lang="en">· Open source</span></p>
         <h1>开源软件社区，<br />温暖一点。</h1>
         <p class="lede">
-          我们做开源软件。产品带着动物意象，粉彩卡片和认真写的代码，都希望让人觉得亲近。
+          我们做开源软件，也一起想下一只会是什么。产品带着动物意象；粉彩卡片和认真写的代码，都希望让人觉得亲近。
         </p>
         <p class="lede en" lang="en">
-          An open-source community with a softer edge — one creature for each project, and care for the people who build it.
+          An open-source community with a softer edge — one creature for each project, and room to co-create the next idea.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="#work">看项目</a>
+          <a class="button ghost" href={site.ideas} rel="noreferrer">提想法 · Ideas</a>
           <a class="button ghost" href={site.github} rel="noreferrer">GitHub 组织</a>
         </div>
       </div>
@@ -51,11 +56,53 @@ const description =
   <section class="section" id="work" aria-labelledby="work-title">
     <div class="wrap">
       <h2 class="section-title" id="work-title">作品 · Projects</h2>
-      <ul class="product-grid">
-        {products.map((product, index) => <ProductCard product={product} index={index} />)}
-      </ul>
+
+      <div class="status-block" id="beta">
+        <h3 class="status-heading">
+          {statusMeta.beta.zh}
+          <span lang="en">· {statusMeta.beta.en}</span>
+        </h3>
+        <p class="status-lede">已可试用的三款；各自有独立介绍页。</p>
+        <ul class="product-grid">
+          {beta.map((product, index) => <ProductCard product={product} index={index} />)}
+        </ul>
+      </div>
+
+      <div class="status-block" id="developing">
+        <h3 class="status-heading">
+          {statusMeta.developing.zh}
+          <span lang="en">· {statusMeta.developing.en}</span>
+        </h3>
+        <p class="status-lede">还在长的项目，欢迎到仓库看进度、开 Issue。</p>
+        <ul class="product-grid">
+          {developing.map((product, index) => (
+            <ProductCard product={product} index={beta.length + index} />
+          ))}
+        </ul>
+      </div>
+
+      <details class="status-block onhold-block" id="onhold">
+        <summary class="status-heading">
+          {statusMeta.onhold.zh}
+          <span lang="en">· {statusMeta.onhold.en}</span>
+          <span class="summary-hint">展开</span>
+        </summary>
+        <p class="status-lede">暂时搁置，代码仍在 GitHub。</p>
+        <ul class="product-grid">
+          {onhold.map((product, index) => (
+            <ProductCard product={product} index={beta.length + developing.length + index} />
+          ))}
+        </ul>
+      </details>
+
+      <p class="footnote ideas-cta">
+        下一只会是什么？到
+        <a href={site.ideas} rel="noreferrer">Beastry/ideas</a>
+        提交或讨论想法（剪贴板、PDF 等构思已在那里）。
+        <span lang="en">Propose ideas at Beastry/ideas — clipboard and PDF seeds are already filed.</span>
+      </p>
       <p class="footnote">
-        上方吉祥物与卡片色是品牌 v1 示意；正式标志以各仓库为准。
+        上方吉祥物与卡片色是品牌 v1 示意；正式标志以各仓库为准。动物园单品形象另开专项。
         <span lang="en">Mascots and pastel tiles are brand v1 stand-ins until each project ships its own mark.</span>
       </p>
     </div>

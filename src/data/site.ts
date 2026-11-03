@@ -7,6 +7,18 @@ export type MarkName =
   | 'bee'
   | 'squirrel';
 
+/** Product maturity on the mother-brand site. */
+export type ProductStatus = 'beta' | 'developing' | 'onhold';
+
+export const statusMeta: Record<
+  ProductStatus,
+  { zh: string; en: string; order: number }
+> = {
+  beta: { zh: '公测', en: 'Beta', order: 0 },
+  developing: { zh: '开发中', en: 'In development', order: 1 },
+  onhold: { zh: '搁置', en: 'On hold', order: 2 },
+};
+
 export interface Product {
   slug: string;
   name: string;
@@ -14,11 +26,14 @@ export interface Product {
   mark: MarkName;
   /** What the placeholder drawing depicts. Not an official logo. */
   markLabel: string;
+  status: ProductStatus;
   summaryZh: string;
   summaryEn: string;
   detailZh: string;
   detailEn: string;
+  /** Primary card link: product site when migrated, else GitHub. */
   href: string;
+  github: string;
   platform: string;
   /** Short factual caveat shown on the card. */
   noteZh?: string;
@@ -31,6 +46,7 @@ export const site = {
   name: 'Beastry',
   url: 'https://beastry.app',
   github: 'https://github.com/Beastry',
+  ideas: 'https://github.com/Beastry/ideas',
   x: {
     handle: '@beastryapp',
     href: 'https://x.com/beastryapp',
@@ -56,34 +72,37 @@ export const site = {
 
 export const products: Product[] = [
   {
-    slug: 'octoshot',
-    name: 'Octoshot',
-    aka: '一酱',
-    mark: 'octopus',
-    markLabel: '章鱼',
-    summaryZh: '八只手，一次截完。',
-    summaryEn: 'macOS screenshot with on-device AI.',
+    slug: 'stow',
+    name: 'Stow',
+    mark: 'squirrel',
+    markLabel: '松鼠',
+    status: 'beta',
+    summaryZh: '原生 macOS 压缩包工具。',
+    summaryEn: 'A native macOS archive tool.',
     detailZh:
-      'macOS 原生截图：区域、窗口、全屏、滚动拼接和录屏，智能处理留在本机。菜单栏常驻。正式发布版面向 Apple Silicon。',
+      '浏览、预览、解压并打包多种压缩格式。免费开源，安装与 Finder 集成接在真实引擎上。',
     detailEn:
-      'A native macOS capture tool. Region, window, fullscreen, scrolling capture, and recording, with on-device AI. The release build targets Apple Silicon.',
-    href: 'https://github.com/Beastry/Octoshot',
+      'Browse, preview, extract, and pack many archive formats. Free and open source, on a real archive engine.',
+    href: '/stow/',
+    github: 'https://github.com/Beastry/stow',
     platform: 'macOS',
-    wash: '#D6ECE7',
-    washDark: '#1A3530',
+    wash: '#FFD6C7',
+    washDark: '#2C261C',
   },
   {
     slug: 'mijiabar',
     name: 'MijiaBar',
     mark: 'cat',
     markLabel: '猫',
+    status: 'beta',
     summaryZh: '米家设备的 macOS 菜单栏。',
     summaryEn: 'Mi Home menu bar for macOS.',
     detailZh:
       '在菜单栏查看和控制米家设备，也可以通过命令行和 MCP 交给 Agent。扫码登录，凭据留在系统钥匙串。',
     detailEn:
       'See and control Mi Home devices from the menu bar, or hand them to an agent through the CLI and MCP. Sign-in is a QR code; credentials stay in the Keychain.',
-    href: 'https://github.com/Beastry/MijiaBar',
+    href: '/mijiabar/',
+    github: 'https://github.com/Beastry/MijiaBar',
     platform: 'macOS',
     noteZh: '非官方，与小米公司无关。',
     noteEn: 'Unofficial. Not affiliated with Xiaomi.',
@@ -91,27 +110,30 @@ export const products: Product[] = [
     washDark: '#3A261C',
   },
   {
-    slug: 'jiyi-mianbao',
-    name: '记忆面包',
-    aka: 'jiyi-mianbao',
-    mark: 'mouse',
-    markLabel: '小鼠',
-    summaryZh: '一条 B 站链接，做成 Anki 和小红书卡片。',
-    summaryEn: 'Bilibili → Anki + cards.',
+    slug: 'octoshot',
+    name: 'Octoshot',
+    aka: '一酱',
+    mark: 'octopus',
+    markLabel: '章鱼',
+    status: 'beta',
+    summaryZh: '八只手，一次截完。',
+    summaryEn: 'macOS screenshot with on-device AI.',
     detailZh:
-      '从哔哩哔哩字幕生成带时间戳的 Anki 卡组，并同时整理小红书卡片。也可以从本地字幕文件开始。',
+      'macOS 原生截图：区域、窗口、全屏、滚动拼接和录屏，智能处理留在本机。菜单栏常驻。正式发布版面向 Apple Silicon。',
     detailEn:
-      'Turn a Bilibili video into a timestamped Anki deck and Xiaohongshu cards. Local subtitle files work too.',
-    href: 'https://github.com/Beastry/jiyi-mianbao',
-    platform: 'Python',
-    wash: '#FFE8B8',
-    washDark: '#332A16',
+      'A native macOS capture tool. Region, window, fullscreen, scrolling capture, and recording, with on-device AI. The release build targets Apple Silicon.',
+    href: '/octoshot/',
+    github: 'https://github.com/Beastry/Octoshot',
+    platform: 'macOS',
+    wash: '#D6ECE7',
+    washDark: '#1A3530',
   },
   {
     slug: 'agentkey',
     name: 'AgentKey',
     mark: 'fox',
     markLabel: '狐',
+    status: 'developing',
     summaryZh: '给人与 Agent 的密钥库。',
     summaryEn: 'Agent-native secrets for Apple.',
     detailZh:
@@ -119,6 +141,7 @@ export const products: Product[] = [
     detailEn:
       'A personal vault for people and AI agents. Devices sync end to end, with no cloud account. An agent only receives a secret after you approve it with Touch ID or Apple Watch.',
     href: 'https://github.com/Beastry/AgentKey',
+    github: 'https://github.com/Beastry/AgentKey',
     platform: 'Apple',
     noteZh: '尚未安全审计。',
     noteEn: 'Not yet security-audited.',
@@ -130,6 +153,7 @@ export const products: Product[] = [
     name: 'Splatty',
     mark: 'chameleon',
     markLabel: '变色龙',
+    status: 'developing',
     summaryZh: '收藏品，做成 3D 高斯泼溅。',
     summaryEn: 'Collectibles → 3DGS.',
     detailZh:
@@ -137,6 +161,7 @@ export const products: Product[] = [
     detailEn:
       'Photograph figures, badges, and bricks, train a 3D Gaussian splat on a Mac at home, then turn it over on your phone.',
     href: 'https://github.com/Beastry/Splatty',
+    github: 'https://github.com/Beastry/Splatty',
     platform: 'iPhone · Mac',
     noteZh: '早期版本，接口还会变。',
     noteEn: 'Early build. Interfaces may change.',
@@ -149,6 +174,7 @@ export const products: Product[] = [
     aka: '纸短情长',
     mark: 'bee',
     markLabel: '蜜蜂',
+    status: 'developing',
     summaryZh: '慢一点的信。写信、寄信、等信、收信。',
     summaryEn: 'A slow-mail web app.',
     detailZh:
@@ -156,29 +182,35 @@ export const products: Product[] = [
     detailEn:
       'A web app for writing, sending, waiting, and opening letters. The wait is part of the message.',
     href: 'https://github.com/Beastry/LetterBee',
+    github: 'https://github.com/Beastry/LetterBee',
     platform: 'Web',
     wash: '#FFE8B8',
     washDark: '#332C14',
   },
   {
-    slug: 'stow',
-    name: 'Stow',
-    mark: 'squirrel',
-    markLabel: '松鼠',
-    summaryZh: '原生 macOS 压缩包工具。',
-    summaryEn: 'A native macOS archive tool.',
+    slug: 'jiyi-mianbao',
+    name: '记忆面包',
+    aka: 'jiyi-mianbao',
+    mark: 'mouse',
+    markLabel: '小鼠',
+    status: 'onhold',
+    summaryZh: '一条 B 站链接，做成 Anki 和小红书卡片。',
+    summaryEn: 'Bilibili → Anki + cards.',
     detailZh:
-      '浏览、预览、解压并打包多种压缩格式。原型阶段，安装动作和 Finder 集成已经接在真实引擎上。',
+      '从哔哩哔哩字幕生成带时间戳的 Anki 卡组，并同时整理小红书卡片。也可以从本地字幕文件开始。',
     detailEn:
-      'Browse, preview, extract, and pack many archive formats. Still a prototype, on a real archive engine.',
-    href: 'https://github.com/skyswordw/stow',
-    platform: 'macOS',
-    noteZh: '转入组织前，仓库仍在 skyswordw/stow。',
-    noteEn: 'Still at skyswordw/stow until the org transfer.',
-    wash: '#FFD6C7',
-    washDark: '#2C261C',
+      'Turn a Bilibili video into a timestamped Anki deck and Xiaohongshu cards. Local subtitle files work too.',
+    href: 'https://github.com/Beastry/jiyi-mianbao',
+    github: 'https://github.com/Beastry/jiyi-mianbao',
+    platform: 'Python',
+    wash: '#FFE8B8',
+    washDark: '#332A16',
   },
 ];
+
+export function productsByStatus(status: ProductStatus): Product[] {
+  return products.filter((p) => p.status === status);
+}
 
 export function indexLabel(index: number): string {
   return String(index + 1).padStart(2, '0');

@@ -8,17 +8,19 @@
 
 ## Projects
 
-| Project | Animal | Description |
-|---------|--------|-------------|
-| [Octoshot](https://github.com/Beastry/Octoshot) | — | macOS screenshot with on-device AI |
-| [MijiaBar](https://github.com/Beastry/MijiaBar) | — | Mi Home menu bar for macOS |
-| [记忆面包](https://github.com/Beastry/jiyi-mianbao) | — | Bilibili → Anki + 小红书卡片 |
-| [AgentKey](https://github.com/Beastry/AgentKey) | — | Agent-native secrets for Apple |
-| [Splatty](https://github.com/Beastry/Splatty) | — | Collectibles → 3DGS |
-| [LetterBee](https://github.com/Beastry/LetterBee) | — | Slow-mail Web app · 纸短情长 |
-| [Stow](https://github.com/skyswordw/stow) | — | native macOS archive tool (pending transfer) |
+状态：公测 · 开发中 · 搁置。想法收集：[Beastry/ideas](https://github.com/Beastry/ideas)。
 
-网站上的动物简笔画是占位，不是各产品的正式 logo。正式形象以仓库为准，例如 Octoshot 使用原创章鱼图标。MijiaBar 是非官方项目，与小米公司无关。AgentKey 尚未经过安全审计。
+| Status | Project | Site | Description |
+|--------|---------|------|-------------|
+| 公测 | [Stow](https://github.com/Beastry/stow) | [/stow](https://beastry.app/stow/) | native macOS archive tool |
+| 公测 | [MijiaBar](https://github.com/Beastry/MijiaBar) | [/mijiabar](https://beastry.app/mijiabar/) | Mi Home menu bar for macOS |
+| 公测 | [Octoshot](https://github.com/Beastry/Octoshot) | [/octoshot](https://beastry.app/octoshot/) | macOS screenshot with on-device AI |
+| 开发中 | [AgentKey](https://github.com/Beastry/AgentKey) | — | Agent-native secrets for Apple |
+| 开发中 | [Splatty](https://github.com/Beastry/Splatty) | — | Collectibles → 3DGS |
+| 开发中 | [LetterBee](https://github.com/Beastry/LetterBee) | — | Slow-mail Web app · 纸短情长 |
+| 搁置 | [记忆面包](https://github.com/Beastry/jiyi-mianbao) | — | Bilibili → Anki + 小红书卡片 |
+
+网站上的动物简笔画是占位，不是各产品的正式 logo。正式形象以仓库为准。MijiaBar 是非官方项目，与小米公司无关。AgentKey 尚未经过安全审计。剪贴板 / PDF 等构思只在 ideas 库，不进产品网格。
 
 ## Contact
 

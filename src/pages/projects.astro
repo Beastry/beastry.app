@@ -1,10 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
 import Mark from '../components/Mark.astro';
-import { products } from '../data/site';
+import { products, site, statusMeta } from '../data/site';
 
 const description =
-  'Beastry 的开源项目：Octoshot、MijiaBar、记忆面包、AgentKey、Splatty、LetterBee、Stow。';
+  'Beastry 的开源项目：公测 Stow / MijiaBar / Octoshot；开发中与搁置项目；想法见 Beastry/ideas。';
 ---
 
 <Base title="项目" description={description}>
@@ -12,43 +12,68 @@ const description =
     <div class="wrap">
       <p class="kicker">Projects</p>
       <h1>项目</h1>
-      <p class="lede">现在挂在这个名字下的软件。点名字进入代码仓库。</p>
-      <p class="lede en" lang="en">The software under this name today. Each title opens its repository.</p>
+      <p class="lede">
+        按状态排列。公测产品链到 beastry.app 子路径；其余进代码仓库。新想法请开
+        <a href={site.ideas} rel="noreferrer">Beastry/ideas</a>。
+      </p>
+      <p class="lede en" lang="en">
+        Grouped by status. Beta products open on this site; others open their repos. New ideas go to
+        Beastry/ideas.
+      </p>
 
       <ol class="project-list">
         {
-          products.map((product) => (
-            <li class="project" id={product.slug} style={`--wash: ${product.wash}; --wash-dark: ${product.washDark};`}>
-              <span class="mark">
-                <Mark name={product.mark} label={product.markLabel} />
-              </span>
-              <div class="project-main">
-                <h2>
-                  <a href={product.href} rel="noreferrer">
-                    {product.name}
-                  </a>
-                  {product.aka && <span class="aka">{product.aka}</span>}
-                  <span class="project-platform">{product.platform}</span>
-                </h2>
-                <p>{product.summaryZh}</p>
-                <p class="muted" lang="en">
-                  {product.summaryEn}
-                </p>
-                <p class="detail">{product.detailZh}</p>
-                <p class="detail muted" lang="en">
-                  {product.detailEn}
-                </p>
-                {product.noteZh && (
-                  <p class="note">
-                    {product.noteZh}
-                    <span class="en" lang="en">
-                      {product.noteEn}
-                    </span>
+          products.map((product) => {
+            const status = statusMeta[product.status];
+            const external = product.href.startsWith('http');
+            return (
+              <li class="project" id={product.slug} style={`--wash: ${product.wash}; --wash-dark: ${product.washDark};`}>
+                <span class="mark">
+                  <Mark name={product.mark} label={product.markLabel} />
+                </span>
+                <div class="project-main">
+                  <p class={`status status-${product.status}`}>
+                    {status.zh}
+                    <span lang="en"> · {status.en}</span>
                   </p>
-                )}
-              </div>
-            </li>
-          ))
+                  <h2>
+                    <a href={product.href} rel={external ? 'noreferrer' : undefined}>
+                      {product.name}
+                    </a>
+                    {product.aka && <span class="aka">{product.aka}</span>}
+                    <span class="project-platform">{product.platform}</span>
+                  </h2>
+                  <p>{product.summaryZh}</p>
+                  <p class="muted" lang="en">
+                    {product.summaryEn}
+                  </p>
+                  <p class="detail">{product.detailZh}</p>
+                  <p class="detail muted" lang="en">
+                    {product.detailEn}
+                  </p>
+                  {product.noteZh && (
+                    <p class="note">
+                      {product.noteZh}
+                      <span class="en" lang="en">
+                        {product.noteEn}
+                      </span>
+                    </p>
+                  )}
+                  <p class="project-links">
+                    <a href={product.github} rel="noreferrer">
+                      GitHub
+                    </a>
+                    {!external && (
+                      <>
+                        {' · '}
+                        <a href={product.href}>介绍页</a>
+                      </>
+                    )}
+                  </p>
+                </div>
+              </li>
+            );
+          })
         }
       </ol>
     </div>

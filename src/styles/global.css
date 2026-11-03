@@ -503,6 +503,104 @@ a:hover {
   font-size: 0.92rem;
 }
 
+.status-block {
+  margin-top: 2rem;
+}
+
+.status-block:first-of-type {
+  margin-top: 1.1rem;
+}
+
+.status-heading {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.45rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.status-heading .summary-hint {
+  margin-left: 0.6rem;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 450;
+}
+
+.status-lede {
+  margin: 0.35rem 0 0.9rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.onhold-block {
+  padding: 0.85rem 1rem 1rem;
+  border: 1px dashed var(--line);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--bg-elev) 70%, transparent);
+}
+
+.onhold-block > summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+.onhold-block > summary::-webkit-details-marker {
+  display: none;
+}
+
+.onhold-block[open] .summary-hint {
+  display: none;
+}
+
+.card-badges {
+  margin: -0.35rem 0 0.55rem;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--mint) 70%, var(--bg-elev));
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.status .en {
+  color: var(--muted);
+  font-weight: 450;
+}
+
+.status-beta {
+  background: color-mix(in srgb, var(--mint) 75%, var(--bg-elev));
+}
+
+.status-developing {
+  background: color-mix(in srgb, var(--sky) 75%, var(--bg-elev));
+}
+
+.status-onhold {
+  background: color-mix(in srgb, var(--honey) 55%, var(--bg-elev));
+}
+
+.project .status {
+  margin: 0 0 0.35rem;
+}
+
+.project-links {
+  margin: 0.75rem 0 0;
+  font-size: 0.92rem;
+}
+
+.ideas-cta a {
+  color: var(--accent);
+  font-weight: 500;
+}
+
 .contact-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
