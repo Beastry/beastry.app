@@ -1,6 +1,13 @@
 # Site brand assets
 
-**Production:** `mark.jpg` · `logo-lockup.jpg` (Beastry brand v3 cute JPG masters, locked 2026-11-03).
+**Production (mother brand):**
 
-SVG is **not** production (deferred upstream in Beastry/brand `final/svg/`).
-Do not ship auto-traced SVG here.
+| File | Use |
+|------|-----|
+| `mark.jpg` | Circular mark |
+| `logo-lockup.jpg` | Horizontal lockup |
+| `app-icon-1024.png` | App icon (no outer ring) |
+| `og-1200x630.png` | Open Graph 1200×630 |
+| `banner-1500x320.png` | README / social banner 1500×320 |
+
+Source of truth: [Beastry/brand](https://github.com/Beastry/brand) (`final/` + `brand-book/exports/`).
