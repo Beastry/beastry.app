@@ -536,7 +536,7 @@ footer { border-top: 1px solid var(--line); padding: 40px 0 56px; font-size: 13.
     <h1>Archives, opened <em>with care.</em></h1>
     <p class="lede">See what’s inside and take the next step — without extracting a thing. Packing for someone else? Stow makes sure it opens on their computer too.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="https://github.com/Beastry/stow/releases/latest">Download for Mac</a>
+      <a class="btn btn-primary" data-stow-download href="https://github.com/Beastry/stow/releases/download/v0.1.10/Stow-0.1.10.dmg">Download for Mac</a>
       <a class="btn btn-ghost" href="https://github.com/Beastry/stow">Read the source</a>
     </div>
     <p class="hero-meta">Free and open source (GPL-3.0) · No ads, no accounts · Nothing leaves your Mac</p>
@@ -926,7 +926,7 @@ footer { border-top: 1px solid var(--line); padding: 40px 0 56px; font-size: 13.
     <svg class="mark" aria-hidden="true"><use href="#logo"/></svg>
     <h2>Open your next archive<br>with Stow.</h2>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="https://github.com/Beastry/stow/releases/latest">Download for Mac</a>
+      <a class="btn btn-primary" data-stow-download href="https://github.com/Beastry/stow/releases/download/v0.1.10/Stow-0.1.10.dmg">Download for Mac</a>
       <a class="btn btn-ghost" href="https://github.com/Beastry/stow">Read the source</a>
     </div>
     <p class="hero-meta">Early release · macOS 26 or later · Signed and notarized</p>
@@ -945,6 +945,23 @@ footer { border-top: 1px solid var(--line); padding: 40px 0 56px; font-size: 13.
 
 <script>
 (() => {
+  // Refresh the direct links while keeping the bundled DMG URL usable if the lookup fails.
+  fetch('https://api.github.com/repos/Beastry/stow/releases/latest')
+    .then(response => response.ok ? response.json() : null)
+    .then(release => {
+      const tag = release?.tag_name;
+      if (!/^v\d+\.\d+\.\d+$/.test(tag)) return;
+
+      const filename = `Stow-${tag.slice(1)}.dmg`;
+      const url = `https://github.com/Beastry/stow/releases/download/${tag}/${filename}`;
+      const available = release.assets?.some(asset =>
+        asset.name === filename && asset.state === 'uploaded' && asset.browser_download_url === url);
+      if (available) document.querySelectorAll('[data-stow-download]').forEach(link => { link.href = url; });
+    })
+    .catch(() => {
+      // The existing links remain usable during network errors or API outages.
+    });
+
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* Nav: scroll-edge divider only when content is underneath */
