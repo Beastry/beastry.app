@@ -1,27 +1,25 @@
 ---
 import Base from '../layouts/Base.astro';
 import DownloadList from '../components/DownloadList.astro';
-import { products, site, statusMeta } from '../data/site';
+import { products, statusMeta } from '../data/site';
 
-const description =
-  'Beastry 的开源项目：公测 Stow / MijiaBar / Octoshot；开发中与搁置项目；想法见 Beastry/ideas。';
+const description = 'Beastry 的作品：三款公测可以下载，其余还在开发或先搁着。';
 const descriptionEn =
-  'Open-source projects at Beastry: public betas, work in development, and one project on hold. New ideas go to Beastry/ideas.';
+  'Works from Beastry. Three public betas can be downloaded. The others are still in development, or paused.';
 ---
 
-<Base title="项目" titleEn="Projects" description={description} descriptionEn={descriptionEn}>
+<Base title="作品" titleEn="Works" description={description} descriptionEn={descriptionEn}>
   <article class="page">
     <div class="wrap">
-      <p class="kicker"><span lang="zh-Hans">项目</span><span lang="en">Projects</span></p>
-      <h1><span lang="zh-Hans">项目</span><span lang="en">Projects</span></h1>
+      <p class="kicker"><span lang="zh-Hans">作品</span><span lang="en">Works</span></p>
+      <h1><span lang="zh-Hans">作品</span><span lang="en">Works</span></h1>
       <p class="lede" lang="zh-Hans">
-        按状态排列。公测产品链到 beastry.app 上的介绍页；其余进代码仓库。新想法请到
-        <a href={site.ideaIssue} rel="noreferrer">Beastry/ideas</a>。已有产品的 Bug 和建议在
-        <a href="/help">帮助</a>。
+        公测的三款现在可以下载。其余还在做，或先搁着，没有安装包。版本和系统要求写在这一页下面。新想法去
+        <a href="/community">参与</a>，问题去 <a href="/help">帮助</a>。
       </p>
       <p class="lede en" lang="en">
-        Grouped by status. Beta products open on this site; the others open their repos. New ideas go to
-        Beastry/ideas. Bugs and suggestions for an existing product go to Help.
+        The three public betas can be downloaded now. The others are still being built, or are paused, and have no installer. Versions and system requirements are below. New ideas go to
+        <a href="/community">Take part</a>. Problems go to <a href="/help">Help</a>.
       </p>
 
       <ol class="project-list">

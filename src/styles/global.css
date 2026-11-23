@@ -41,7 +41,16 @@
   --serif: 'Newsreader Variable', 'Noto Serif SC', 'Iowan Old Style', Palatino, 'Songti SC', serif;
   --sans: 'Outfit Variable', 'Noto Sans SC', 'Avenir Next', 'PingFang SC', 'Hiragino Sans GB',
     'Microsoft YaHei', sans-serif;
-  --measure: 40rem;
+  --measure: 38rem;
+  --track: 0em;
+  --leading: 1.75;
+  --display-leading: 1.34;
+}
+
+html[data-lang='en'] {
+  --track: -0.018em;
+  --leading: 1.58;
+  --display-leading: 1.15;
 }
 
 :root[data-theme='dark'] {
@@ -100,8 +109,9 @@ body {
   color: var(--ink);
   font-family: var(--sans);
   font-size: 1.0625rem;
-  line-height: 1.6;
+  line-height: var(--leading);
   text-rendering: optimizeLegibility;
+  font-synthesis: none;
 }
 
 img,
@@ -375,20 +385,20 @@ a:hover {
 
 
 .kicker {
-  margin: 0 0 1rem;
+  margin: 0 0 0.35rem;
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: 0.84rem;
+  letter-spacing: 0;
 }
 
 .hero h1 {
   margin: 0;
-  max-width: 9em;
+  max-width: 12em;
   font-family: var(--serif);
   font-weight: 600;
-  font-size: clamp(2.8rem, 6.4vw, 5rem);
-  line-height: 1.08;
-  letter-spacing: -0.03em;
-  font-variation-settings: 'opsz' 72, 'SOFT' 40, 'WONK' 0.6;
+  font-size: clamp(1.95rem, 3.6vw, 2.7rem);
+  line-height: var(--display-leading);
+  letter-spacing: var(--track);
 }
 
 .lede {
@@ -415,13 +425,13 @@ a:hover {
 }
 
 .button.primary {
-  background: var(--accent);
-  color: #fffaf5;
+  background: #c2412d;
+  color: #fffaf6;
 }
 
 .button.primary:hover {
-  background: color-mix(in srgb, var(--accent) 86%, var(--ink));
-  color: #fffaf5;
+  background: #a83624;
+  color: #fffaf6;
 }
 
 .button.ghost {
@@ -520,10 +530,10 @@ a:hover {
 .card h3 {
   margin: 0;
   font-family: var(--serif);
-  font-size: 1.7rem;
+  font-size: 1.45rem;
   font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
+  letter-spacing: var(--track);
+  line-height: var(--display-leading);
 }
 
 .aka {
@@ -581,10 +591,11 @@ a:hover {
 
 .status-heading {
   margin: 0;
-  font-family: var(--serif);
-  font-size: 1.45rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-family: var(--sans);
+  font-size: 1.2rem;
+  font-weight: 560;
+  letter-spacing: 0;
+  line-height: 1.4;
 }
 
 .status-heading .summary-hint {
@@ -635,7 +646,7 @@ a:hover {
   color: var(--ink);
   font-size: 0.78rem;
   font-weight: 500;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
 }
 
 .status-beta {
@@ -674,11 +685,13 @@ a:hover {
 }
 
 .contact-list a {
-  display: inline-block;
-  font-family: var(--serif);
-  font-size: 1.25rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  font-weight: 560;
+  letter-spacing: 0;
   text-decoration: none;
 }
 
@@ -693,13 +706,14 @@ a:hover {
 }
 
 .page h1 {
-  margin: 0.3rem 0 0;
+  margin: 0.15rem 0 0;
+  max-width: 14em;
   font-family: var(--serif);
   font-weight: 600;
-  font-size: clamp(2.6rem, 6vw, 4.4rem);
-  letter-spacing: -0.035em;
-  line-height: 1.12;
-  font-variation-settings: 'opsz' 72, 'SOFT' 30;
+  font-size: clamp(1.85rem, 3.4vw, 2.45rem);
+  letter-spacing: var(--track);
+  line-height: var(--display-leading);
+  text-wrap: pretty;
 }
 
 .prose {
@@ -709,14 +723,29 @@ a:hover {
 .prose p,
 .prose li {
   font-size: 1.05rem;
+  text-wrap: pretty;
+}
+
+.prose p {
+  margin: 0.8rem 0 0;
 }
 
 .prose h2 {
-  margin: 2.2rem 0 0.4rem;
-  font-family: var(--serif);
-  font-size: 1.7rem;
-  font-weight: 600;
-  letter-spacing: -0.03em;
+  margin: 2.1rem 0 0.45rem;
+  font-family: var(--sans);
+  font-size: 1.2rem;
+  font-weight: 560;
+  letter-spacing: 0;
+  line-height: 1.45;
+}
+
+.prose h3 {
+  margin: 0 0 0.35rem;
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  font-weight: 560;
+  letter-spacing: 0;
+  line-height: 1.4;
 }
 
 .project-list {
@@ -753,10 +782,10 @@ a:hover {
 .project h2 {
   margin: 0;
   font-family: var(--serif);
-  font-size: clamp(1.7rem, 3vw, 2.15rem);
+  font-size: clamp(1.45rem, 2.4vw, 1.85rem);
   font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
+  letter-spacing: var(--track);
+  line-height: var(--display-leading);
 }
 
 .project h2 a {
@@ -792,9 +821,10 @@ a:hover {
 
 .footer-name {
   margin: 0;
-  font-family: var(--serif);
-  font-size: 1.4rem;
-  letter-spacing: -0.03em;
+  font-family: var(--sans);
+  font-size: 1.15rem;
+  font-weight: 560;
+  letter-spacing: 0;
 }
 
 .footer-inner .muted,
@@ -805,10 +835,18 @@ a:hover {
 .footer-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem 1.1rem;
+  gap: 0.15rem 0.35rem;
   margin: 0.3rem 0 0;
   padding: 0;
   list-style: none;
+}
+
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.2rem 0.35rem;
+  text-decoration: none;
 }
 
 .legal {
@@ -1029,6 +1067,14 @@ html[data-lang='en'] [lang='zh-Hans'] {
   border-top: 1px solid var(--line);
 }
 
+.help-list a,
+.project-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.15rem 0.1rem;
+}
+
 .help-list h2,
 .help-list h3 {
   margin: 0 0 0.35rem;
@@ -1080,12 +1126,17 @@ html[data-lang='en'] [lang='zh-Hans'] {
 
 .welcome-card h1 {
   margin: 0;
-  max-width: 10em;
+  max-width: 11em;
   font-family: var(--serif);
   font-weight: 600;
-  font-size: clamp(2.5rem, 5vw, 3.7rem);
-  line-height: 1.12;
-  letter-spacing: -0.03em;
+  font-size: clamp(1.95rem, 3.6vw, 2.7rem);
+  line-height: var(--display-leading);
+  letter-spacing: var(--track);
+  text-wrap: pretty;
+}
+
+html[data-lang='en'] .welcome-card h1 {
+  font-size: clamp(2.2rem, 4vw, 3.05rem);
 }
 
 .welcome-card .lede {

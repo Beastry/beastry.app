@@ -3,9 +3,9 @@ import Base from '../layouts/Base.astro';
 import ContactList from '../components/ContactList.astro';
 import { site } from '../data/site';
 
-const description = 'Beastry 是一个开源软件社区——动物意象、粉彩气质，认真对待每个项目与贡献者。';
+const description = 'Beastry 是做开源 macOS 工具的社区。母品牌是书与粉兔、蓝猫、黄熊。';
 const descriptionEn =
-  'Beastry is an open-source software community: animal imagery, a pastel tone, and care for each project and contributor.';
+  'Beastry is a community that makes open-source Mac apps. The mother brand is a book with a pink rabbit, a blue cat, and a yellow bear.';
 ---
 
 <Base title="关于" titleEn="About" description={description} descriptionEn={descriptionEn}>
@@ -14,52 +14,50 @@ const descriptionEn =
       <p class="kicker"><span lang="zh-Hans">关于</span><span lang="en">About</span></p>
       <h1><span lang="zh-Hans">关于 Beastry</span><span lang="en">About Beastry</span></h1>
       <p lang="zh-Hans">
-        Beastry 是一个开源软件社区，家在
-        <a href={site.url}>beastry.app</a>。我们做给自己也希望别人用得上的工具，也收集下一只产品的想法。
+        Beastry 做开源的 macOS 工具，也收下一件作品的想法。家在
+        <a href={site.url}>beastry.app</a>。
       </p>
       <p lang="en">
-        Beastry is an open-source software community. The work matters, and so do the people who
-        contribute to it.
+        Beastry makes open-source Mac apps, and collects ideas for what to make next. Home is
+        <a href={site.url}>beastry.app</a>.
       </p>
 
-      <h2><span lang="zh-Hans">母品牌</span><span lang="en">Mother brand</span></h2>
+      <h2><span lang="zh-Hans">母品牌</span><span lang="en">The mother brand</span></h2>
       <p lang="zh-Hans">
-        母品牌 logo 是可爱 JPG「字标 + 书」：打开的书，与粉兔、蓝猫、黄熊。它只代表 Beastry，不充当某个产品的吉祥物。Stow、MijiaBar、Octoshot 使用各自官网的标志。还没核实到正式标志的项目，页面上留空。
+        标志是打开的书，书上是粉兔、蓝猫和黄熊。它代表 Beastry，不是某一款应用的图标。Stow、MijiaBar、Octoshot 用它们自己的标志。还没核实到标志的项目，页面上留空。
       </p>
       <p lang="en">
-        The mother-brand logo is the warm JPG of a wordmark and a book: an open book with a pink rabbit, a blue cat, and a yellow bear. It stands for Beastry, not for a product. Stow, MijiaBar, and Octoshot use the marks from their own sites. A project without a verified mark is left blank.
+        The mark is an open book with a pink rabbit, a blue cat, and a yellow bear. It stands for Beastry, not for one app. Stow, MijiaBar, and Octoshot use their own marks. A project without a verified mark is left blank.
       </p>
 
-      <h2><span lang="zh-Hans">产品状态</span><span lang="en">Status</span></h2>
+      <h2><span lang="zh-Hans">现在有什么</span><span lang="en">What is here now</span></h2>
       <p lang="zh-Hans">
-        主站用 <strong>公测</strong>、<strong>开发中</strong>、<strong>搁置</strong> 区分成熟度。Stow、MijiaBar、Octoshot 现为公测，介绍页在
-        <a href="/stow/">/stow</a>、<a href="/mijiabar/">/mijiabar</a>、<a href="/octoshot/">/octoshot</a>。记忆面包标为搁置。AgentKey、Splatty、LetterBee 按仓库现状标为开发中，没有安装包。
+        Stow、MijiaBar、Octoshot 在公测，介绍页是
+        <a href="/stow/">/stow</a>、<a href="/mijiabar/">/mijiabar</a>、<a href="/octoshot/">/octoshot</a>。AgentKey、Splatty、LetterBee 还在开发，没有安装包。记忆面包在本站标为搁置；它的 README 自己没有写“已搁置”。完整名单在
+        <a href="/projects">作品</a>。
       </p>
       <p lang="en">
-        The site uses beta, in development, and on hold. Stow, MijiaBar, and Octoshot are in beta. 记忆面包 is on hold. AgentKey, Splatty, and LetterBee are in development, with no installer.
+        Stow, MijiaBar, and Octoshot are in public beta. AgentKey, Splatty, and LetterBee are still in development and have no installer. 记忆面包 is listed here as on hold; its own README does not say that. The full list is on
+        <a href="/projects">Works</a>.
       </p>
 
-      <h2><span lang="zh-Hans">共建与想法</span><span lang="en">Building together</span></h2>
+      <h2><span lang="zh-Hans">一起做</span><span lang="en">Making things together</span></h2>
       <p lang="zh-Hans">
-        到 <a href={site.ideaIssue} rel="noreferrer">Beastry/ideas</a> 用 Issue 模板提交产品想法。投票机制以后再加；剪贴板管理、PDF 工具等构思已在那里开种。已有产品的 Bug 和建议从 <a href="/help">帮助</a> 进各自仓库。路线图入口在 <a href="/community">社区</a>。本站第一方源码、原创文档，以及 Beastry 持有版权的原创素材，以 GPL-3.0-only 提供，见本仓库 LICENSE。
+        新想法提交到 <a href={site.ideaIssue} rel="noreferrer">Beastry/ideas</a>。已有产品的问题和建议从 <a href="/help">帮助</a> 进各自仓库。怎么读这些记录、谁来点合并，写在 <a href="/community">参与</a> 和 <a href="/agents">Agent 说明</a>。本站第一方源码和原创文档以
+        <a href="https://www.gnu.org/licenses/gpl-3.0.html" rel="noreferrer">GPL-3.0-only</a>
+        提供，见本仓库 LICENSE。
       </p>
       <p lang="en">
-        Propose a product with the issue template at Beastry/ideas. Bugs and suggestions for something that already exists start at Help. Roadmap links are on Community.
-      </p>
-      <p lang="zh-Hans">
-        组织主页：<a href={site.github}>GitHub 上的 Beastry</a>。想找人聊天，写信到
-        <a href="mailto:community@beastry.app">community@beastry.app</a>。
-      </p>
-      <p lang="en">
-        The organization is on GitHub. To talk with a person, write to community@beastry.app.
+        New ideas go to <a href={site.ideaIssue} rel="noreferrer">Beastry/ideas</a>. Problems and suggestions for an existing product start at <a href="/help">Help</a>. How those records are read, and who merges, is on <a href="/community">Take part</a> and <a href="/agents">For agents</a>. First-party source and original docs on this site are
+        <a href="https://www.gnu.org/licenses/gpl-3.0.html" rel="noreferrer">GPL-3.0-only</a>. See this repository’s LICENSE.
       </p>
 
       <h2><span lang="zh-Hans">安全</span><span lang="en">Security</span></h2>
       <p lang="zh-Hans">
-        如果你发现漏洞，请寄到 <a href="mailto:security@beastry.app">security@beastry.app</a>。AgentKey 的 README 写明尚未经过安全审计，使用前请读它自己的说明。
+        如果发现漏洞，请寄到 <a href="mailto:security@beastry.app">security@beastry.app</a>。AgentKey 的 README 写明尚未经过安全审计，使用前请读它自己的说明。
       </p>
       <p lang="en">
-        If you find a vulnerability, email security@beastry.app. AgentKey’s README says it has not been security-audited.
+        If you find a vulnerability, email security@beastry.app. AgentKey’s README says it has not had a security audit. Read that note before you rely on it.
       </p>
 
       <h2><span lang="zh-Hans">联系</span><span lang="en">Contact</span></h2>
