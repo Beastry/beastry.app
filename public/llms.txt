@@ -1,0 +1,50 @@
+# Beastry
+
+> Index for https://beastry.app. The mother site is Chinese or English. This file lists stable links. It is not a copy of versions, open issues, or repository policy. A file inside a repository is authoritative. Checked 2026-11-23.
+
+## Site
+
+- [For agents](https://beastry.app/agents): website guidance for people and coding agents, in Chinese and English
+- [Projects](https://beastry.app/projects): current product status
+- [Community](https://beastry.app/community): ideas and links to roadmaps that already exist
+- [Help](https://beastry.app/help): bug and suggestion links for each product
+- [About](https://beastry.app/about): mother brand
+- [Home](https://beastry.app/)
+
+## Where work is tracked
+
+- [Beastry on GitHub](https://github.com/Beastry)
+- [Beastry/ideas issues](https://github.com/Beastry/ideas/issues)
+- [New idea](https://github.com/Beastry/ideas/issues/new?template=idea.yml)
+- [Stow issues](https://github.com/Beastry/stow/issues)
+- [MijiaBar issues](https://github.com/Beastry/MijiaBar/issues)
+- [Octoshot issues](https://github.com/Beastry/Octoshot/issues)
+- [AgentKey issues](https://github.com/Beastry/AgentKey/issues)
+- [Splatty issues](https://github.com/Beastry/Splatty/issues)
+- [LetterBee issues](https://github.com/Beastry/LetterBee/issues)
+- [jiyi-mianbao issues](https://github.com/Beastry/jiyi-mianbao/issues)
+
+## Repository files that exist
+
+- [Stow AGENTS.md](https://github.com/Beastry/stow/blob/main/AGENTS.md)
+- [Stow CLAUDE.md](https://github.com/Beastry/stow/blob/main/CLAUDE.md)
+- [Stow DEVELOPING.md](https://github.com/Beastry/stow/blob/main/DEVELOPING.md)
+- [Stow RELEASING.md](https://github.com/Beastry/stow/blob/main/RELEASING.md)
+- [Stow ROADMAP.md](https://github.com/Beastry/stow/blob/main/ROADMAP.md)
+- [MijiaBar AGENTS.md](https://github.com/Beastry/MijiaBar/blob/main/AGENTS.md)
+- [MijiaBar agent setup, Simplified Chinese](https://github.com/Beastry/MijiaBar/blob/main/docs/AGENT_SETUP.zh-CN.md)
+- [MijiaBar agent setup, English](https://github.com/Beastry/MijiaBar/blob/main/docs/AGENT_SETUP.md)
+- [Splatty CONTRIBUTING.md](https://github.com/Beastry/Splatty/blob/main/CONTRIBUTING.md)
+- [Splatty architecture](https://github.com/Beastry/Splatty/blob/main/docs/architecture.md)
+- [AgentKey SECURITY.md](https://github.com/Beastry/AgentKey/blob/main/SECURITY.md)
+- [LetterBee development plan](https://github.com/Beastry/LetterBee/blob/main/docs/development-plan.md)
+
+On 2026-11-23, AGENTS.md was found only in Stow and MijiaBar. CONTRIBUTING.md was found only in Splatty. Octoshot, AgentKey, LetterBee, jiyi-mianbao, and beastry.app did not have either file.
+
+## People
+
+- community@beastry.app
+- hello@beastry.app
+- security@beastry.app
+
+Merging a pull request, publishing a release, and changing repository or Cloudflare permissions need a human maintainer. This index does not grant that.

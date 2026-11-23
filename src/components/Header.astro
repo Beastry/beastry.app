@@ -10,12 +10,12 @@ function current(href: string): 'page' | undefined {
 
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="wordmark" href="/" aria-label="Beastry 首页">
+    <a class="wordmark" href="/" data-label-zh="Beastry 首页" data-label-en="Beastry home" aria-label="Beastry 首页">
       <img class="brand-mark" src="/brand/mark.jpg" width="64" height="64" alt="" />
       <span>Beastry</span>
     </a>
     <div class="header-tools">
-      <nav class="nav nav-desktop" aria-label="主导航">
+      <nav class="nav nav-desktop" data-label-zh="主导航" data-label-en="Main" aria-label="主导航">
         {
           navLinks.map((link) => (
             <a href={link.href} aria-current={current(link.href)}>
@@ -26,10 +26,9 @@ function current(href: string): 'page' | undefined {
         }
         <a href={site.github} rel="noreferrer">GitHub</a>
       </nav>
-      <div class="lang-switch" role="group" aria-label="语言">
-        <button type="button" data-lang-set="zh" aria-pressed="false">中文</button>
+      <div class="lang-switch" role="group" data-label-zh="语言" data-label-en="Language" aria-label="语言">
+        <button type="button" data-lang-set="zh" aria-pressed="true">中文</button>
         <button type="button" data-lang-set="en" aria-pressed="false">EN</button>
-        <button type="button" data-lang-set="both" aria-pressed="true">中英</button>
       </div>
       <button type="button" class="theme-btn" id="theme-toggle" aria-label="切换深色或浅色">
         <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
@@ -55,7 +54,7 @@ function current(href: string): 'page' | undefined {
           <span lang="zh-Hans">菜单</span>
           <span lang="en">Menu</span>
         </summary>
-        <nav class="nav nav-panel" aria-label="主导航">
+        <nav class="nav nav-panel" data-label-zh="主导航" data-label-en="Main" aria-label="主导航">
           {
             navLinks.map((link) => (
               <a href={link.href} aria-current={current(link.href)}>
@@ -90,16 +89,46 @@ function current(href: string): 'page' | undefined {
     const mode = currentTheme();
     if (themeMeta) themeMeta.setAttribute('content', mode === 'dark' ? '#2a2421' : '#fff6ee');
     if (!button) return;
-    const nextLabel = mode === 'dark' ? '切换到浅色' : '切换到深色';
+    const english = root.dataset.lang === 'en';
+    const nextLabel =
+      mode === 'dark'
+        ? english
+          ? 'Switch to light'
+          : '切换到浅色'
+        : english
+          ? 'Switch to dark'
+          : '切换到深色';
     button.setAttribute('aria-label', nextLabel);
   }
 
-  function syncLang() {
-    const mode = root.dataset.lang === 'zh' || root.dataset.lang === 'en' ? root.dataset.lang : 'both';
-    root.dataset.lang = mode;
+  function applyLang(next: 'zh' | 'en') {
+    root.dataset.lang = next;
+    root.lang = next === 'en' ? 'en' : 'zh-Hans';
+    const title = next === 'en' ? root.dataset.titleEn : root.dataset.titleZh;
+    const desc = next === 'en' ? root.dataset.descEn : root.dataset.descZh;
+    if (title) document.title = title;
+    const writeMeta = (selector: string, value: string | undefined) => {
+      if (!value) return;
+      document.querySelectorAll(selector).forEach((node) => node.setAttribute('content', value));
+    };
+    writeMeta('meta[name="description"]', desc);
+    writeMeta('meta[property="og:description"]', desc);
+    writeMeta('meta[name="twitter:description"]', desc);
+    writeMeta('meta[property="og:title"]', title);
+    writeMeta('meta[name="twitter:title"]', title);
+    writeMeta('meta[property="og:locale"]', next === 'en' ? 'en_US' : 'zh_CN');
     document.querySelectorAll<HTMLButtonElement>('[data-lang-set]').forEach((item) => {
-      item.setAttribute('aria-pressed', item.dataset.langSet === mode ? 'true' : 'false');
+      item.setAttribute('aria-pressed', item.dataset.langSet === next ? 'true' : 'false');
     });
+    document.querySelectorAll<HTMLElement>('[data-label-zh]').forEach((el) => {
+      const label = next === 'en' ? el.dataset.labelEn : el.dataset.labelZh;
+      if (label) el.setAttribute('aria-label', label);
+    });
+    document.querySelectorAll<HTMLImageElement>('[data-alt-zh]').forEach((img) => {
+      const alt = next === 'en' ? img.dataset.altEn : img.dataset.altZh;
+      if (alt) img.alt = alt;
+    });
+    syncTheme();
   }
 
   button?.addEventListener('click', () => {
@@ -116,18 +145,16 @@ function current(href: string): 'page' | undefined {
   document.querySelectorAll<HTMLButtonElement>('[data-lang-set]').forEach((item) => {
     item.addEventListener('click', () => {
       const next = item.dataset.langSet;
-      if (next !== 'zh' && next !== 'en' && next !== 'both') return;
-      root.dataset.lang = next;
+      if (next !== 'zh' && next !== 'en') return;
       try {
         localStorage.setItem('beastry-lang', next);
       } catch {
         /* private mode */
       }
-      syncLang();
+      applyLang(next);
     });
   });
 
-  syncTheme();
-  syncLang();
+  applyLang(root.dataset.lang === 'en' ? 'en' : 'zh');
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', syncTheme);
 </script>

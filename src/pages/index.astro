@@ -11,9 +11,11 @@ const onhold = productsByStatus('onhold');
 
 const description =
   'Beastry 是开源软件社区。公测：Stow、MijiaBar、Octoshot；另有开发中与搁置项目。想法收集见 Beastry/ideas。';
+const descriptionEn =
+  'Beastry is an open-source software community. Public beta: Stow, MijiaBar, and Octoshot. Other projects are in development or on hold. Ideas are collected in Beastry/ideas.';
 ---
 
-<Base description={description}>
+<Base description={description} descriptionEn={descriptionEn}>
   <section class="hero">
     <div class="wrap hero-grid">
       <div>
@@ -41,6 +43,8 @@ const description =
           width="1024"
           height="1024"
           alt="Beastry 母品牌：字标与打开的书，书上是粉兔、蓝猫和黄熊"
+          data-alt-zh="Beastry 母品牌：字标与打开的书，书上是粉兔、蓝猫和黄熊"
+          data-alt-en="Beastry mother brand: wordmark and an open book with a pink rabbit, a blue cat, and a yellow bear"
           loading="eager"
           decoding="async"
         />

@@ -220,11 +220,6 @@ a:hover {
   cursor: pointer;
 }
 
-html[data-lang='both'] .nav a [lang='en'] {
-  color: var(--muted);
-  font-size: 0.72rem;
-}
-
 .lang-switch {
   display: inline-flex;
   border: 1px solid var(--line);
@@ -400,12 +395,6 @@ html[data-lang='both'] .nav a [lang='en'] {
   font-size: 1.15rem;
 }
 
-.lede.en {
-  margin-top: 0.35rem;
-  color: var(--muted);
-  font-size: 1.02rem;
-}
-
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
@@ -553,7 +542,6 @@ html[data-lang='both'] .nav a [lang='en'] {
 .note .en,
 .contact-list .en {
   display: block;
-  color: var(--muted);
 }
 
 .note {
@@ -646,11 +634,6 @@ html[data-lang='both'] .nav a [lang='en'] {
   font-size: 0.78rem;
   font-weight: 500;
   letter-spacing: 0.01em;
-}
-
-.status .en {
-  color: var(--muted);
-  font-weight: 450;
 }
 
 .status-beta {
@@ -889,38 +872,6 @@ html[data-lang='zh'] [lang='en'] {
 
 html[data-lang='en'] [lang='zh-Hans'] {
   display: none !important;
-}
-
-html[data-lang='both'] h1 > [lang='en'],
-html[data-lang='both'] .nav-toggle [lang='en'] {
-  display: none;
-}
-
-html[data-lang='both'] .section-title [lang='en'],
-html[data-lang='both'] .status-heading [lang='en'] {
-  color: var(--muted);
-  font-size: 0.85em;
-}
-
-html[data-lang='both'] p > [lang='en'],
-html[data-lang='both'] .summary > [lang='en'],
-html[data-lang='both'] .note > [lang='en'],
-html[data-lang='both'] .footnote > [lang='en'],
-html[data-lang='both'] .status-lede > [lang='en'],
-html[data-lang='both'] figcaption > [lang='en'],
-html[data-lang='both'] .footer-inner > div .muted [lang='en'] {
-  display: block;
-  color: var(--muted);
-}
-
-html[data-lang='both'] .button [lang='en']::before,
-html[data-lang='both'] .footer-links [lang='en']::before,
-html[data-lang='both'] .status [lang='en']::before,
-html[data-lang='both'] .project-links a > [lang='en']::before,
-html[data-lang='both'] .prose h2 > [lang='en']::before {
-  content: ' · ';
-  color: var(--muted);
-  font-weight: 450;
 }
 
 .logo-mark {

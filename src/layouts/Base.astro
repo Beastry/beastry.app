@@ -8,11 +8,14 @@ import { site } from '../data/site';
 
 interface Props {
   title?: string;
+  titleEn?: string;
   description: string;
+  descriptionEn?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, titleEn, description, descriptionEn = description } = Astro.props;
 const fullTitle = title ? `${title} — Beastry` : 'Beastry — 开源软件社区';
+const fullTitleEn = titleEn ? `${titleEn} — Beastry` : 'Beastry — Open-source community';
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -26,7 +29,14 @@ const jsonLd = {
 ---
 
 <!doctype html>
-<html lang="zh-Hans">
+<html
+  lang="zh-Hans"
+  data-lang="zh"
+  data-title-zh={fullTitle}
+  data-title-en={fullTitleEn}
+  data-desc-zh={description}
+  data-desc-en={descriptionEn}
+>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -36,11 +46,18 @@ const jsonLd = {
         if (theme === 'light' || theme === 'dark') {
           document.documentElement.dataset.theme = theme;
         }
-        const lang = localStorage.getItem('beastry-lang');
-        document.documentElement.dataset.lang =
-          lang === 'zh' || lang === 'en' || lang === 'both' ? lang : 'both';
+        let lang = localStorage.getItem('beastry-lang');
+        if (lang === 'both') {
+          lang = 'zh';
+          localStorage.setItem('beastry-lang', 'zh');
+        }
+        if (lang !== 'en') lang = 'zh';
+        const root = document.documentElement;
+        root.dataset.lang = lang;
+        root.lang = lang === 'en' ? 'en' : 'zh-Hans';
       } catch (error) {
-        document.documentElement.dataset.lang = 'both';
+        document.documentElement.dataset.lang = 'zh';
+        document.documentElement.lang = 'zh-Hans';
       }
     </script>
     <title>{fullTitle}</title>
@@ -59,9 +76,26 @@ const jsonLd = {
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script is:inline>
+      const root = document.documentElement;
+      const english = root.dataset.lang === 'en';
+      const titleText = english ? root.dataset.titleEn : root.dataset.titleZh;
+      const descText = english ? root.dataset.descEn : root.dataset.descZh;
+      if (titleText) document.title = titleText;
+      const writeMeta = (selector, value) => {
+        if (!value) return;
+        document.querySelectorAll(selector).forEach((node) => node.setAttribute('content', value));
+      };
+      writeMeta('meta[name="description"]', descText);
+      writeMeta('meta[property="og:description"]', descText);
+      writeMeta('meta[name="twitter:description"]', descText);
+      writeMeta('meta[property="og:title"]', titleText);
+      writeMeta('meta[name="twitter:title"]', titleText);
+      writeMeta('meta[property="og:locale"]', english ? 'en_US' : 'zh_CN');
+    </script>
   </head>
   <body>
-    <a class="skip" href="#main">跳到正文</a>
+    <a class="skip" href="#main"><span lang="zh-Hans">跳到正文</span><span lang="en">Skip to content</span></a>
     <Header />
     <main id="main">
       <slot />

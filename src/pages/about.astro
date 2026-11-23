@@ -4,12 +4,14 @@ import ContactList from '../components/ContactList.astro';
 import { site } from '../data/site';
 
 const description = 'Beastry 是一个开源软件社区——动物意象、粉彩气质，认真对待每个项目与贡献者。';
+const descriptionEn =
+  'Beastry is an open-source software community: animal imagery, a pastel tone, and care for each project and contributor.';
 ---
 
-<Base title="关于" description={description}>
+<Base title="关于" titleEn="About" description={description} descriptionEn={descriptionEn}>
   <article class="page">
     <div class="wrap prose">
-      <p class="kicker">About · Community</p>
+      <p class="kicker"><span lang="zh-Hans">关于</span><span lang="en">About</span></p>
       <h1><span lang="zh-Hans">关于 Beastry</span><span lang="en">About Beastry</span></h1>
       <p lang="zh-Hans">
         Beastry 是一个开源软件社区，家在

@@ -3,12 +3,14 @@ import Base from '../layouts/Base.astro';
 import { products, site, statusMeta } from '../data/site';
 
 const description = 'Beastry 的帮助与反馈：每个产品的 Bug 和建议分别开到对应 GitHub 仓库，不另建账号或论坛。';
+const descriptionEn =
+  'Help and feedback for Beastry. Bugs and suggestions go to each product’s own GitHub repository. There is no separate account or forum.';
 ---
 
-<Base title="帮助" description={description}>
+<Base title="帮助" titleEn="Help" description={description} descriptionEn={descriptionEn}>
   <article class="page">
     <div class="wrap prose">
-      <p class="kicker">Help</p>
+      <p class="kicker"><span lang="zh-Hans">帮助</span><span lang="en">Help</span></p>
       <h1><span lang="zh-Hans">帮助与反馈</span><span lang="en">Help and feedback</span></h1>
       <p lang="zh-Hans">
         这里集中入口。Bug 和建议分开：两边都进该产品自己的 GitHub Issues，标题不同，方便认。新的产品想法不写进某个产品的仓库，请到

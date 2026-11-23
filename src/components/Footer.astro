@@ -22,6 +22,9 @@ const year = new Date().getFullYear();
       <li>
         <a href="/about"><span lang="zh-Hans">关于</span><span lang="en">About</span></a>
       </li>
+      <li>
+        <a href="/agents"><span lang="zh-Hans">给代理</span><span lang="en">For agents</span></a>
+      </li>
       {
         site.emails.map((email) => (
           <li>
@@ -37,9 +40,16 @@ const year = new Date().getFullYear();
       </li>
     </ul>
     <p class="legal">
-      © {year} Beastry. 本站第一方内容以
-      <a href="https://www.gnu.org/licenses/gpl-3.0.html" rel="noreferrer">GPL-3.0-only</a>
-      授权（仅第 3 版）。产品镜像页仍按其上游许可证提供。
+      <span lang="zh-Hans">
+        © {year} Beastry. 本站第一方内容以
+        <a href="https://www.gnu.org/licenses/gpl-3.0.html" rel="noreferrer">GPL-3.0-only</a>
+        授权（仅第 3 版）。产品镜像页仍按其上游许可证提供。
+      </span>
+      <span lang="en">
+        © {year} Beastry. First-party material on this site is
+        <a href="https://www.gnu.org/licenses/gpl-3.0.html" rel="noreferrer">GPL-3.0-only</a>
+        (version 3 only). Imported product pages keep their upstream licenses.
+      </span>
     </p>
   </div>
 </footer>
