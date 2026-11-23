@@ -15,6 +15,8 @@ test('Stow page keeps the direct DMG and the latest-release refresh', () => {
   assert.doesNotMatch(html, /docs\/roadmap\.html/);
   assert.doesNotMatch(html, /docs\/readme\.html/);
   assert.match(html, /class="nav-fold"/);
+  assert.match(html, /@media \(max-width: 720px\) \{\s*\/\* The desktop bleed/);
+  assert.match(html, /\.hero-shot \{\s*width: calc\(100% - 32px\);/);
 });
 
 test('MijiaBar pages keep the merged org repo, GPL label, and phone menu', () => {
@@ -39,6 +41,13 @@ test('Octoshot download fallback and phone menu stay in place', () => {
   const docs = read('public/octoshot/zh/docs/getting-started/index.html');
   assert.match(docs, /href="\/octoshot\/zh\/#faq"/);
   assert.doesNotMatch(docs, /href="#faq"/);
+  const license = 'https://github.com/Beastry/Octoshot/blob/main/LICENSE';
+  for (const path of ['public/octoshot/zh/index.html', 'public/octoshot/en/index.html']) {
+    const page = read(path);
+    assert.equal(page.split(license).length - 1, 3);
+    assert.match(page, /GPL-3\.0-only/);
+    assert.doesNotMatch(page, /MIT/);
+  }
 });
 
 test('mother-site navigation has real destinations in both languages', () => {

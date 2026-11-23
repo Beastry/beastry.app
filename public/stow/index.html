@@ -157,7 +157,7 @@ p { margin: 0; }
 }
 
 /* ───────────────────────── Hero ───────────────────────── */
-.hero { position: relative; padding: clamp(40px, 6vw, 84px) 0 0; text-align: center; isolation: isolate; }
+.hero { position: relative; padding: clamp(40px, 6vw, 84px) 0 0; text-align: center; isolation: isolate; overflow-x: clip; }
 .hero::before {
   content: ""; position: absolute; z-index: -1; inset: -10% -20% auto;
   height: 900px;
@@ -179,7 +179,16 @@ p { margin: 0; }
   margin-left: 50%; margin-right: 0; translate: -50% 0;
   position: relative;
 }
-.hero-shot img { width: 100%; filter: drop-shadow(0 40px 60px rgba(0,0,0,.12)); }
+.hero-shot img { width: 100%; height: auto; filter: drop-shadow(0 40px 60px rgba(0,0,0,.12)); }
+@media (max-width: 720px) {
+  /* The desktop bleed (100% + 40px) is wider than a phone. Stay inside the column. */
+  .hero-shot {
+    width: calc(100% - 32px);
+    margin-left: auto;
+    margin-right: auto;
+    translate: none;
+  }
+}
 /* One-time materialise on load: blur + scale together, not a plain fade. */
 .hero-shot { animation: materialise 900ms var(--ease-out) 150ms both; }
 @keyframes materialise {
