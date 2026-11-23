@@ -1,0 +1,88 @@
+---
+import Base from '../layouts/Base.astro';
+import { products, site, statusMeta } from '../data/site';
+
+const description = 'Beastry 的帮助与反馈：每个产品的 Bug 和建议分别开到对应 GitHub 仓库，不另建账号或论坛。';
+---
+
+<Base title="帮助" description={description}>
+  <article class="page">
+    <div class="wrap prose">
+      <p class="kicker">Help</p>
+      <h1><span lang="zh-Hans">帮助与反馈</span><span lang="en">Help and feedback</span></h1>
+      <p lang="zh-Hans">
+        这里集中入口。Bug 和建议分开：两边都进该产品自己的 GitHub Issues，标题不同，方便认。新的产品想法不写进某个产品的仓库，请到
+        <a href={site.ideaIssue} rel="noreferrer">Beastry/ideas</a>。没有账号系统，也没有论坛。
+      </p>
+      <p lang="en">
+        One place to start. Bugs and suggestions are separate links into that product’s GitHub Issues, with different titles. A new product idea goes to Beastry/ideas, not into an existing repo. There is no account system and no forum.
+      </p>
+
+      <ul class="help-list">
+        {
+          products.map((product) => {
+            const status = statusMeta[product.status];
+            return (
+              <li id={product.slug}>
+                <h2>
+                  {product.name}
+                  {product.aka && <span class="aka">{product.aka}</span>}
+                </h2>
+                <p class={`status status-${product.status}`}>
+                  <span lang="zh-Hans">{status.zh}</span>
+                  <span lang="en">{status.en}</span>
+                </p>
+                <p>
+                  <span lang="zh-Hans">{product.summaryZh}</span>
+                  <span lang="en">{product.summaryEn}</span>
+                </p>
+                <p class="project-links">
+                  <a href={product.bugUrl} rel="noreferrer">
+                    <span lang="zh-Hans">报告 Bug</span>
+                    <span lang="en">Report a bug</span>
+                  </a>
+                  {' · '}
+                  <a href={product.suggestUrl} rel="noreferrer">
+                    <span lang="zh-Hans">提建议</span>
+                    <span lang="en">Suggest a change</span>
+                  </a>
+                  {' · '}
+                  <a href={`${product.github}/issues`} rel="noreferrer">
+                    <span lang="zh-Hans">已有 Issue</span>
+                    <span lang="en">Existing issues</span>
+                  </a>
+                  {' · '}
+                  <a href={product.href} rel={product.href.startsWith('http') ? 'noreferrer' : undefined}>
+                    <span lang="zh-Hans">{product.href.startsWith('http') ? '仓库' : '介绍页'}</span>
+                    <span lang="en">{product.href.startsWith('http') ? 'Repository' : 'Product page'}</span>
+                  </a>
+                </p>
+              </li>
+            );
+          })
+        }
+      </ul>
+
+      <h2><span lang="zh-Hans">安全</span><span lang="en">Security</span></h2>
+      <p lang="zh-Hans">
+        如果发现漏洞，请寄到 <a href="mailto:security@beastry.app">security@beastry.app</a>。AgentKey 的 README 写明尚未经过安全审计。
+      </p>
+      <p lang="en">
+        If you find a vulnerability, email security@beastry.app. AgentKey’s README says it has not been security-audited.
+      </p>
+
+      <h2><span lang="zh-Hans">其他联系</span><span lang="en">Other contact</span></h2>
+      <ul>
+        {
+          site.emails.map((email) => (
+            <li>
+              <a href={`mailto:${email.address}`}>{email.address}</a>
+              <span lang="zh-Hans"> — {email.labelZh}</span>
+              <span lang="en"> — {email.labelEn}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </article>
+</Base>

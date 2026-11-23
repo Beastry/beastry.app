@@ -36,8 +36,11 @@ const jsonLd = {
         if (theme === 'light' || theme === 'dark') {
           document.documentElement.dataset.theme = theme;
         }
+        const lang = localStorage.getItem('beastry-lang');
+        document.documentElement.dataset.lang =
+          lang === 'zh' || lang === 'en' || lang === 'both' ? lang : 'both';
       } catch (error) {
-        /* ignore */
+        document.documentElement.dataset.lang = 'both';
       }
     </script>
     <title>{fullTitle}</title>
@@ -64,5 +67,78 @@ const jsonLd = {
       <slot />
     </main>
     <Footer />
+    <script>
+      type Pattern = 'stow' | 'mijiabar' | 'octoshot';
+
+      function matchedRelease(release: any, pattern: Pattern): { url: string; tag: string; published: string } | null {
+        const tag = release?.tag_name;
+        if (typeof tag !== 'string' || !/^v\d+\.\d+\.\d+$/.test(tag)) return null;
+        const assets = Array.isArray(release.assets) ? release.assets : [];
+        const uploaded = (name: string, url: string) =>
+          assets.some(
+            (asset: any) =>
+              asset &&
+              asset.name === name &&
+              asset.state === 'uploaded' &&
+              asset.browser_download_url === url,
+          );
+
+        if (pattern === 'stow') {
+          const filename = `Stow-${tag.slice(1)}.dmg`;
+          const url = `https://github.com/Beastry/stow/releases/download/${tag}/${filename}`;
+          return uploaded(filename, url) ? { url, tag, published: String(release.published_at || '') } : null;
+        }
+        if (pattern === 'mijiabar') {
+          const filename = `MijiaBar-${tag.slice(1)}.dmg`;
+          const url = `https://github.com/Beastry/MijiaBar/releases/download/${tag}/${filename}`;
+          return uploaded(filename, url) ? { url, tag, published: String(release.published_at || '') } : null;
+        }
+        const prefix = `https://github.com/Beastry/Octoshot/releases/download/${tag}/`;
+        const asset = assets.find(
+          (item: any) =>
+            item &&
+            item.state === 'uploaded' &&
+            typeof item.name === 'string' &&
+            /\.dmg$/i.test(item.name) &&
+            item.browser_download_url === prefix + item.name,
+        );
+        return asset ? { url: asset.browser_download_url, tag, published: String(release.published_at || '') } : null;
+      }
+
+      const groups = new Map<string, HTMLElement[]>();
+      document.querySelectorAll<HTMLElement>('[data-release]').forEach((node) => {
+        const repo = node.dataset.repo;
+        const pattern = node.dataset.pattern;
+        if (!repo || (pattern !== 'stow' && pattern !== 'mijiabar' && pattern !== 'octoshot')) return;
+        const key = `${repo}|${pattern}`;
+        const list = groups.get(key) ?? [];
+        list.push(node);
+        groups.set(key, list);
+      });
+
+      groups.forEach((nodes, key) => {
+        const [repo, pattern] = key.split('|') as [string, Pattern];
+        fetch(`https://api.github.com/repos/${repo}/releases/latest`, {
+          headers: { Accept: 'application/vnd.github+json' },
+        })
+          .then((response) => (response.ok ? response.json() : null))
+          .then((release) => {
+            const next = matchedRelease(release, pattern);
+            if (!next) return;
+            const day = /^\d{4}-\d{2}-\d{2}/.test(next.published) ? next.published.slice(0, 10) : '';
+            nodes.forEach((node) => {
+              if (node instanceof HTMLAnchorElement) node.href = next.url;
+              if (node.dataset.releaseVersion !== undefined) node.textContent = next.tag;
+              if (node.dataset.releaseDate !== undefined && day) {
+                node.textContent = day;
+                node.setAttribute('datetime', day);
+              }
+            });
+          })
+          .catch(() => {
+            /* The pinned file stays available. */
+          });
+      });
+    </script>
   </body>
 </html>

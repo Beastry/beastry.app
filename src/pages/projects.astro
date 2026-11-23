@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import Mark from '../components/Mark.astro';
+import DownloadList from '../components/DownloadList.astro';
 import { products, site, statusMeta } from '../data/site';
 
 const description =
@@ -11,14 +11,15 @@ const description =
   <article class="page">
     <div class="wrap">
       <p class="kicker">Projects</p>
-      <h1>项目</h1>
-      <p class="lede">
-        按状态排列。公测产品链到 beastry.app 子路径；其余进代码仓库。新想法请开
-        <a href={site.ideas} rel="noreferrer">Beastry/ideas</a>。
+      <h1><span lang="zh-Hans">项目</span><span lang="en">Projects</span></h1>
+      <p class="lede" lang="zh-Hans">
+        按状态排列。公测产品链到 beastry.app 上的介绍页；其余进代码仓库。新想法请到
+        <a href={site.ideaIssue} rel="noreferrer">Beastry/ideas</a>。已有产品的 Bug 和建议在
+        <a href="/help">帮助</a>。
       </p>
       <p class="lede en" lang="en">
-        Grouped by status. Beta products open on this site; others open their repos. New ideas go to
-        Beastry/ideas.
+        Grouped by status. Beta products open on this site; the others open their repos. New ideas go to
+        Beastry/ideas. Bugs and suggestions for an existing product go to Help.
       </p>
 
       <ol class="project-list">
@@ -28,13 +29,19 @@ const description =
             const external = product.href.startsWith('http');
             return (
               <li class="project" id={product.slug} style={`--wash: ${product.wash}; --wash-dark: ${product.washDark};`}>
-                <span class="mark">
-                  <Mark name={product.mark} label={product.markLabel} />
-                </span>
+                {product.logo && (
+                  <img
+                    class="logo-mark"
+                    src={product.logo.src}
+                    width="72"
+                    height="72"
+                    alt={`${product.logo.altZh} / ${product.logo.altEn}`}
+                  />
+                )}
                 <div class="project-main">
                   <p class={`status status-${product.status}`}>
-                    {status.zh}
-                    <span lang="en"> · {status.en}</span>
+                    <span lang="zh-Hans">{status.zh}</span>
+                    <span lang="en">{status.en}</span>
                   </p>
                   <h2>
                     <a href={product.href} rel={external ? 'noreferrer' : undefined}>
@@ -43,32 +50,69 @@ const description =
                     {product.aka && <span class="aka">{product.aka}</span>}
                     <span class="project-platform">{product.platform}</span>
                   </h2>
-                  <p>{product.summaryZh}</p>
-                  <p class="muted" lang="en">
-                    {product.summaryEn}
+                  <p>
+                    <span lang="zh-Hans">{product.summaryZh}</span>
+                    <span lang="en">{product.summaryEn}</span>
                   </p>
-                  <p class="detail">{product.detailZh}</p>
-                  <p class="detail muted" lang="en">
-                    {product.detailEn}
+                  <p class="detail">
+                    <span lang="zh-Hans">{product.detailZh}</span>
+                    <span lang="en">{product.detailEn}</span>
                   </p>
                   {product.noteZh && (
                     <p class="note">
-                      {product.noteZh}
-                      <span class="en" lang="en">
-                        {product.noteEn}
-                      </span>
+                      <span lang="zh-Hans">{product.noteZh}</span>
+                      <span lang="en">{product.noteEn}</span>
                     </p>
                   )}
+                  {!product.logo && (
+                    <p class="note">
+                      <span lang="zh-Hans">还没有核实到正式标志，所以这里不放替代图。</span>
+                      <span lang="en">No official mark was verified, so no stand-in is shown.</span>
+                    </p>
+                  )}
+                  {product.shot && (
+                    <figure class="shot">
+                      <img
+                        src={product.shot.src}
+                        width={product.shot.width}
+                        height={product.shot.height}
+                        alt={`${product.shot.altZh} / ${product.shot.altEn}`}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <figcaption>
+                        <span lang="zh-Hans">{product.shot.altZh}</span>
+                        <span lang="en">{product.shot.altEn}</span>
+                        {product.shot.noteZh && (
+                          <>
+                            <span lang="zh-Hans"> {product.shot.noteZh}</span>
+                            <span lang="en"> {product.shot.noteEn}</span>
+                          </>
+                        )}
+                      </figcaption>
+                    </figure>
+                  )}
                   <p class="project-links">
-                    <a href={product.github} rel="noreferrer">
-                      GitHub
-                    </a>
+                    <a href={product.github} rel="noreferrer">GitHub</a>
                     {!external && (
                       <>
                         {' · '}
-                        <a href={product.href}>介绍页</a>
+                        <a href={product.href}><span lang="zh-Hans">介绍页</span><span lang="en">Product page</span></a>
                       </>
                     )}
+                    {' · '}
+                    <a href={product.bugUrl} rel="noreferrer"><span lang="zh-Hans">报告 Bug</span><span lang="en">Report a bug</span></a>
+                    {' · '}
+                    <a href={product.suggestUrl} rel="noreferrer"><span lang="zh-Hans">提建议</span><span lang="en">Suggest</span></a>
+                    {product.extraLinks?.map((link) => (
+                      <>
+                        {' · '}
+                        <a href={link.href} rel={link.href.startsWith('http') ? 'noreferrer' : undefined}>
+                          <span lang="zh-Hans">{link.zh}</span>
+                          <span lang="en">{link.en}</span>
+                        </a>
+                      </>
+                    ))}
                   </p>
                 </div>
               </li>
@@ -76,6 +120,8 @@ const description =
           })
         }
       </ol>
+
+      <DownloadList products={products} />
     </div>
   </article>
 </Base>

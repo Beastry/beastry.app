@@ -20,7 +20,9 @@
 | 开发中 | [LetterBee](https://github.com/Beastry/LetterBee) | — | Slow-mail Web app · 纸短情长 |
 | 搁置 | [记忆面包](https://github.com/Beastry/jiyi-mianbao) | — | Bilibili → Anki + 小红书卡片 |
 
-网站上的动物简笔画是占位，不是各产品的正式 logo。正式形象以仓库为准。MijiaBar 是非官方项目，与小米公司无关。AgentKey 尚未经过安全审计。剪贴板 / PDF 等构思只在 ideas 库，不进产品网格。
+公测产品使用各自官网的标志。母品牌 JPG（书与粉兔、蓝猫、黄熊）只代表 Beastry，不充当产品吉祥物。没有核实到正式标志的项目不另画替代。MijiaBar 是非官方项目，与小米公司无关。AgentKey 尚未经过安全审计。剪贴板 / PDF 等构思只在 ideas 库，不进产品网格。
+
+主站导航还有 `/help` 和 `/community`。帮助把 Bug 和建议分到对应 GitHub；社区只链到已有的想法模板和路线图，没有账号或论坛。
 
 ## Contact
 

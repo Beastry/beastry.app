@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import { products, site } from '../data/site';
+
+const description = 'Beastry 的轻量社区入口：用 GitHub Issue 提想法、看路线图和贡献说明。不另建账号或论坛。';
+
+const withLinks = products.filter((product) => product.extraLinks && product.extraLinks.length > 0);
+---
+
+<Base title="社区" description={description}>
+  <article class="page">
+    <div class="wrap prose">
+      <p class="kicker">Community</p>
+      <h1><span lang="zh-Hans">社区与路线图</span><span lang="en">Community and roadmaps</span></h1>
+      <p lang="zh-Hans">
+        贡献走现有的 GitHub。新想法用 Issue 模板提交。各产品只链接仓库里已经有的路线图或规划，没有的不补一页。不注册、不建论坛、不做后台。
+      </p>
+      <p lang="en">
+        Contribution stays on GitHub. New ideas use the issue template. Roadmap links point only at files that already exist. There is no sign-up, forum, or admin site.
+      </p>
+
+      <h2><span lang="zh-Hans">提一个新产品想法</span><span lang="en">Propose a product</span></h2>
+      <p>
+        <a href={site.ideaIssue} rel="noreferrer">Beastry/ideas · Idea</a>
+      </p>
+      <p lang="zh-Hans">剪贴板和 PDF 的构思已经开在那个仓库里，不进本站的产品网格。</p>
+      <p lang="en">Clipboard and PDF seeds are already filed there. They are not in the product grid.</p>
+
+      <h2><span lang="zh-Hans">已有项目</span><span lang="en">Existing projects</span></h2>
+      <ul class="help-list">
+        {
+          withLinks.map((product) => (
+            <li>
+              <h3>{product.name}</h3>
+              <p class="project-links">
+                <a href={`${product.github}/issues`} rel="noreferrer">Issues</a>
+                {product.extraLinks?.map((link) => (
+                  <>
+                    {' · '}
+                    <a href={link.href} rel={link.href.startsWith('http') ? 'noreferrer' : undefined}>
+                      <span lang="zh-Hans">{link.zh}</span>
+                      <span lang="en">{link.en}</span>
+                    </a>
+                  </>
+                ))}
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p lang="zh-Hans">
+        组织主页：<a href={site.github} rel="noreferrer">GitHub 上的 Beastry</a>。想写信：
+        <a href="mailto:community@beastry.app">community@beastry.app</a>。
+      </p>
+      <p lang="en">
+        The organization is on GitHub. To write to a person: community@beastry.app.
+      </p>
+    </div>
+  </article>
+</Base>

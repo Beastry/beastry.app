@@ -1,12 +1,11 @@
 ---
-import { site } from '../data/site';
+import { navLinks, site } from '../data/site';
 
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
-const links = [
-  { href: '/projects', label: '项目' },
-  { href: '/about', label: '关于' },
-  { href: '/#contact', label: '联系' },
-];
+
+function current(href: string): 'page' | undefined {
+  return href === path ? 'page' : undefined;
+}
 ---
 
 <header class="site-header">
@@ -15,15 +14,23 @@ const links = [
       <img class="brand-mark" src="/brand/mark.jpg" width="64" height="64" alt="" />
       <span>Beastry</span>
     </a>
-    <nav class="nav" aria-label="主导航">
-      {
-        links.map((link) => (
-          <a href={link.href} aria-current={path === link.href ? 'page' : undefined}>
-            {link.label}
-          </a>
-        ))
-      }
-      <a href={site.github} rel="noreferrer">GitHub</a>
+    <div class="header-tools">
+      <nav class="nav nav-desktop" aria-label="主导航">
+        {
+          navLinks.map((link) => (
+            <a href={link.href} aria-current={current(link.href)}>
+              <span lang="zh-Hans">{link.zh}</span>
+              <span lang="en">{link.en}</span>
+            </a>
+          ))
+        }
+        <a href={site.github} rel="noreferrer">GitHub</a>
+      </nav>
+      <div class="lang-switch" role="group" aria-label="语言">
+        <button type="button" data-lang-set="zh" aria-pressed="false">中文</button>
+        <button type="button" data-lang-set="en" aria-pressed="false">EN</button>
+        <button type="button" data-lang-set="both" aria-pressed="true">中英</button>
+      </div>
       <button type="button" class="theme-btn" id="theme-toggle" aria-label="切换深色或浅色">
         <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
           <path
@@ -43,7 +50,24 @@ const links = [
             stroke-linecap="round"></path>
         </svg>
       </button>
-    </nav>
+      <details class="nav-fold">
+        <summary class="nav-toggle">
+          <span lang="zh-Hans">菜单</span>
+          <span lang="en">Menu</span>
+        </summary>
+        <nav class="nav nav-panel" aria-label="主导航">
+          {
+            navLinks.map((link) => (
+              <a href={link.href} aria-current={current(link.href)}>
+                <span lang="zh-Hans">{link.zh}</span>
+                <span lang="en">{link.en}</span>
+              </a>
+            ))
+          }
+          <a href={site.github} rel="noreferrer">GitHub</a>
+        </nav>
+      </details>
+    </div>
   </div>
 </header>
 
@@ -56,31 +80,54 @@ const links = [
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
 
-  function current(): 'light' | 'dark' {
+  function currentTheme(): 'light' | 'dark' {
     const set = root.dataset.theme;
     if (set === 'light' || set === 'dark') return set;
     return preferred();
   }
 
-  function sync() {
-    const mode = current();
+  function syncTheme() {
+    const mode = currentTheme();
     if (themeMeta) themeMeta.setAttribute('content', mode === 'dark' ? '#2a2421' : '#fff6ee');
     if (!button) return;
     const nextLabel = mode === 'dark' ? '切换到浅色' : '切换到深色';
     button.setAttribute('aria-label', nextLabel);
   }
 
+  function syncLang() {
+    const mode = root.dataset.lang === 'zh' || root.dataset.lang === 'en' ? root.dataset.lang : 'both';
+    root.dataset.lang = mode;
+    document.querySelectorAll<HTMLButtonElement>('[data-lang-set]').forEach((item) => {
+      item.setAttribute('aria-pressed', item.dataset.langSet === mode ? 'true' : 'false');
+    });
+  }
+
   button?.addEventListener('click', () => {
-    const next = current() === 'dark' ? 'light' : 'dark';
+    const next = currentTheme() === 'dark' ? 'light' : 'dark';
     root.dataset.theme = next;
     try {
       localStorage.setItem('theme', next);
     } catch {
       /* private mode */
     }
-    sync();
+    syncTheme();
   });
 
-  sync();
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', sync);
+  document.querySelectorAll<HTMLButtonElement>('[data-lang-set]').forEach((item) => {
+    item.addEventListener('click', () => {
+      const next = item.dataset.langSet;
+      if (next !== 'zh' && next !== 'en' && next !== 'both') return;
+      root.dataset.lang = next;
+      try {
+        localStorage.setItem('beastry-lang', next);
+      } catch {
+        /* private mode */
+      }
+      syncLang();
+    });
+  });
+
+  syncTheme();
+  syncLang();
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', syncTheme);
 </script>
