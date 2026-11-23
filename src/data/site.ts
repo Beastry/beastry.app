@@ -134,12 +134,10 @@ export const site = {
 } as const;
 
 export const navLinks = [
-  { href: '/', zh: '首页', en: 'Home' },
-  { href: '/projects', zh: '项目', en: 'Projects' },
-  { href: '/help', zh: '帮助', en: 'Help' },
-  { href: '/community', zh: '社区', en: 'Community' },
+  { href: '/projects', zh: '作品', en: 'Works' },
+  { href: '/#downloads', zh: '下载', en: 'Download' },
+  { href: '/community', zh: '参与', en: 'Take part' },
   { href: '/about', zh: '关于', en: 'About' },
-  { href: '/#contact', zh: '联系', en: 'Contact' },
 ] as const;
 
 export const products: Product[] = [

@@ -1,5 +1,5 @@
 ---
-import { navLinks, site } from '../data/site';
+import { navLinks } from '../data/site';
 
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 
@@ -12,7 +12,7 @@ function current(href: string): 'page' | undefined {
   <div class="wrap header-inner">
     <a class="wordmark" href="/" data-label-zh="Beastry 首页" data-label-en="Beastry home" aria-label="Beastry 首页">
       <img class="brand-mark" src="/brand/mark.jpg" width="64" height="64" alt="" />
-      <span>Beastry</span>
+      <span>beastry</span>
     </a>
     <div class="header-tools">
       <nav class="nav nav-desktop" data-label-zh="主导航" data-label-en="Main" aria-label="主导航">
@@ -24,7 +24,6 @@ function current(href: string): 'page' | undefined {
             </a>
           ))
         }
-        <a href={site.github} rel="noreferrer">GitHub</a>
       </nav>
       <div class="lang-switch" role="group" data-label-zh="语言" data-label-en="Language" aria-label="语言">
         <button type="button" data-lang-set="zh" aria-pressed="true">中文</button>
@@ -63,7 +62,6 @@ function current(href: string): 'page' | undefined {
               </a>
             ))
           }
-          <a href={site.github} rel="noreferrer">GitHub</a>
         </nav>
       </details>
     </div>
