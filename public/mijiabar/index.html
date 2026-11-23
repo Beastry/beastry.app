@@ -102,7 +102,12 @@ button{font:inherit;color:inherit;letter-spacing:inherit}
 .btn-sm{display:inline-flex;align-items:center;min-height:28px;padding:0 12px;border-radius:980px;background:var(--btn);color:#fff;font-size:12px;font-weight:400;letter-spacing:-.01em;transition:background-color var(--snappy) var(--ease),transform var(--press) var(--ease)}
 .btn-sm:hover{background:var(--btn-hover);text-decoration:none}
 .btn-sm:active{transform:scale(.97)}
-@media (max-width:833px){.nav-links{display:none}.nav-end{margin-left:auto}}
+.nav-fold{display:none}
+.nav-fold summary{display:inline-flex;align-items:center;min-height:28px;padding:0 10px;border-radius:8px;color:var(--nav-fg);cursor:pointer;list-style:none;font-size:12px}
+.nav-fold summary::-webkit-details-marker{display:none}
+.nav-fold[open] .nav-panel{position:absolute;z-index:60;top:100%;left:0;right:0;display:flex;flex-direction:column;gap:12px;margin:0;padding:8px 22px 16px;background:var(--bg);border-bottom:1px solid var(--hair)}
+.nav-fold .nav-panel a{color:var(--fg);font-size:14px;text-decoration:none}
+@media (max-width:833px){.nav-links{display:none}.nav-fold{display:block}.nav-end{margin-left:auto}}
 
 /* 语言菜单：<details>，没有 JS 也能用 */
 .lang{position:relative;font-size:12px}
@@ -350,6 +355,17 @@ footer a{color:var(--fg)}
       <a href="#faq">FAQ</a>
     </nav>
     <div class="nav-end">
+      <details class="nav-fold">
+        <summary>Menu</summary>
+        <div class="nav-panel">
+          <a href="#house">House</a>
+          <a href="#devices">Devices</a>
+          <a href="#camera">Camera</a>
+          <a href="#details">Details</a>
+          <a href="#agents">Agents</a>
+          <a href="#faq">FAQ</a>
+        </div>
+      </details>
       <details class="lang" data-lang-menu>
         <summary><svg viewBox="0 0 16 16" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="8" cy="8" r="6.6"/><ellipse cx="8" cy="8" rx="2.9" ry="6.6"/><path d="M1.6 5.6h12.8M1.6 10.4h12.8"/></g></svg><span class="sr">Language: </span><span class="lang-name">English</span><svg class="caret" viewBox="0 0 8 8" aria-hidden="true"><path d="M1 2.6l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
         <ul class="lang-list" role="list">

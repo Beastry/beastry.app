@@ -7,7 +7,7 @@ import { site } from '../data/site';
     site.emails.map((email) => (
       <li>
         <a href={`mailto:${email.address}`}>{email.address}</a>
-        <span>{email.labelZh}</span>
+        <span lang="zh-Hans">{email.labelZh}</span>
         <span class="en" lang="en">
           {email.labelEn}
         </span>
@@ -16,7 +16,7 @@ import { site } from '../data/site';
   }
   <li>
     <a href={site.x.href} rel="noreferrer">X {site.x.handle}</a>
-    <span>动态</span>
+    <span lang="zh-Hans">动态</span>
     <span class="en" lang="en">
       Updates
     </span>

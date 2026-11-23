@@ -145,10 +145,19 @@ p { margin: 0; }
 .nav-links { display: flex; align-items: center; gap: 28px; font-size: 14px; }
 .nav-links a:not(.btn) { text-decoration: none; color: var(--ink-2); transition: color 150ms ease; }
 @media (hover: hover) and (pointer: fine) { .nav-links a:not(.btn):hover { color: var(--ink); } }
-@media (max-width: 720px) { .nav-links a:not(.btn) { display: none; } }
+.nav-fold { display: none; }
+.nav-fold summary { list-style: none; cursor: pointer; border: 0; background: transparent; color: var(--ink); font: inherit; font-size: 14px; font-weight: 600; padding: 8px 12px; border-radius: 999px; }
+.nav-fold summary::-webkit-details-marker { display: none; }
+.nav-fold[open] .nav-panel { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; position: absolute; z-index: 60; top: 100%; right: 0; left: 0; margin: 0; padding: 8px 22px 16px; background: var(--bg); border-bottom: 1px solid var(--line); }
+.nav-fold .nav-panel a { color: var(--ink); text-decoration: none; font-size: 16px; padding: 6px 0; }
+@media (max-width: 720px) {
+  .nav-inner { position: relative; }
+  .nav-fold { display: block; margin-left: auto; }
+  .nav-links a:not(.btn) { display: none; }
+}
 
 /* ───────────────────────── Hero ───────────────────────── */
-.hero { position: relative; padding: clamp(40px, 6vw, 84px) 0 0; text-align: center; isolation: isolate; }
+.hero { position: relative; padding: clamp(40px, 6vw, 84px) 0 0; text-align: center; isolation: isolate; overflow-x: clip; }
 .hero::before {
   content: ""; position: absolute; z-index: -1; inset: -10% -20% auto;
   height: 900px;
@@ -170,7 +179,16 @@ p { margin: 0; }
   margin-left: 50%; margin-right: 0; translate: -50% 0;
   position: relative;
 }
-.hero-shot img { width: 100%; filter: drop-shadow(0 40px 60px rgba(0,0,0,.12)); }
+.hero-shot img { width: 100%; height: auto; filter: drop-shadow(0 40px 60px rgba(0,0,0,.12)); }
+@media (max-width: 720px) {
+  /* The desktop bleed (100% + 40px) is wider than a phone. Stay inside the column. */
+  .hero-shot {
+    width: calc(100% - 32px);
+    margin-left: auto;
+    margin-right: auto;
+    translate: none;
+  }
+}
 /* One-time materialise on load: blur + scale together, not a plain fade. */
 .hero-shot { animation: materialise 900ms var(--ease-out) 150ms both; }
 @keyframes materialise {
@@ -515,6 +533,18 @@ footer { border-top: 1px solid var(--line); padding: 40px 0 56px; font-size: 13.
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
     <a class="brand" href="#top" aria-label="Stow home"><svg aria-hidden="true"><use href="#logo"/></svg>Stow</a>
+    <details class="nav-fold">
+      <summary>Menu</summary>
+      <div class="nav-panel">
+        <a href="#features">Features</a>
+        <a href="#tour">Walkthrough</a>
+        <a href="#pack">Packing</a>
+        <a href="#formats">Formats</a>
+        <a href="#open-source">Open source</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://github.com/Beastry/stow/blob/main/ROADMAP.md">Roadmap</a>
+      </div>
+    </details>
     <nav class="nav-links" aria-label="Main">
       <a href="#features">Features</a>
       <a href="#tour">Walkthrough</a>
@@ -522,7 +552,7 @@ footer { border-top: 1px solid var(--line); padding: 40px 0 56px; font-size: 13.
       <a href="#formats">Formats</a>
       <a href="#open-source">Open source</a>
       <a href="#faq">FAQ</a>
-      <a href="docs/roadmap.html">Roadmap</a>
+      <a href="https://github.com/Beastry/stow/blob/main/ROADMAP.md">Roadmap</a>
       <a class="btn btn-primary btn-sm" href="https://github.com/Beastry/stow">GitHub</a>
     </nav>
   </div>
@@ -897,7 +927,7 @@ footer { border-top: 1px solid var(--line); padding: 40px 0 56px; font-size: 13.
     </div>
     <div class="hero-cta reveal" style="margin-top:40px">
       <a class="btn btn-primary" href="https://github.com/Beastry/stow">View on GitHub</a>
-      <a class="btn btn-ghost" href="docs/roadmap.html">See the roadmap</a>
+      <a class="btn btn-ghost" href="https://github.com/Beastry/stow/blob/main/ROADMAP.md">See the roadmap</a>
     </div>
   </div>
 </section>
@@ -909,7 +939,7 @@ footer { border-top: 1px solid var(--line); padding: 40px 0 56px; font-size: 13.
       <h2>Questions</h2>
     </div>
     <div class="faq reveal">
-      <details><summary>Where do I download it?<span class="pm" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span></summary><div class="a">Download the signed, notarized DMG from the <a class="link" href="https://github.com/Beastry/stow/releases/latest">latest GitHub release</a>, then drag Stow to Applications. These are early releases for macOS 26 or later, on Apple silicon and Intel Macs. You can also <a class="link" href="docs/readme.html#build--run">build from source</a>.</div></details>
+      <details><summary>Where do I download it?<span class="pm" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span></summary><div class="a">Download the signed, notarized DMG from the <a class="link" href="https://github.com/Beastry/stow/releases/latest">latest GitHub release</a>, then drag Stow to Applications. These are early releases for macOS 26 or later, on Apple silicon and Intel Macs. You can also <a class="link" href="https://github.com/Beastry/stow/blob/main/DEVELOPING.md">build from source</a>.</div></details>
       <details><summary>Will Stow change my original archive?<span class="pm" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span></summary><div class="a">Never by browsing, previewing or extracting. Changes happen only when you edit and save — and they’re written to a staging copy first, so a cancel or an error leaves the original exactly as it was.</div></details>
       <details><summary>Can it create RAR files?<span class="pm" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span></summary><div class="a">No — RAR creation is licensed by its authors. Stow opens and extracts RAR 4 and 5 (including encrypted and multi-part ones). To pack, ZIP works everywhere and 7Z compresses harder.</div></details>
       <details><summary>What does “for Windows PCs” actually change?<span class="pm" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span></summary><div class="a">It replaces characters Windows rejects (like “:” or “?”), renames reserved names such as “aux”, stores accents the way Windows expects, and leaves out “.DS_Store” and other Finder files. You see every change before packing; your originals stay as they are.</div></details>
@@ -938,7 +968,7 @@ footer { border-top: 1px solid var(--line); padding: 40px 0 56px; font-size: 13.
   <div class="wrap foot">
     <span>Stow is free software under the GPL-3.0. Built on the 7-Zip engine (LGPL).</span>
     <nav aria-label="Footer">
-      <a href="#features">Features</a><a href="#formats">Formats</a><a href="#open-source">Open source</a><a href="#faq">FAQ</a><a href="#faq">Privacy</a><a href="https://github.com/Beastry/stow/blob/main/LICENSE">Licence</a><a href="docs/roadmap.html">Roadmap</a>
+      <a href="#features">Features</a><a href="#formats">Formats</a><a href="#open-source">Open source</a><a href="#faq">FAQ</a><a href="#faq">Privacy</a><a href="https://github.com/Beastry/stow/blob/main/LICENSE">Licence</a><a href="https://github.com/Beastry/stow/blob/main/ROADMAP.md">Roadmap</a>
     </nav>
   </div>
 </footer>

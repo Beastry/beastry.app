@@ -1,0 +1,86 @@
+---
+import { sourcesChecked, type Product } from '../data/site';
+
+interface Props {
+  products: Product[];
+}
+
+const { products } = Astro.props;
+const listed = products.filter((product) => product.download);
+---
+
+{
+  listed.length > 0 && (
+    <div class="download-list">
+      <h3 class="status-heading" id="downloads">
+        <span lang="zh-Hans">下载与更新</span>
+        <span lang="en">Downloads</span>
+      </h3>
+      <p class="status-lede">
+        <span lang="zh-Hans">
+          按钮先指向 {sourcesChecked} 核对过的安装包。浏览器能连上 GitHub 时，会改到该仓库最新 release 里已经上传的对应文件；连不上或对不上，就仍下载原来那一份。
+        </span>
+        <span lang="en">
+          Each button starts at the installer checked on {sourcesChecked}. If GitHub can be reached, it moves to the matching file already uploaded on the latest release. If that lookup fails, the original file stays.
+        </span>
+      </p>
+      <ul class="download-grid">
+        {listed.map((product) => {
+          const file = product.download!;
+          return (
+            <li class="download-card" id={`${product.slug}-download`}>
+              <h4>
+                {product.name}
+                {product.aka && <span class="aka">{product.aka}</span>}
+              </h4>
+              <p class="release-line">
+                <span data-release data-release-version data-repo={file.repo} data-pattern={file.pattern}>
+                  {file.version}
+                </span>
+                <span aria-hidden="true"> · </span>
+                <time
+                  data-release
+                  data-release-date
+                  data-repo={file.repo}
+                  data-pattern={file.pattern}
+                  datetime={file.published}
+                >
+                  {file.published}
+                </time>
+                <span class="muted"> · {file.assetName}</span>
+              </p>
+              <p>
+                <span lang="zh-Hans">{file.requirementsZh}</span>
+                <span lang="en">{file.requirementsEn}</span>
+              </p>
+              <p>
+                <span lang="zh-Hans">{file.installZh}</span>
+                <span lang="en">{file.installEn}</span>
+              </p>
+              <p class="download-actions">
+                <a
+                  class="button primary"
+                  data-release
+                  data-repo={file.repo}
+                  data-pattern={file.pattern}
+                  href={file.href}
+                >
+                  <span lang="zh-Hans">下载 {file.assetName}</span>
+                  <span lang="en">Download {file.assetName}</span>
+                </a>
+                <a href={file.releaseUrl} rel="noreferrer">
+                  <span lang="zh-Hans">这一版的更新说明</span>
+                  <span lang="en">This release’s notes</span>
+                </a>
+              </p>
+              <p class="footnote">
+                <span lang="zh-Hans">{file.sourceNoteZh}</span>
+                <span lang="en">{file.sourceNoteEn}</span>
+              </p>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  )
+}

@@ -10,8 +10,8 @@ const description = 'Beastry 是一个开源软件社区——动物意象、粉
   <article class="page">
     <div class="wrap prose">
       <p class="kicker">About · Community</p>
-      <h1>关于 Beastry</h1>
-      <p>
+      <h1><span lang="zh-Hans">关于 Beastry</span><span lang="en">About Beastry</span></h1>
+      <p lang="zh-Hans">
         Beastry 是一个开源软件社区，家在
         <a href={site.url}>beastry.app</a>。我们做给自己也希望别人用得上的工具，也收集下一只产品的想法。
       </p>
@@ -20,32 +20,47 @@ const description = 'Beastry 是一个开源软件社区——动物意象、粉
         contribute to it.
       </p>
 
-      <h2>动物意象</h2>
-      <p>
-        产品线上有动物。品牌方向是「动物家族」为主、柔和珊瑚点缀；母品牌 logo 已定稿为可爱 JPG「字标 + 书」（打开的书与三只寓言兽：粉兔 / 蓝猫 / 黄熊）。本站首页的吉祥物横排与粉彩卡片仍是产品示意。单品正式图标与命名另开专项。
+      <h2><span lang="zh-Hans">母品牌</span><span lang="en">Mother brand</span></h2>
+      <p lang="zh-Hans">
+        母品牌 logo 是可爱 JPG「字标 + 书」：打开的书，与粉兔、蓝猫、黄熊。它只代表 Beastry，不充当某个产品的吉祥物。Stow、MijiaBar、Octoshot 使用各自官网的标志。还没核实到正式标志的项目，页面上留空。
+      </p>
+      <p lang="en">
+        The mother-brand logo is the warm JPG of a wordmark and a book: an open book with a pink rabbit, a blue cat, and a yellow bear. It stands for Beastry, not for a product. Stow, MijiaBar, and Octoshot use the marks from their own sites. A project without a verified mark is left blank.
       </p>
 
-      <h2>产品状态</h2>
-      <p>
-        主站用 <strong>公测</strong>、<strong>开发中</strong>、<strong>搁置</strong> 区分成熟度。Stow、MijiaBar、Octoshot 现为公测，介绍页挂在
-        <a href="/stow/">/stow</a>、<a href="/mijiabar/">/mijiabar</a>、<a href="/octoshot/">/octoshot</a>。
+      <h2><span lang="zh-Hans">产品状态</span><span lang="en">Status</span></h2>
+      <p lang="zh-Hans">
+        主站用 <strong>公测</strong>、<strong>开发中</strong>、<strong>搁置</strong> 区分成熟度。Stow、MijiaBar、Octoshot 现为公测，介绍页在
+        <a href="/stow/">/stow</a>、<a href="/mijiabar/">/mijiabar</a>、<a href="/octoshot/">/octoshot</a>。记忆面包标为搁置。AgentKey、Splatty、LetterBee 按仓库现状标为开发中，没有安装包。
+      </p>
+      <p lang="en">
+        The site uses beta, in development, and on hold. Stow, MijiaBar, and Octoshot are in beta. 记忆面包 is on hold. AgentKey, Splatty, and LetterBee are in development, with no installer.
       </p>
 
-      <h2>共建与想法</h2>
-      <p>
-        到 <a href={site.ideas} rel="noreferrer">Beastry/ideas</a> 用 Issue 提交产品想法。投票机制以后再加；剪贴板管理、PDF 工具等构思已在那里开种。每个立项仓库按自己的 README 接受 issue 和 pull request，许可证以该仓库默认分支上的文本为准。本站第一方源码、原创文档，以及 Beastry 持有版权的原创素材，以 GPL-3.0-only 提供，见本仓库 LICENSE。
+      <h2><span lang="zh-Hans">共建与想法</span><span lang="en">Building together</span></h2>
+      <p lang="zh-Hans">
+        到 <a href={site.ideaIssue} rel="noreferrer">Beastry/ideas</a> 用 Issue 模板提交产品想法。投票机制以后再加；剪贴板管理、PDF 工具等构思已在那里开种。已有产品的 Bug 和建议从 <a href="/help">帮助</a> 进各自仓库。路线图入口在 <a href="/community">社区</a>。本站第一方源码、原创文档，以及 Beastry 持有版权的原创素材，以 GPL-3.0-only 提供，见本仓库 LICENSE。
       </p>
-      <p>
+      <p lang="en">
+        Propose a product with the issue template at Beastry/ideas. Bugs and suggestions for something that already exists start at Help. Roadmap links are on Community.
+      </p>
+      <p lang="zh-Hans">
         组织主页：<a href={site.github}>GitHub 上的 Beastry</a>。想找人聊天，写信到
         <a href="mailto:community@beastry.app">community@beastry.app</a>。
       </p>
-
-      <h2>安全</h2>
-      <p>
-        如果你发现漏洞，请寄到 <a href="mailto:security@beastry.app">security@beastry.app</a>，我们希望你负责任地披露。AgentKey 这类密钥工具尚未经过独立安全审计，使用前请读它自己的说明。
+      <p lang="en">
+        The organization is on GitHub. To talk with a person, write to community@beastry.app.
       </p>
 
-      <h2>联系</h2>
+      <h2><span lang="zh-Hans">安全</span><span lang="en">Security</span></h2>
+      <p lang="zh-Hans">
+        如果你发现漏洞，请寄到 <a href="mailto:security@beastry.app">security@beastry.app</a>。AgentKey 的 README 写明尚未经过安全审计，使用前请读它自己的说明。
+      </p>
+      <p lang="en">
+        If you find a vulnerability, email security@beastry.app. AgentKey’s README says it has not been security-audited.
+      </p>
+
+      <h2><span lang="zh-Hans">联系</span><span lang="en">Contact</span></h2>
       <ContactList />
     </div>
   </article>

@@ -19,12 +19,58 @@ export const statusMeta: Record<
   onhold: { zh: '搁置', en: 'On hold', order: 2 },
 };
 
+/** Versions below were read from GitHub on this date. Buttons can refresh later. */
+export const sourcesChecked = '2026-11-23';
+
+export interface ProductLogo {
+  src: string;
+  altZh: string;
+  altEn: string;
+  /** Where the file was taken from. */
+  source: string;
+}
+
+export interface ProductShot {
+  src: string;
+  width: number;
+  height: number;
+  altZh: string;
+  altEn: string;
+  source: string;
+  noteZh?: string;
+  noteEn?: string;
+}
+
+export type ReleasePattern = 'stow' | 'mijiabar' | 'octoshot';
+
+export interface ProductDownload {
+  version: string;
+  published: string;
+  assetName: string;
+  href: string;
+  repo: string;
+  pattern: ReleasePattern;
+  requirementsZh: string;
+  requirementsEn: string;
+  installZh: string;
+  installEn: string;
+  releaseUrl: string;
+  sourceNoteZh: string;
+  sourceNoteEn: string;
+}
+
+export interface SourcedLink {
+  href: string;
+  zh: string;
+  en: string;
+}
+
 export interface Product {
   slug: string;
   name: string;
   aka?: string;
   mark: MarkName;
-  /** What the placeholder drawing depicts. Not an official logo. */
+  /** What the old placeholder drawing depicted. Not shown when a real logo exists. */
   markLabel: string;
   status: ProductStatus;
   summaryZh: string;
@@ -40,6 +86,22 @@ export interface Product {
   noteEn?: string;
   wash: string;
   washDark: string;
+  logo?: ProductLogo;
+  shot?: ProductShot;
+  download?: ProductDownload;
+  /** Prefilled GitHub issue for a defect. Separate from suggestions. */
+  bugUrl: string;
+  /** Prefilled GitHub issue for a suggestion. Not a new-product idea. */
+  suggestUrl: string;
+  extraLinks?: SourcedLink[];
+}
+
+function issueLinks(repo: string): Pick<Product, 'bugUrl' | 'suggestUrl'> {
+  const base = `https://github.com/${repo}/issues/new`;
+  return {
+    bugUrl: `${base}?title=Bug%3A%20`,
+    suggestUrl: `${base}?title=Suggestion%3A%20`,
+  };
 }
 
 export const site = {
@@ -47,6 +109,7 @@ export const site = {
   url: 'https://beastry.app',
   github: 'https://github.com/Beastry',
   ideas: 'https://github.com/Beastry/ideas',
+  ideaIssue: 'https://github.com/Beastry/ideas/issues/new?template=idea.yml',
   x: {
     handle: '@beastryapp',
     href: 'https://x.com/beastryapp',
@@ -70,6 +133,15 @@ export const site = {
   ],
 } as const;
 
+export const navLinks = [
+  { href: '/', zh: '首页', en: 'Home' },
+  { href: '/projects', zh: '项目', en: 'Projects' },
+  { href: '/help', zh: '帮助', en: 'Help' },
+  { href: '/community', zh: '社区', en: 'Community' },
+  { href: '/about', zh: '关于', en: 'About' },
+  { href: '/#contact', zh: '联系', en: 'Contact' },
+] as const;
+
 export const products: Product[] = [
   {
     slug: 'stow',
@@ -88,6 +160,52 @@ export const products: Product[] = [
     platform: 'macOS',
     wash: '#FFD6C7',
     washDark: '#2C261C',
+    logo: {
+      src: '/stow/favicon.svg',
+      altZh: 'Stow 应用图标',
+      altEn: 'Stow app icon',
+      source: 'https://github.com/Beastry/stow/blob/main/website/favicon.svg',
+    },
+    shot: {
+      src: '/stow/assets/grid-light.webp',
+      width: 2224,
+      height: 1438,
+      altZh: 'Stow 浏览压缩包中的照片文件夹',
+      altEn: 'Stow browsing a photos folder inside an archive',
+      source: 'https://github.com/Beastry/stow/blob/main/website/assets/grid-light.webp',
+    },
+    download: {
+      version: 'v0.1.11',
+      published: '2026-11-22',
+      assetName: 'Stow-0.1.11.dmg',
+      href: 'https://github.com/Beastry/stow/releases/download/v0.1.11/Stow-0.1.11.dmg',
+      repo: 'Beastry/stow',
+      pattern: 'stow',
+      requirementsZh: 'macOS 26 或更高。Apple 芯片和 Intel 都可以。',
+      requirementsEn: 'macOS 26 or later. Apple silicon and Intel.',
+      installZh:
+        '下载 DMG，把 Stow 拖进“应用程序”。也可以用 Homebrew：brew install --cask beastry/tap/stow。',
+      installEn:
+        'Download the DMG and drag Stow to Applications. Or: brew install --cask beastry/tap/stow.',
+      releaseUrl: 'https://github.com/Beastry/stow/releases/tag/v0.1.11',
+      sourceNoteZh:
+        '版本与日期来自 GitHub Release v0.1.11（2026-11-22 发布）。系统要求与安装步骤来自仓库 README；Homebrew cask 在同日为 0.1.11，且 depends_on macos: tahoe。',
+      sourceNoteEn:
+        'Version and date are GitHub release v0.1.11 (published 2026-11-22). Requirements and install steps are from the repo README. The Homebrew cask was 0.1.11 that day and depends on macOS Tahoe.',
+    },
+    ...issueLinks('Beastry/stow'),
+    extraLinks: [
+      {
+        href: 'https://github.com/Beastry/stow/blob/main/ROADMAP.md',
+        zh: '路线图',
+        en: 'Roadmap',
+      },
+      {
+        href: 'https://github.com/Beastry/stow/blob/main/DEVELOPING.md',
+        zh: '从源码构建',
+        en: 'Build from source',
+      },
+    ],
   },
   {
     slug: 'mijiabar',
@@ -108,6 +226,47 @@ export const products: Product[] = [
     noteEn: 'Unofficial. Not affiliated with Xiaomi.',
     wash: '#FFD6C7',
     washDark: '#3A261C',
+    logo: {
+      src: '/mijiabar/assets/icon.png',
+      altZh: 'MijiaBar 应用图标',
+      altEn: 'MijiaBar app icon',
+      source: 'https://github.com/Beastry/beastry.app/blob/main/public/mijiabar/assets/icon.png',
+    },
+    shot: {
+      src: '/media/mijiabar-list-light.webp',
+      width: 720,
+      height: 1120,
+      altZh: 'MijiaBar 浅色设备列表',
+      altEn: 'MijiaBar device list in light mode',
+      source: 'https://files.neardws.com/mijiabar/readme/list-light.webp',
+    },
+    download: {
+      version: 'v0.1.16',
+      published: '2026-11-11',
+      assetName: 'MijiaBar-0.1.16.dmg',
+      href: 'https://github.com/Beastry/MijiaBar/releases/download/v0.1.16/MijiaBar-0.1.16.dmg',
+      repo: 'Beastry/MijiaBar',
+      pattern: 'mijiabar',
+      requirementsZh: 'macOS 14 或更高。Apple 芯片和 Intel 都可以。',
+      requirementsEn: 'macOS 14 or later. Apple silicon and Intel.',
+      installZh:
+        '下载 DMG，把 MijiaBar 拖进“应用程序”再打开。第一次控制设备时允许“本地网络”。',
+      installEn:
+        'Download the DMG, drag MijiaBar to Applications, and open it. Allow Local Network the first time you control a device.',
+      releaseUrl: 'https://github.com/Beastry/MijiaBar/releases/tag/v0.1.16',
+      sourceNoteZh:
+        '版本与日期来自 GitHub Release v0.1.16（2026-11-11 发布）。系统要求与安装步骤来自 Beastry/MijiaBar README。',
+      sourceNoteEn:
+        'Version and date are GitHub release v0.1.16 (published 2026-11-11). Requirements and install steps are from the Beastry/MijiaBar README.',
+    },
+    ...issueLinks('Beastry/MijiaBar'),
+    extraLinks: [
+      {
+        href: 'https://github.com/Beastry/MijiaBar/blob/main/docs/AGENT_SETUP.zh-CN.md',
+        zh: 'Agent 安装说明',
+        en: 'Agent setup',
+      },
+    ],
   },
   {
     slug: 'octoshot',
@@ -127,6 +286,54 @@ export const products: Product[] = [
     platform: 'macOS',
     wash: '#D6ECE7',
     washDark: '#1A3530',
+    logo: {
+      src: '/octoshot/brand/logo.svg',
+      altZh: '一酱，Octoshot 的红章鱼标志',
+      altEn: '一酱, the Octoshot red-octopus mark',
+      source: 'https://github.com/Beastry/Octoshot/blob/main/website/public/brand/logo.svg',
+    },
+    shot: {
+      src: '/octoshot/screenshots/zh/hero-web.webp',
+      width: 1440,
+      height: 900,
+      altZh: 'Octoshot 官网的捕获界面画面',
+      altEn: 'Capture scene from the Octoshot site',
+      source: 'https://github.com/Beastry/Octoshot/blob/main/website/public/screenshots/zh/hero-web.webp',
+      noteZh: '官网写明这些画面是按界面生成的，不是手截的屏幕照片。',
+      noteEn: 'The product site says these scenes are generated from the UI, not hand-captured screenshots.',
+    },
+    download: {
+      version: 'v0.3.3',
+      published: '2026-11-14',
+      assetName: 'Octoshot-v0.3.3-macOS.dmg',
+      href: 'https://github.com/Beastry/Octoshot/releases/download/v0.3.3/Octoshot-v0.3.3-macOS.dmg',
+      repo: 'Beastry/Octoshot',
+      pattern: 'octoshot',
+      requirementsZh:
+        '官网写需要 macOS 14 或更高，捕获要允许屏幕录制。README 写正式发布版只支持 Apple 芯片；Intel Mac 请留在旧版。旧版的版本号仓库没有写出。',
+      requirementsEn:
+        'The product site says macOS 14 or later, and capture needs Screen Recording permission. The README says release builds support Apple silicon only; Intel Macs should stay on an older build. That older version number is not named in the repo.',
+      installZh: '从 GitHub 下载发行版，打开 Octoshot.app，按提示允许屏幕录制。',
+      installEn: 'Download the GitHub release, open Octoshot.app, and allow Screen Recording when prompted.',
+      releaseUrl: 'https://github.com/Beastry/Octoshot/releases/tag/v0.3.3',
+      sourceNoteZh:
+        '版本与日期来自 GitHub Release v0.3.3（2026-11-14 发布）。macOS 14 与安装步骤来自官网“快速开始”；芯片范围来自仓库 README。',
+      sourceNoteEn:
+        'Version and date are GitHub release v0.3.3 (published 2026-11-14). macOS 14 and the install steps are from the site’s Getting started page. The chip note is from the repo README.',
+    },
+    ...issueLinks('Beastry/Octoshot'),
+    extraLinks: [
+      {
+        href: 'https://github.com/Beastry/Octoshot/blob/main/README.md#%E8%B7%AF%E7%BA%BF%E5%9B%BE',
+        zh: '路线图',
+        en: 'Roadmap',
+      },
+      {
+        href: '/octoshot/zh/docs/getting-started/',
+        zh: '快速开始',
+        en: 'Getting started',
+      },
+    ],
   },
   {
     slug: 'agentkey',
@@ -143,10 +350,23 @@ export const products: Product[] = [
     href: 'https://github.com/Beastry/AgentKey',
     github: 'https://github.com/Beastry/AgentKey',
     platform: 'Apple',
-    noteZh: '尚未安全审计。',
-    noteEn: 'Not yet security-audited.',
+    noteZh: 'README 写明尚未安全审计。没有 GitHub Release，这里不提供下载。',
+    noteEn: 'The README says it is not audited. There is no GitHub release, so this site has no download.',
     wash: '#E7E2F6',
     washDark: '#2A2438',
+    ...issueLinks('Beastry/AgentKey'),
+    extraLinks: [
+      {
+        href: 'https://github.com/Beastry/AgentKey/blob/main/README.md',
+        zh: 'README 里的状态',
+        en: 'Status in the README',
+      },
+      {
+        href: 'https://github.com/Beastry/AgentKey/blob/main/SECURITY.md',
+        zh: '安全说明',
+        en: 'Security notes',
+      },
+    ],
   },
   {
     slug: 'splatty',
@@ -163,10 +383,23 @@ export const products: Product[] = [
     href: 'https://github.com/Beastry/Splatty',
     github: 'https://github.com/Beastry/Splatty',
     platform: 'iPhone · Mac',
-    noteZh: '早期版本，接口还会变。',
-    noteEn: 'Early build. Interfaces may change.',
+    noteZh: 'README 写的是早期脚手架，接口还会变。没有 Release，不提供下载。',
+    noteEn: 'The README calls it early scaffolding. Interfaces may change. No release, so no download.',
     wash: '#D6E9F6',
     washDark: '#1C2A33',
+    ...issueLinks('Beastry/Splatty'),
+    extraLinks: [
+      {
+        href: 'https://github.com/Beastry/Splatty/blob/main/docs/architecture.md',
+        zh: '架构说明',
+        en: 'Architecture',
+      },
+      {
+        href: 'https://github.com/Beastry/Splatty/blob/main/CONTRIBUTING.md',
+        zh: '贡献说明',
+        en: 'Contributing',
+      },
+    ],
   },
   {
     slug: 'letterbee',
@@ -184,8 +417,18 @@ export const products: Product[] = [
     href: 'https://github.com/Beastry/LetterBee',
     github: 'https://github.com/Beastry/LetterBee',
     platform: 'Web',
+    noteZh: '开发规划写的是先做能内测的 Web App。没有 Release，不提供下载。',
+    noteEn: 'The development plan aims at an internal-test web app first. No release, so no download.',
     wash: '#FFE8B8',
     washDark: '#332C14',
+    ...issueLinks('Beastry/LetterBee'),
+    extraLinks: [
+      {
+        href: 'https://github.com/Beastry/LetterBee/blob/main/docs/development-plan.md',
+        zh: '开发规划',
+        en: 'Development plan',
+      },
+    ],
   },
   {
     slug: 'jiyi-mianbao',
@@ -203,8 +446,12 @@ export const products: Product[] = [
     href: 'https://github.com/Beastry/jiyi-mianbao',
     github: 'https://github.com/Beastry/jiyi-mianbao',
     platform: 'Python',
+    noteZh: '本站标为搁置。仓库 README 仍有使用说明，没有写“已搁置”，也没有 Release。',
+    noteEn:
+      'Listed here as on hold. The README still documents how to run it, does not say “on hold,” and there is no release.',
     wash: '#FFE8B8',
     washDark: '#332A16',
+    ...issueLinks('Beastry/jiyi-mianbao'),
   },
 ];
 

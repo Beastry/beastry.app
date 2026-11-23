@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import ProductCard from '../components/ProductCard.astro';
 import ContactList from '../components/ContactList.astro';
+import DownloadList from '../components/DownloadList.astro';
 import { productsByStatus, site, statusMeta } from '../data/site';
 
 const beta = productsByStatus('beta');
@@ -16,18 +17,22 @@ const description =
   <section class="hero">
     <div class="wrap hero-grid">
       <div>
-        <p class="kicker">Beastry · 开源软件社区 <span lang="en">· Open source</span></p>
-        <h1>开源软件社区，<br />温暖一点。</h1>
-        <p class="lede">
-          我们做开源软件，也一起想下一只会是什么。产品带着动物意象；粉彩卡片和认真写的代码，都希望让人觉得亲近。
+        <p class="kicker"><span lang="zh-Hans">Beastry · 开源软件社区</span> <span lang="en">Beastry · Open source</span></p>
+        <h1>
+          <span lang="zh-Hans">开源软件社区，<br />温暖一点。</span>
+          <span lang="en">Open source,<br />a little warmer.</span>
+        </h1>
+        <p class="lede" lang="zh-Hans">
+          我们做开源软件，也一起想下一只会是什么。母品牌是书与粉兔、蓝猫、黄熊；有官网的产品用它们自己的标志。
         </p>
         <p class="lede en" lang="en">
-          An open-source community with a softer edge — one creature for each project, and room to co-create the next idea.
+          An open-source community. The mother brand is a book with a pink rabbit, a blue cat, and a yellow bear. Products with a site use their own marks.
         </p>
         <div class="hero-actions">
-          <a class="button primary" href="#work">看项目</a>
-          <a class="button ghost" href={site.ideas} rel="noreferrer">提想法 · Ideas</a>
-          <a class="button ghost" href={site.github} rel="noreferrer">GitHub 组织</a>
+          <a class="button primary" href="#work"><span lang="zh-Hans">看项目</span><span lang="en">Projects</span></a>
+          <a class="button ghost" href="/help"><span lang="zh-Hans">帮助与反馈</span><span lang="en">Help</span></a>
+          <a class="button ghost" href={site.ideas} rel="noreferrer"><span lang="zh-Hans">提想法</span><span lang="en">Ideas</span></a>
+          <a class="button ghost" href={site.github} rel="noreferrer"><span lang="zh-Hans">GitHub 组织</span><span lang="en">GitHub</span></a>
         </div>
       </div>
       <figure class="hero-visual">
@@ -35,34 +40,27 @@ const description =
           src="/brand/logo-lockup.jpg"
           width="1024"
           height="1024"
-          alt="Beastry 字标与打开的书 mark（三只寓言兽）"
+          alt="Beastry 母品牌：字标与打开的书，书上是粉兔、蓝猫和黄熊"
           loading="eager"
           decoding="async"
         />
       </figure>
     </div>
-    <div class="wrap mascot-band">
-      <img
-        src="/brand/mascots-row.jpg"
-        width="1536"
-        height="640"
-        alt="Beastry 产品吉祥物横排示意"
-        loading="lazy"
-        decoding="async"
-      />
-    </div>
   </section>
 
   <section class="section" id="work" aria-labelledby="work-title">
     <div class="wrap">
-      <h2 class="section-title" id="work-title">作品 · Projects</h2>
+      <h2 class="section-title" id="work-title"><span lang="zh-Hans">作品</span><span lang="en">Projects</span></h2>
 
       <div class="status-block" id="beta">
         <h3 class="status-heading">
-          {statusMeta.beta.zh}
-          <span lang="en">· {statusMeta.beta.en}</span>
+          <span lang="zh-Hans">{statusMeta.beta.zh}</span>
+          <span lang="en">{statusMeta.beta.en}</span>
         </h3>
-        <p class="status-lede">已可试用的三款；各自有独立介绍页。</p>
+        <p class="status-lede">
+          <span lang="zh-Hans">已可试用的三款；各自有独立介绍页。标志来自它们自己的官网。</span>
+          <span lang="en">Three you can try. Each has its own page, and the mark is from that product’s site.</span>
+        </p>
         <ul class="product-grid">
           {beta.map((product, index) => <ProductCard product={product} index={index} />)}
         </ul>
@@ -70,10 +68,13 @@ const description =
 
       <div class="status-block" id="developing">
         <h3 class="status-heading">
-          {statusMeta.developing.zh}
-          <span lang="en">· {statusMeta.developing.en}</span>
+          <span lang="zh-Hans">{statusMeta.developing.zh}</span>
+          <span lang="en">{statusMeta.developing.en}</span>
         </h3>
-        <p class="status-lede">还在长的项目，欢迎到仓库看进度、开 Issue。</p>
+        <p class="status-lede">
+          <span lang="zh-Hans">还在长的项目。仓库里没有核对到正式标志或安装包，这里不另画、也不提供下载。</span>
+          <span lang="en">Still growing. No official mark or installer was verified, so none is invented here.</span>
+        </p>
         <ul class="product-grid">
           {developing.map((product, index) => (
             <ProductCard product={product} index={beta.length + index} />
@@ -83,11 +84,14 @@ const description =
 
       <details class="status-block onhold-block" id="onhold">
         <summary class="status-heading">
-          {statusMeta.onhold.zh}
-          <span lang="en">· {statusMeta.onhold.en}</span>
-          <span class="summary-hint">展开</span>
+          <span lang="zh-Hans">{statusMeta.onhold.zh}</span>
+          <span lang="en">{statusMeta.onhold.en}</span>
+          <span class="summary-hint"><span lang="zh-Hans">展开</span><span lang="en">Show</span></span>
         </summary>
-        <p class="status-lede">暂时搁置，代码仍在 GitHub。</p>
+        <p class="status-lede">
+          <span lang="zh-Hans">暂时搁置，代码仍在 GitHub。记忆面包的 README 还没有写“已搁置”。</span>
+          <span lang="en">Paused for now. The code stays on GitHub. 记忆面包’s README does not itself say it is on hold.</span>
+        </p>
         <ul class="product-grid">
           {onhold.map((product, index) => (
             <ProductCard product={product} index={beta.length + developing.length + index} />
@@ -95,22 +99,28 @@ const description =
         </ul>
       </details>
 
+      <DownloadList products={beta} />
       <p class="footnote ideas-cta">
-        下一只会是什么？到
-        <a href={site.ideas} rel="noreferrer">Beastry/ideas</a>
-        提交或讨论想法（剪贴板、PDF 等构思已在那里）。
-        <span lang="en">Propose ideas at Beastry/ideas — clipboard and PDF seeds are already filed.</span>
+        <span lang="zh-Hans">
+          下一只会是什么？到
+          <a href={site.ideaIssue} rel="noreferrer">Beastry/ideas</a>
+          提交想法（剪贴板、PDF 等构思已在那里）。已有产品的 Bug 和建议在
+          <a href="/help">帮助</a>。
+        </span>
+        <span lang="en">
+          Propose a new idea at Beastry/ideas. Bugs and suggestions for a product that already exists go to <a href="/help">Help</a>.
+        </span>
       </p>
       <p class="footnote">
-        上方吉祥物与卡片色是品牌 v1 示意；正式标志以各仓库为准。动物园单品形象另开专项。
-        <span lang="en">Mascots and pastel tiles are brand v1 stand-ins until each project ships its own mark.</span>
+        <span lang="zh-Hans">上方字标与书是母品牌（粉兔、蓝猫、黄熊）。它不是产品标志。没有核实到标志的项目留空。</span>
+        <span lang="en">The wordmark and book above are the mother brand: a pink rabbit, a blue cat, and a yellow bear. They are not product marks. Products without a verified mark are left blank.</span>
       </p>
     </div>
   </section>
 
   <section class="section" id="contact" aria-labelledby="contact-title">
     <div class="wrap">
-      <h2 class="section-title" id="contact-title">联系 · Contact</h2>
+      <h2 class="section-title" id="contact-title"><span lang="zh-Hans">联系</span><span lang="en">Contact</span></h2>
       <ContactList />
     </div>
   </section>

@@ -1,0 +1,34 @@
+/* Phone navigation for the vendored Octoshot pages.
+   Desktop links stay in the existing bar. Below 768px those links are hidden by the
+   site CSS, so this disclosure shows the same destinations. */
+.beastry-nav-mobile { display: none; }
+.beastry-nav-mobile summary { list-style: none; cursor: pointer; }
+.beastry-nav-mobile summary::-webkit-details-marker { display: none; }
+@media (max-width: 767px) {
+  .beastry-nav-mobile { display: block; }
+  .beastry-nav-mobile summary {
+    color: var(--nav-fg, var(--fg));
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+  .beastry-nav-mobile[open] .beastry-nav-panel {
+    position: absolute;
+    z-index: 60;
+    top: 52px;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+    padding: 8px 22px 16px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--hair);
+  }
+  .beastry-nav-mobile .beastry-nav-panel a {
+    color: var(--fg);
+    font-size: 14px;
+    text-decoration: none;
+    padding: 4px 0;
+  }
+}
