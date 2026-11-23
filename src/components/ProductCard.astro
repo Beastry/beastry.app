@@ -26,7 +26,9 @@ const external = product.href.startsWith('http');
             src={product.logo.src}
             width="68"
             height="68"
-            alt={`${product.logo.altZh} / ${product.logo.altEn}`}
+            alt={product.logo.altZh}
+            data-alt-zh={product.logo.altZh}
+            data-alt-en={product.logo.altEn}
           />
         )
       }

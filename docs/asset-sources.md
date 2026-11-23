@@ -45,3 +45,7 @@ Requirements and install lines are copied from the Stow README, the MijiaBar REA
 ## Pull request 3
 
 Pull request 3 merged onto `main` as `71d90b6` while this branch was open. This branch was not started from that pull request. The merge into this branch keeps its org-repo URLs and GPL-3.0-only labels, and keeps the phone menu added here. Screenshot hotlinks on `files.neardws.com` and the footer line “Copyright © 2026 neardws and contributors.” are unchanged from that merge.
+
+## Agent index
+
+Checked 2026-11-23. `AGENTS.md` was on the default branch of [Beastry/stow](https://github.com/Beastry/stow/blob/main/AGENTS.md) and [Beastry/MijiaBar](https://github.com/Beastry/MijiaBar/blob/main/AGENTS.md) only. `CONTRIBUTING.md` was in [Beastry/Splatty](https://github.com/Beastry/Splatty/blob/main/CONTRIBUTING.md) only. Stow also had `CLAUDE.md`, `DEVELOPING.md`, `RELEASING.md`, and `ROADMAP.md` in the repo root. Beastry/ideas had `.github/ISSUE_TEMPLATE/idea.yml`. Octoshot, AgentKey, LetterBee, jiyi-mianbao, and beastry.app had no `AGENTS.md`. The website page `/agents` and `public/llms.txt` link those files. They do not copy open issues or release versions.

@@ -3,20 +3,34 @@ import Base from '../layouts/Base.astro';
 import { products, site } from '../data/site';
 
 const description = 'Beastry 的轻量社区入口：用 GitHub Issue 提想法、看路线图和贡献说明。不另建账号或论坛。';
+const descriptionEn =
+  'A light community entry for Beastry: GitHub issues for ideas, plus links to roadmaps that already exist. No accounts or forum.';
 
 const withLinks = products.filter((product) => product.extraLinks && product.extraLinks.length > 0);
 ---
 
-<Base title="社区" description={description}>
+<Base title="社区" titleEn="Community" description={description} descriptionEn={descriptionEn}>
   <article class="page">
     <div class="wrap prose">
-      <p class="kicker">Community</p>
+      <p class="kicker"><span lang="zh-Hans">社区</span><span lang="en">Community</span></p>
       <h1><span lang="zh-Hans">社区与路线图</span><span lang="en">Community and roadmaps</span></h1>
       <p lang="zh-Hans">
         贡献走现有的 GitHub。新想法用 Issue 模板提交。各产品只链接仓库里已经有的路线图或规划，没有的不补一页。不注册、不建论坛、不做后台。
       </p>
       <p lang="en">
         Contribution stays on GitHub. New ideas use the issue template. Roadmap links point only at files that already exist. There is no sign-up, forum, or admin site.
+      </p>
+
+      <h2><span lang="zh-Hans">给写代码的人和代理</span><span lang="en">For people and coding agents</span></h2>
+      <p lang="zh-Hans">
+        <a href="/agents">给代理的说明</a>
+        是本站的中文和英文指引：社区现状、任务在哪个仓库、怎么提 Issue 和 PR、需要人批准的边界。仓库里的文件仍然优先。公开索引在
+        <a href="/llms.txt">/llms.txt</a>。
+      </p>
+      <p lang="en">
+        <a href="/agents">For agents</a>
+        is this site’s Chinese and English guidance: status, where tasks live, how to open an issue or pull request, and what still needs a person. Files inside each repository stay authoritative. The public index is
+        <a href="/llms.txt">/llms.txt</a>.
       </p>
 
       <h2><span lang="zh-Hans">提一个新产品想法</span><span lang="en">Propose a product</span></h2>

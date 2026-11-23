@@ -5,12 +5,14 @@ import { products, site, statusMeta } from '../data/site';
 
 const description =
   'Beastry 的开源项目：公测 Stow / MijiaBar / Octoshot；开发中与搁置项目；想法见 Beastry/ideas。';
+const descriptionEn =
+  'Open-source projects at Beastry: public betas, work in development, and one project on hold. New ideas go to Beastry/ideas.';
 ---
 
-<Base title="项目" description={description}>
+<Base title="项目" titleEn="Projects" description={description} descriptionEn={descriptionEn}>
   <article class="page">
     <div class="wrap">
-      <p class="kicker">Projects</p>
+      <p class="kicker"><span lang="zh-Hans">项目</span><span lang="en">Projects</span></p>
       <h1><span lang="zh-Hans">项目</span><span lang="en">Projects</span></h1>
       <p class="lede" lang="zh-Hans">
         按状态排列。公测产品链到 beastry.app 上的介绍页；其余进代码仓库。新想法请到
@@ -35,7 +37,9 @@ const description =
                     src={product.logo.src}
                     width="72"
                     height="72"
-                    alt={`${product.logo.altZh} / ${product.logo.altEn}`}
+                    alt={product.logo.altZh}
+                    data-alt-zh={product.logo.altZh}
+                    data-alt-en={product.logo.altEn}
                   />
                 )}
                 <div class="project-main">
@@ -76,7 +80,9 @@ const description =
                         src={product.shot.src}
                         width={product.shot.width}
                         height={product.shot.height}
-                        alt={`${product.shot.altZh} / ${product.shot.altEn}`}
+                        alt={product.shot.altZh}
+                        data-alt-zh={product.shot.altZh}
+                        data-alt-en={product.shot.altEn}
                         loading="lazy"
                         decoding="async"
                       />

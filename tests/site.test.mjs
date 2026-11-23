@@ -50,20 +50,31 @@ test('Octoshot download fallback and phone menu stay in place', () => {
   }
 });
 
-test('mother-site navigation has real destinations in both languages', () => {
+test('mother-site navigation is Chinese or English, with real destinations', () => {
   const header = read('src/components/Header.astro');
+  const layout = read('src/layouts/Base.astro');
   const data = read('src/data/site.ts');
+  const css = read('src/styles/global.css');
   for (const href of ['/', '/projects', '/help', '/community', '/about', '/#contact']) {
     assert.match(data, new RegExp(`href: '${href.replace('/', '\\/')}'`));
   }
+  assert.doesNotMatch(data, /href: '\/agents'/);
+  assert.doesNotMatch(header, /href="\/agents"/);
   assert.match(header, /data-lang-set="zh"/);
   assert.match(header, /data-lang-set="en"/);
-  assert.match(header, /data-lang-set="both"/);
+  assert.doesNotMatch(header, /data-lang-set="both"/);
+  assert.doesNotMatch(header, /中英/);
+  assert.match(layout, /data-lang="zh"/);
+  assert.match(layout, /lang === 'both'/);
+  assert.match(layout, /localStorage\.setItem\('beastry-lang', 'zh'\)/);
+  assert.doesNotMatch(layout, /dataset\.lang = 'both'|dataset\.lang = "both"/);
+  assert.doesNotMatch(css, /data-lang='both'|data-lang="both"/);
   assert.doesNotMatch(header, /href=""/);
   assert.doesNotMatch(header, /href="#"/);
   assert.match(read('src/pages/help.astro'), /bugUrl/);
   assert.match(read('src/pages/help.astro'), /suggestUrl/);
   assert.match(read('src/pages/community.astro'), /ideaIssue/);
+  assert.match(read('src/pages/community.astro'), /href="\/agents"/);
 });
 
 test('pinned downloads and logo files are the sourced ones', () => {
@@ -86,6 +97,7 @@ test('pages do not invent download counts or a forum', () => {
     'src/pages/projects.astro',
     'src/pages/help.astro',
     'src/pages/community.astro',
+    'src/pages/agents.astro',
     'src/data/site.ts',
   ]
     .map(read)
@@ -93,4 +105,27 @@ test('pages do not invent download counts or a forum', () => {
   assert.doesNotMatch(blob, /下载量|download count|★★|5 星|安全承诺/i);
   assert.match(blob, /没有账号/);
   assert.match(blob, /没有论坛|no forum/i);
+});
+
+test('agent page and llms.txt link the files that exist', () => {
+  const page = read('src/pages/agents.astro');
+  const index = read('public/llms.txt');
+  const combined = `${page}\n${index}`;
+  for (const url of [
+    'https://github.com/Beastry/stow/blob/main/AGENTS.md',
+    'https://github.com/Beastry/MijiaBar/blob/main/AGENTS.md',
+    'https://github.com/Beastry/Splatty/blob/main/CONTRIBUTING.md',
+    'https://github.com/Beastry/ideas/issues/new?template=idea.yml',
+    'https://beastry.app/agents',
+    'https://beastry.app/projects',
+  ]) {
+    assert.ok(combined.includes(url), url);
+  }
+  assert.match(page, /lang="zh-Hans"/);
+  assert.match(page, /lang="en"/);
+  assert.match(page, /href="\/llms\.txt"/);
+  assert.match(page, /没有代理账号/);
+  assert.doesNotMatch(combined, /issues\?q=.*good-first-issue|label%3Agood-first-issue/i);
+  assert.doesNotMatch(page, /Octoshot\/blob\/main\/AGENTS\.md|AgentKey\/blob\/main\/AGENTS\.md|LetterBee\/blob\/main\/AGENTS\.md/);
+  assert.doesNotMatch(index, /<html|<!doctype/i);
 });
