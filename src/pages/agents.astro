@@ -87,15 +87,13 @@ const ruleFiles = [
 
       <h2><span lang="zh-Hans">任务在哪里</span><span lang="en">Where the tasks are</span></h2>
       <p lang="zh-Hans">
-        真实任务在各仓库的 Issues，不在本页。本站没有“good first issue”清单，也没有在各仓库统一打过这个标签。新的产品想法用
-        <a href={site.ideaIssue} rel="noreferrer">Beastry/ideas 的 Idea 模板</a>，已有讨论在
-        <a href={`${site.ideas}/issues`} rel="noreferrer">ideas 的 Issues</a>。Bug 和建议的预填链接在
+        前门在 <a href="/community">共建</a>。它打开时向 GitHub 读取 Beastry/ideas 的 Issue、带 <code>help wanted</code> 或 <code>good first issue</code> 的打开 Issue，以及最近合并的 Pull Request。本站不保存第二份任务清单。没有查询结果就显示没有。新的软件想法用
+        <a href={site.ideaIssue} rel="noreferrer">Idea 模板</a>。角色或故事没有单独模板，只能打开一条标题预填为 <code>[Story]</code> 的 GitHub Issue。Bug 和建议的预填链接在
         <a href="/help">帮助</a>。
       </p>
       <p lang="en">
-        Real tasks are each repository’s issues, not this page. This site does not keep a good-first-issue list, and it does not claim that label exists across the repositories. New product ideas use the
-        <a href={site.ideaIssue} rel="noreferrer">Idea template in Beastry/ideas</a>. Existing discussion is in
-        <a href={`${site.ideas}/issues`} rel="noreferrer">the ideas issues</a>. Prefilled bug and suggestion links are on
+        The front door is <a href="/community">Make together</a>. When it opens, it reads Beastry/ideas, open issues labeled <code>help wanted</code> or <code>good first issue</code>, and recently merged pull requests. This site does not keep a second task list. No query result means none. A new software idea uses the
+        <a href={site.ideaIssue} rel="noreferrer">Idea template</a>. A character or story has no template of its own. The only handoff is a GitHub issue whose title is prefilled with <code>[Story]</code>. Prefilled bug and suggestion links are on
         <a href="/help">Help</a>.
       </p>
       <ul>
@@ -131,10 +129,10 @@ const ruleFiles = [
 
       <h2><span lang="zh-Hans">怎么参与</span><span lang="en">How to contribute</span></h2>
       <p lang="zh-Hans">
-        在对应仓库开 Issue，或在已有 Issue 下留言，让人看见你在做什么。代码用 Pull Request 提出。本站没有认领流程，也没有代为分配任务的账号。仓库自己的文件如果写了别的步骤，以那个文件为准。
+        在对应仓库开 Issue，或在已有 Issue 下留言，让人看见你在做什么。代码用 Pull Request 提出。本站没有认领名单，也没有代为分配任务的账号。+1、提交和留言必须由一个负责的人用自己的 GitHub 账号发出。代理可以起草，不能代替这个人发出，也不能因此发布版本。仓库自己的文件如果写了别的步骤，以那个文件为准。
       </p>
       <p lang="en">
-        Open an issue in the relevant repository, or comment on an existing one, so a person can see the work. Propose code with a pull request. This site has no claim protocol and no account that assigns tasks. If that repository’s own file describes different steps, follow the file.
+        Open an issue in the relevant repository, or comment on an existing one, so a person can see the work. Propose code with a pull request. This site has no claim list and no account that assigns tasks. A +1, a submission, and a comment must be sent by a responsible person with their own GitHub account. An agent may draft them and may not send them instead of that person, and may not publish a release because of them. If that repository’s own file describes different steps, follow the file.
       </p>
       <ul>
         {

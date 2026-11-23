@@ -46,6 +46,10 @@ Requirements and install lines are copied from the Stow README, the MijiaBar REA
 
 Pull request 3 merged onto `main` as `71d90b6` while this branch was open. This branch was not started from that pull request. The merge into this branch keeps its org-repo URLs and GPL-3.0-only labels, and keeps the phone menu added here. Screenshot hotlinks on `files.neardws.com` and the footer line “Copyright © 2026 neardws and contributors.” are unchanged from that merge.
 
+## Co-creation front door
+
+Checked 2026-11-23, after the bilingual pages were on `main`. Beastry/ideas has an Idea template and two open issues. GitHub reactions are the only interest signal, and they do not set priority. There is no claim list, no story template, and no assignment form. `help wanted` and `good first issue` are default labels; a search that day found no open issue using either. Official mother-brand beasts are [Beastry/brand `guidelines/04-fable-beasts.md`](https://github.com/Beastry/brand/blob/main/guidelines/04-fable-beasts.md). The community page reads the public API in the browser and links back to GitHub for every write.
+
 ## Agent index
 
 Checked 2026-11-23. `AGENTS.md` was on the default branch of [Beastry/stow](https://github.com/Beastry/stow/blob/main/AGENTS.md) and [Beastry/MijiaBar](https://github.com/Beastry/MijiaBar/blob/main/AGENTS.md) only. `CONTRIBUTING.md` was in [Beastry/Splatty](https://github.com/Beastry/Splatty/blob/main/CONTRIBUTING.md) only. Stow also had `CLAUDE.md`, `DEVELOPING.md`, `RELEASING.md`, and `ROADMAP.md` in the repo root. Beastry/ideas had `.github/ISSUE_TEMPLATE/idea.yml`. Octoshot, AgentKey, LetterBee, jiyi-mianbao, and beastry.app had no `AGENTS.md`. The website page `/agents` and `public/llms.txt` link those files. They do not copy open issues or release versions.

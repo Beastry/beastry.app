@@ -6,7 +6,7 @@
 
 - [For agents](https://beastry.app/agents): website guidance for people and coding agents, in Chinese and English
 - [Projects](https://beastry.app/projects): current product status
-- [Community](https://beastry.app/community): ideas and links to roadmaps that already exist
+- [Make together](https://beastry.app/community): front door that reads public GitHub issues, labeled tasks, and merged pull requests. Submitting, +1, and comments happen on GitHub.
 - [Help](https://beastry.app/help): bug and suggestion links for each product
 - [About](https://beastry.app/about): mother brand
 - [Home](https://beastry.app/)
