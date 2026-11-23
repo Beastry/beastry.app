@@ -17,11 +17,12 @@ test('Stow page keeps the direct DMG and the latest-release refresh', () => {
   assert.match(html, /class="nav-fold"/);
 });
 
-test('MijiaBar pages keep the current neardws and MIT text for pull request 3', () => {
+test('MijiaBar pages keep the merged org repo, GPL label, and phone menu', () => {
   for (const path of ['public/mijiabar/index.html', 'public/mijiabar/zh-CN.html']) {
     const html = read(path);
-    assert.match(html, /neardws\/MijiaBar/);
-    assert.match(html, /MIT/);
+    assert.match(html, /https:\/\/github\.com\/Beastry\/MijiaBar/);
+    assert.match(html, /GPL-3\.0-only/);
+    assert.doesNotMatch(html, /github\.com\/neardws\/MijiaBar/);
     assert.match(html, /class="nav-fold"/);
     assert.doesNotMatch(html, /href=""/);
     assert.doesNotMatch(html, /href="#"/);

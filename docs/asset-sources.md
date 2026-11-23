@@ -41,6 +41,6 @@ Stow’s own page still pins `Stow-0.1.10.dmg` and refreshes with the script fro
 
 Requirements and install lines are copied from the Stow README, the MijiaBar README, the Octoshot getting-started page, and the Octoshot README. The Homebrew line is the Stow README command; the cask at [Beastry/homebrew-tap `Casks/stow.rb`](https://github.com/Beastry/homebrew-tap/blob/main/Casks/stow.rb) was version 0.1.11 and `depends_on macos: :tahoe` on the same day.
 
-## Not changed on purpose
+## Pull request 3
 
-Pull request 3 still owns the vendored MijiaBar links. Those pages still say `neardws/MijiaBar` and MIT. The organization repo’s current `LICENSE` and README badge say GPL-3.0-only. This branch does not relabel them.
+Pull request 3 merged onto `main` as `71d90b6` while this branch was open. This branch was not started from that pull request. The merge into this branch keeps its org-repo URLs and GPL-3.0-only labels, and keeps the phone menu added here. Screenshot hotlinks on `files.neardws.com` and the footer line “Copyright © 2026 neardws and contributors.” are unchanged from that merge.
