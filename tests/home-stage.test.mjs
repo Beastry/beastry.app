@@ -52,6 +52,21 @@ test('homepage is the approved welcome and a manual product stage', () => {
   }
 });
 
+test('Chinese UI shares one system sans and English keeps its own Latin faces', () => {
+  const css = read('src/styles/global.css');
+  assert.doesNotMatch(css, /@font-face|noto-sans-sc|noto-serif|Noto Serif|Songti/);
+  const root = css.slice(css.indexOf(':root {'), css.indexOf("html[data-lang='en']"));
+  assert.match(root, /--sans:[^;]*-apple-system[^;]*PingFang SC[^;]*Microsoft YaHei[^;]*sans-serif/);
+  assert.match(root, /--serif:\s*var\(--sans\)/);
+  assert.doesNotMatch(root, /Newsreader|Outfit/);
+  const en = css.slice(css.indexOf("html[data-lang='en']"), css.indexOf(":root[data-theme='dark']"));
+  assert.match(en, /--sans:[^;]*Outfit Variable/);
+  assert.match(en, /--serif:[^;]*Newsreader Variable/);
+  assert.match(en, /PingFang SC/);
+  assert.match(css, /\.welcome-card h1[\s\S]*font-family:\s*var\(--serif\)/);
+  assert.match(css, /\.stage-copy h3[\s\S]*font-family:\s*var\(--sans\)/);
+});
+
 test('old routes stay available when the nav labels change', () => {
   for (const path of [
     'src/pages/projects.astro',

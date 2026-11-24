@@ -83,7 +83,7 @@ GNU GPL 许可的是版权。Beastry 这一名称、各产品名称和标志上�
 
 下列材料继续适用它们已经带有的许可证：
 
-- `public/fonts/`：SIL Open Font License 1.1，全文在 [`public/fonts/LICENSE.txt`](public/fonts/LICENSE.txt)（Noto Sans SC 与 Noto Serif SC，Copyright 2014–2021 Adobe，Reserved Font Name “Source”）。
+- 中文界面使用访问者系统里的无衬线字体（Apple 上是苹方，Windows 上是微软雅黑，系统已安装时用思源黑体 / Noto Sans CJK）。本仓库不再附带只覆盖部分汉字的 Noto 子集。英文界面仍使用 npm 包里的 Newsreader 与 Outfit。
 - npm 包 `@fontsource-variable/newsreader` 与 `@fontsource-variable/outfit`：随包提供的 SIL Open Font License 1.1。`package-lock.json` 里这两个包以及其余第三方包的许可证字段保持原样。本包自己的 `license` 字段为 `GPL-3.0-only`。
 - [`public/stow/`](public/stow/)：导入的 Stow 站点。页面写的是 GPL-3.0，并写明 7-Zip 引擎为 LGPL。这与 2026-11-14 的 [Beastry/stow](https://github.com/Beastry/stow) `main` 一致：README 给出 GNU General Public License v3.0。`any later version` 出现在 GPL 文本自己的第 14 节和附录示例里；Stow 的 README 没有另外写上 “or any later version”。Stow 没有开放中的许可证迁移 pull request。这些文件保持导入时的内容。
 - [`public/mijiabar/`](public/mijiabar/)：导入的 MijiaBar 站点。页脚仍写 “Copyright © 2026 neardws and contributors.” 产品页上的仓库链接现为 [Beastry/MijiaBar](https://github.com/Beastry/MijiaBar)，许可证标签为 GPL-3.0-only，指向当前 `LICENSE`。2026-11-14 记录下来的 MIT 许可通知仍在 [`LICENSES/MIT-upstream-snapshots.txt`](LICENSES/MIT-upstream-snapshots.txt)；更早随 MIT 发布的副本没有在这里被改写成撤销。[Pull request #111](https://github.com/Beastry/MijiaBar/pull/111) 已合并。`public/mijiabar/assets/README.md` 所写的设备图与截图放在本仓库之外。
@@ -105,7 +105,7 @@ The GNU GPL licenses copyright. Trademark rights in the name Beastry, in product
 
 The following material keeps the license it already carries:
 
-- `public/fonts/` remains under the SIL Open Font License 1.1 in [`public/fonts/LICENSE.txt`](public/fonts/LICENSE.txt) (Noto Sans SC and Noto Serif SC, Copyright 2014–2021 Adobe, Reserved Font Name “Source”).
+- Chinese UI text uses the visitor’s system sans (PingFang on Apple, Microsoft YaHei on Windows, Source Han Sans / Noto Sans CJK when the system already has one). This repository no longer ships the partial Noto subsets. English still uses Newsreader and Outfit from their npm packages.
 - The npm packages `@fontsource-variable/newsreader` and `@fontsource-variable/outfit` remain under the SIL Open Font License 1.1 shipped with those packages. Third-party `license` entries in `package-lock.json` are unchanged. This package’s own `license` field is `GPL-3.0-only`.
 - [`public/stow/`](public/stow/) is the imported Stow site. Its pages say GPL-3.0 and that the 7-Zip engine is LGPL. That matches [Beastry/stow](https://github.com/Beastry/stow) `main` on 2026-11-14: the README offers the GNU General Public License v3.0. The words “any later version” appear in the GPL text itself (section 14 and the appendix sample). Stow’s README does not add that option. Stow has no open license-migration pull request. The imported files were left as they were.
 - [`public/mijiabar/`](public/mijiabar/) is the imported MijiaBar site. The footer still says “Copyright © 2026 neardws and contributors.” Repository links on the product pages now go to [Beastry/MijiaBar](https://github.com/Beastry/MijiaBar), and the license label is GPL-3.0-only, pointing at the current `LICENSE`. The MIT notice recorded on 2026-11-14 remains in [`LICENSES/MIT-upstream-snapshots.txt`](LICENSES/MIT-upstream-snapshots.txt). Copies already received under MIT are not rewritten here as if that grant were revoked. [Pull request #111](https://github.com/Beastry/MijiaBar/pull/111) is merged. The device art and screenshots described in `public/mijiabar/assets/README.md` live outside this repository.
