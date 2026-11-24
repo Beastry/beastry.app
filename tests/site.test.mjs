@@ -55,9 +55,12 @@ test('mother-site navigation is Chinese or English, with real destinations', () 
   const layout = read('src/layouts/Base.astro');
   const data = read('src/data/site.ts');
   const css = read('src/styles/global.css');
-  for (const href of ['/', '/projects', '/help', '/community', '/about', '/#contact']) {
-    assert.match(data, new RegExp(`href: '${href.replace('/', '\\/')}'`));
+  for (const href of ['/projects', '/#downloads', '/community', '/about']) {
+    assert.match(data, new RegExp(`href: '${href.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}'`));
   }
+  assert.match(read('src/components/Header.astro'), /href="\/"/);
+  assert.match(read('src/components/Footer.astro'), /id="contact"/);
+  assert.match(read('src/pages/help.astro'), /bugUrl/);
   assert.doesNotMatch(data, /href: '\/agents'/);
   assert.doesNotMatch(header, /href="\/agents"/);
   assert.match(header, /data-lang-set="zh"/);
@@ -85,8 +88,9 @@ test('pinned downloads and logo files are the sourced ones', () => {
   assert.match(data, /\/stow\/favicon\.svg/);
   assert.match(data, /\/mijiabar\/assets\/icon\.png/);
   assert.match(data, /\/octoshot\/brand\/logo\.svg/);
-  assert.match(read('src/pages/index.astro'), /\/brand\/logo-lockup\.jpg/);
+  assert.match(read('src/pages/index.astro'), /\/brand\/mark\.jpg/);
   assert.doesNotMatch(read('src/pages/index.astro'), /mascots-row\.jpg/);
+  assert.doesNotMatch(read('src/pages/about.astro'), /mascots-row\.jpg/);
   assert.match(read('docs/asset-sources.md'), /list-light\.webp/);
   assert.equal(read('public/media/mijiabar-list-light.webp').slice(0, 4), 'RIFF');
 });

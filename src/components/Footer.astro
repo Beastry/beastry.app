@@ -3,7 +3,7 @@ import { site } from '../data/site';
 const year = new Date().getFullYear();
 ---
 
-<footer class="site-footer">
+<footer class="site-footer" id="contact">
   <div class="wrap footer-inner">
     <div>
       <p class="footer-name">Beastry</p>
@@ -11,19 +11,19 @@ const year = new Date().getFullYear();
     </div>
     <ul class="footer-links">
       <li>
-        <a href="/projects"><span lang="zh-Hans">项目</span><span lang="en">Projects</span></a>
+        <a href="/projects"><span lang="zh-Hans">作品</span><span lang="en">Works</span></a>
       </li>
       <li>
         <a href="/help"><span lang="zh-Hans">帮助</span><span lang="en">Help</span></a>
       </li>
       <li>
-        <a href="/community"><span lang="zh-Hans">社区</span><span lang="en">Community</span></a>
+        <a href="/community"><span lang="zh-Hans">参与</span><span lang="en">Take part</span></a>
       </li>
       <li>
         <a href="/about"><span lang="zh-Hans">关于</span><span lang="en">About</span></a>
       </li>
       <li>
-        <a href="/agents"><span lang="zh-Hans">给代理</span><span lang="en">For agents</span></a>
+        <a href="/agents"><span lang="zh-Hans">Agent 说明</span><span lang="en">For agents</span></a>
       </li>
       {
         site.emails.map((email) => (

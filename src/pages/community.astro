@@ -3,78 +3,76 @@ import Base from '../layouts/Base.astro';
 import { products, site } from '../data/site';
 
 const description =
-  'Beastry 的共建前门：从 GitHub 读取想法、兴趣和已合并的贡献。提交、表态和留言都在 GitHub 上完成。';
+  '参与 Beastry：从 GitHub 看想法、可帮忙的 Issue 和已合并的改动。提交和表态都在 GitHub 上完成。';
 const descriptionEn =
-  'Beastry’s front door for making things together. Ideas, interest, and merged contributions are read from GitHub. Submitting, reacting, and commenting happen on GitHub.';
+  'Take part in Beastry. Ideas, issues you can help with, and merged changes are read from GitHub. Submitting and reacting happen on GitHub.';
 
 const storyIssue = 'https://github.com/Beastry/ideas/issues/new?title=%5BStory%5D%20';
 const beasts = 'https://github.com/Beastry/brand/blob/main/guidelines/04-fable-beasts.md';
 ---
 
-<Base title="共建" titleEn="Make together" description={description} descriptionEn={descriptionEn}>
+<Base title="参与" titleEn="Take part" description={description} descriptionEn={descriptionEn}>
   <article class="page">
     <div class="wrap prose">
-      <p class="kicker"><span lang="zh-Hans">社区</span><span lang="en">Community</span></p>
-      <h1><span lang="zh-Hans">一起做成 Beastry</span><span lang="en">Make Beastry together</span></h1>
+      <p class="kicker"><span lang="zh-Hans">参与</span><span lang="en">Take part</span></p>
+      <h1><span lang="zh-Hans">参与 Beastry</span><span lang="en">Take part</span></h1>
       <p lang="zh-Hans">
-        Beastry 的品牌来自一起做出来的软件、角色和故事。这一页是前门：打开时向 GitHub 读取公开记录，再把提交、表态和留言交回 GitHub。本站没有账号，没有论坛，也不把投票存在这里。
+        这一页从 GitHub 读正在收集的想法、标了 help wanted 或 good first issue 的 Issue，以及最近合并的改动。提交、+1 和留言都在 GitHub 上完成。本站没有账号，没有论坛，也不在这里记投票。
       </p>
       <p lang="en">
-        The Beastry brand comes from software, characters, and stories made together. This page is the front door. It reads the public GitHub record when you open it, then sends submitting, reacting, and commenting back to GitHub. There is no account, no forum, and no vote stored here.
+        This page reads open ideas, issues labeled help wanted or good first issue, and recently merged changes from GitHub. Submitting, adding +1, and commenting happen on GitHub. There is no account, no forum, and no vote stored here.
       </p>
 
-      <h2><span lang="zh-Hans">社区提案和正式资产</span><span lang="en">Community proposals and official assets</span></h2>
+      <h2><span lang="zh-Hans">提案还不是正式作品</span><span lang="en">A proposal is not a product yet</span></h2>
       <p lang="zh-Hans">
-        GitHub Issue 是社区提案。正式产品在
-        <a href="/projects">项目</a>。母品牌的粉兔、蓝猫、黄熊写在
-        <a href={beasts} rel="noreferrer">Beastry/brand 的寓言三兽</a>，各产品的标志在各自仓库。提案在维护者另行决定之前，不是正式资产。本站没有权利转让表单。提交一条 Issue 不表示把权利转给 Beastry。
+        正式作品在 <a href="/projects">作品</a>。母品牌的粉兔、蓝猫、黄熊写在
+        <a href={beasts} rel="noreferrer">Beastry/brand 的寓言三兽</a>。一条 Issue 在维护者另作决定之前，不是正式资产，也不把权利转给 Beastry。本站没有权利转让表单。
       </p>
       <p lang="en">
-        A GitHub issue is a community proposal. Official products are on
-        <a href="/projects">Projects</a>. The mother brand’s pink rabbit, blue cat, and yellow bear are in
-        <a href={beasts} rel="noreferrer">Beastry/brand’s fable beasts</a>. Each product’s mark stays in its own repository. A proposal is not an official asset unless a maintainer decides that later. This site has no assignment form. Opening an issue does not transfer rights to Beastry.
+        The products are on <a href="/projects">Works</a>. The pink rabbit, blue cat, and yellow bear are described in
+        <a href={beasts} rel="noreferrer">Beastry/brand’s fable beasts</a>. An issue is not an official asset, and it does not transfer rights to Beastry, unless a maintainer decides that later. This site has no assignment form.
       </p>
 
-      <h2><span lang="zh-Hans">三条路</span><span lang="en">Three paths</span></h2>
+      <h2><span lang="zh-Hans">从哪里开始</span><span lang="en">Where to start</span></h2>
       <div class="path-grid">
         <section class="path-card">
-          <h3><span lang="zh-Hans">软件</span><span lang="en">Software</span></h3>
-          <p lang="zh-Hans">Beastry/ideas 有 Idea 模板。点开会到 GitHub，用你自己的 GitHub 账号提交。</p>
-          <p lang="en">Beastry/ideas has an Idea template. The button opens GitHub, and you submit with your own GitHub account.</p>
-          <p><a class="button primary" href={site.ideaIssue} rel="noreferrer"><span lang="zh-Hans">在 GitHub 上打开 Idea 模板</span><span lang="en">Open the Idea template on GitHub</span></a></p>
+          <h3><span lang="zh-Hans">一个新想法</span><span lang="en">A new idea</span></h3>
+          <p lang="zh-Hans">用 Beastry/ideas 的模板。打开后在 GitHub 用你自己的账号提交。</p>
+          <p lang="en">Use the Beastry/ideas template. It opens GitHub, and you submit with your own account.</p>
+          <p><a class="button primary" href={site.ideaIssue} rel="noreferrer"><span lang="zh-Hans">打开想法模板</span><span lang="en">Open the idea template</span></a></p>
         </section>
         <section class="path-card">
-          <h3><span lang="zh-Hans">角色、故事、社区创作</span><span lang="en">Character, story, community work</span></h3>
-          <p lang="zh-Hans">没有单独的模板，也没有已启用的品牌资产通道。这个链接只在 GitHub 的空白 Issue 里预填标题 <code>[Story]</code>。它仍是一条讨论，不是正式标志。</p>
-          <p lang="en">There is no separate template and no open channel for official brand assets. This link only prefills the title <code>[Story]</code> on GitHub’s blank issue form. It remains a discussion, not an official mark.</p>
-          <p><a class="button ghost" href={storyIssue} rel="noreferrer"><span lang="zh-Hans">在 GitHub 上写一条故事 Issue</span><span lang="en">Open a story issue on GitHub</span></a></p>
+          <h3><span lang="zh-Hans">角色或故事</span><span lang="en">A character or story</span></h3>
+          <p lang="zh-Hans">没有单独模板。这个链接只在空白 Issue 里预填标题 <code>[Story]</code>。它仍是讨论，不是正式标志。</p>
+          <p lang="en">There is no separate template. This link only prefills <code>[Story]</code> on a blank GitHub issue. It stays a discussion, not an official mark.</p>
+          <p><a class="button ghost" href={storyIssue} rel="noreferrer"><span lang="zh-Hans">写一条故事 Issue</span><span lang="en">Open a story issue</span></a></p>
         </section>
         <section class="path-card">
-          <h3><span lang="zh-Hans">已有产品</span><span lang="en">An existing product</span></h3>
-          <p lang="zh-Hans">任务在该产品自己的 Issues。认领就是在那条 Issue 下留言。代码用 Pull Request 交回同一个仓库。</p>
-          <p lang="en">Tasks are that product’s own issues. A claim is a comment on the issue. Code comes back as a pull request to the same repository.</p>
-          <p><a class="button ghost" href="#tasks"><span lang="zh-Hans">看下面的任务入口</span><span lang="en">See the task links below</span></a></p>
+          <h3><span lang="zh-Hans">已有的作品</span><span lang="en">An existing app</span></h3>
+          <p lang="zh-Hans">问题和建议去 <a href="/help">帮助</a>。代码用那个仓库的 Pull Request 交回。</p>
+          <p lang="en">Bugs and suggestions start at <a href="/help">Help</a>. Code comes back as a pull request to that repository.</p>
+          <p><a class="button ghost" href="#tasks"><span lang="zh-Hans">看任务入口</span><span lang="en">See the task links</span></a></p>
         </section>
       </div>
 
       <h2 id="ideas"><span lang="zh-Hans">正在收集的想法</span><span lang="en">Ideas being collected</span></h2>
       <p lang="zh-Hans">
-        列表在页面打开时从 <a href={`${site.ideas}/issues`} rel="noreferrer">Beastry/ideas</a> 读取。+1 是 GitHub 反应，只表示兴趣，不自动提高优先级。维护者决定做什么。
+        打开页面时从 <a href={`${site.ideas}/issues`} rel="noreferrer">Beastry/ideas</a> 读取。+1 是 GitHub 上的反应，只表示兴趣，不改变优先级。
       </p>
       <p lang="en">
-        The list is read from <a href={`${site.ideas}/issues`} rel="noreferrer">Beastry/ideas</a> when the page opens. A +1 is a GitHub reaction. It signals interest and does not raise priority by itself. A maintainer decides what happens next.
+        Read from <a href={`${site.ideas}/issues`} rel="noreferrer">Beastry/ideas</a> when the page opens. A +1 is a GitHub reaction. It shows interest and does not change priority.
       </p>
       <div id="idea-board">
         <p lang="zh-Hans">实时列表由页面打开后向 GitHub 读取。读不到时，记录仍在上面的 Issues 链接里。</p>
         <p lang="en">The live list is requested from GitHub after the page opens. If that read fails, the record is still at the issues link above.</p>
       </div>
 
-      <h2 id="tasks"><span lang="zh-Hans">可以接手的任务</span><span lang="en">Tasks you can take</span></h2>
+      <h2 id="tasks"><span lang="zh-Hans">可以帮忙的任务</span><span lang="en">Tasks you can pick up</span></h2>
       <p lang="zh-Hans">
-        本站不维护任务副本。下面先列出各仓库的 Issues 和已有文档。再向 GitHub 查询当前带有 <code>help wanted</code> 或 <code>good first issue</code> 的打开 Issue。没有结果就显示没有。要表示你在做，请在该 Issue 下留言，写明范围和你会怎样验证。留言留在 GitHub。
+        本站不另存一份任务清单。下面是各仓库的入口，然后查询当前带 <code>help wanted</code> 或 <code>good first issue</code> 的 Issue。没有就显示没有。要说你在做，请在那条 Issue 下留言。
       </p>
       <p lang="en">
-        This site does not keep a copy of the tasks. The repository links come first. The page then asks GitHub for open issues that currently carry <code>help wanted</code> or <code>good first issue</code>. No result means none. To say you are doing the work, comment on that issue with the scope and how you will verify it. The comment stays on GitHub.
+        This site does not keep its own task list. The repository links come first, then a query for open issues labeled <code>help wanted</code> or <code>good first issue</code>. No result means none. To say you are doing the work, comment on that issue.
       </p>
       <ul class="help-list">
         {
@@ -104,33 +102,33 @@ const beasts = 'https://github.com/Beastry/brand/blob/main/guidelines/04-fable-b
         <p lang="en">Labeled tasks are requested from GitHub after the page opens.</p>
       </div>
 
-      <h2 id="delivered"><span lang="zh-Hans">已经交回的贡献</span><span lang="en">Contributions already handed back</span></h2>
+      <h2 id="delivered"><span lang="zh-Hans">最近合并的改动</span><span lang="en">Recently merged changes</span></h2>
       <p lang="zh-Hans">
-        这里读取 GitHub 上已合并的 Pull Request。它证明有人把改动交回了仓库，不证明该作品已被收成正式品牌资产，也不转移权利。
+        这里是 GitHub 上已合并的 Pull Request。合并只说明改动进了仓库，不是把它收成正式品牌资产，也不转移权利。
       </p>
       <p lang="en">
-        This reads merged pull requests from GitHub. A merged change shows that work was handed back to a repository. It does not show that the work was adopted as an official brand asset, and it does not transfer rights.
+        These are pull requests GitHub already merged. A merge means the change landed in a repository. It does not make the work an official brand asset, and it does not transfer rights.
       </p>
       <div id="pull-board">
         <p lang="zh-Hans">已合并的记录在页面打开后向 GitHub 查询。</p>
         <p lang="en">Merged records are requested from GitHub after the page opens.</p>
       </div>
 
-      <h2><span lang="zh-Hans">谁可以做这些操作</span><span lang="en">Who can take these actions</span></h2>
+      <h2><span lang="zh-Hans">谁来发出</span><span lang="en">Who sends it</span></h2>
       <p lang="zh-Hans">
-        提交、+1 和留言都要用一个对这次工作负责的人的 GitHub 账号。代理可以准备文字，由这个人在 GitHub 上发出。合并、发布和权限仍由仓库维护者决定。说明在
-        <a href="/agents">给代理的说明</a>。公开索引在 <a href="/llms.txt">/llms.txt</a>。
+        提交、+1 和留言要用一个负责的人自己的 GitHub 账号。代理可以起草，发出仍要这个人来。合并、发布和权限由仓库维护者决定。步骤在
+        <a href="/agents">Agent 说明</a>，索引在 <a href="/llms.txt">/llms.txt</a>。
       </p>
       <p lang="en">
-        Submitting, adding +1, and commenting use the GitHub account of a person who is responsible for that work. An agent can draft the words. That person sends them on GitHub. Merges, releases, and permissions stay with the repository maintainer. The notes are in
-        <a href="/agents">For agents</a>. The public index is <a href="/llms.txt">/llms.txt</a>.
+        Submitting, adding +1, and commenting use a responsible person’s own GitHub account. An agent may draft the words. That person still sends them. Merges, releases, and permissions stay with the repository maintainer. The steps are in
+        <a href="/agents">For agents</a>. The index is <a href="/llms.txt">/llms.txt</a>.
       </p>
       <p lang="zh-Hans">
-        未登录的读取大约每小时 60 次，搜索大约每分钟 10 次，按来访者的网络计算。到上限时，列表会说明读不到，GitHub 链接仍可用。写信：
+        未登录时，读取大约每小时 60 次，搜索大约每分钟 10 次，按来访者的网络计算。到上限时列表会说读不到，上面的 GitHub 链接仍可用。写信：
         <a href="mailto:community@beastry.app">community@beastry.app</a>。
       </p>
       <p lang="en">
-        Unsigned reads are about 60 an hour, and searches about 10 a minute, counted for the visitor’s network. At the limit, the list says it could not be read, and the GitHub links still work. Write to
+        Signed-out reads are about 60 an hour, and searches about 10 a minute, counted on the visitor’s network. At the limit the list says GitHub could not be read, and the links above still work. Write to
         <a href="mailto:community@beastry.app">community@beastry.app</a>.
       </p>
     </div>

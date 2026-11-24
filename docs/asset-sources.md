@@ -1,6 +1,6 @@
 # Phase 1 asset and fact sources
 
-Checked 2026-11-23 against the default branches and the files already in this site. Nothing here is a new mascot.
+Checked 2026-11-23 against the default branches and the files already in this site. The mother-brand animals are unchanged. The homepage drawings below are only for this site’s product stage.
 
 ## Mother brand
 
@@ -49,6 +49,18 @@ Pull request 3 merged onto `main` as `71d90b6` while this branch was open. This 
 ## Co-creation front door
 
 Checked 2026-11-23, after the bilingual pages were on `main`. Beastry/ideas has an Idea template and two open issues. GitHub reactions are the only interest signal, and they do not set priority. There is no claim list, no story template, and no assignment form. `help wanted` and `good first issue` are default labels; a search that day found no open issue using either. Official mother-brand beasts are [Beastry/brand `guidelines/04-fable-beasts.md`](https://github.com/Beastry/brand/blob/main/guidelines/04-fable-beasts.md). The community page reads the public API in the browser and links back to GitHub for every write.
+
+## Homepage drawings
+
+Added 2026-11-24 for the approved homepage. These pictures sit beside the three public-beta products on this website only. They do not rename a product, replace an app icon, change a product repository, or grant an organization-wide license.
+
+| File | Scope |
+| --- | --- |
+| `public/media/stow-squirrel.png` | Squirrel drawing on the Stow card. Stow’s app icon is still the lidded box, `public/stow/favicon.svg`. |
+| `public/media/mijiabar-swallow.png` | Swallow drawing on the MijiaBar card. MijiaBar’s app icon is still `public/mijiabar/assets/icon.png`. |
+| `public/media/octoshot-yijiang.png` | 一酱, Octoshot’s existing octopus, placed on the Octoshot card. The app mark is still `public/octoshot/brand/logo.svg`. |
+
+The book, pink rabbit, blue cat, and yellow bear stay the mother brand in `public/brand/mark.jpg`. They are not these three drawings.
 
 ## Agent index
 

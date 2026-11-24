@@ -1,0 +1,462 @@
+---
+import { products, type Product } from '../data/site';
+
+const featured = products.filter((product) => product.status === 'beta' && product.download);
+
+const art: Record<string, { src: string; altZh: string; altEn: string }> = {
+  stow: {
+    src: '/media/stow-squirrel.png',
+    altZh: '松鼠插画，用在本站的 Stow 作品卡上',
+    altEn: 'Squirrel drawing used on this site’s Stow card',
+  },
+  mijiabar: {
+    src: '/media/mijiabar-swallow.png',
+    altZh: '燕子插画，用在本站的 MijiaBar 作品卡上',
+    altEn: 'Swallow drawing used on this site’s MijiaBar card',
+  },
+  octoshot: {
+    src: '/media/octoshot-yijiang.png',
+    altZh: '一酱，Octoshot 已有的章鱼吉祥物',
+    altEn: '一酱, Octoshot’s existing octopus mascot',
+  },
+};
+
+const look: Record<string, { bg: string; ink: string; muted: string }> = {
+  stow: { bg: '#fff4d8', ink: '#2a2421', muted: '#5c4636' },
+  mijiabar: { bg: '#e5f3fb', ink: '#1e2c36', muted: '#3e5564' },
+  octoshot: { bg: '#17202b', ink: '#f5f8fb', muted: '#d0dae4' },
+};
+
+function label(product: Product): string {
+  return product.aka ? `${product.name} — ${product.aka}` : product.name;
+}
+---
+
+<section
+  class="stage"
+  id="downloads"
+  data-stage
+  aria-roledescription="carousel"
+  data-label-zh="可以带走的作品"
+  data-label-en="Works you can take with you"
+  aria-label="可以带走的作品"
+>
+  <div class="wrap">
+    <div class="stage-head">
+      <p class="kicker">
+        <span lang="zh-Hans">可以带走的作品</span>
+        <span lang="en">Works you can take with you</span>
+      </p>
+      <p class="stage-pos" data-stage-pos>
+        1 / {featured.length}
+      </p>
+    </div>
+        <p class="stage-lede">
+          <span lang="zh-Hans">三款正在公测，现在可以下载。左右滑动即可切换。</span>
+          <span lang="en">Three public betas, ready to download. Swipe sideways to switch.</span>
+        </p>
+
+    <div
+      class="stage-tabs"
+      role="tablist"
+      data-label-zh="选择作品"
+      data-label-en="Choose a work"
+      aria-label="选择作品"
+    >
+      {
+        featured.map((product, index) => (
+          <button
+            type="button"
+            class="stage-tab"
+            role="tab"
+            id={`tab-${product.slug}`}
+            data-stage-tab
+            aria-controls={`slide-${product.slug}`}
+            aria-selected={index === 0 ? 'true' : 'false'}
+            tabindex={index === 0 ? 0 : -1}
+          >
+            {label(product)}
+          </button>
+        ))
+      }
+    </div>
+
+    <div class="stage-frame">
+      <button
+        type="button"
+        class="stage-arrow"
+        data-stage-prev
+        data-label-zh="上一款"
+        data-label-en="Previous work"
+        aria-label="上一款"
+      >
+        <span aria-hidden="true">‹</span>
+      </button>
+      <div
+        class="stage-viewport"
+        data-stage-viewport
+        tabindex="0"
+        data-label-zh="左右方向键切换作品"
+        data-label-en="Arrow keys switch works"
+        aria-label="左右方向键切换作品"
+      >
+        <div class="stage-track" data-stage-track>
+          {
+            featured.map((product, index) => {
+              const file = product.download!;
+              const drawn = art[product.slug];
+              const tone = look[product.slug];
+              return (
+                <article
+                  class:list={['stage-slide', { 'is-active': index === 0 }]}
+                  id={`slide-${product.slug}`}
+                  data-stage-slide
+                  data-slug={product.slug}
+                  data-name-zh={label(product)}
+                  data-name-en={label(product)}
+                  role="tabpanel"
+                  aria-labelledby={`tab-${product.slug}`}
+                  style={`--slide-bg:${tone.bg};--slide-ink:${tone.ink};--slide-muted:${tone.muted}`}
+                >
+                  <div class="stage-card-top">
+                    <img
+                      class="stage-icon"
+                      draggable="false"
+                      src={product.logo!.src}
+                      width="48"
+                      height="48"
+                      alt={product.logo!.altZh}
+                      data-alt-zh={product.logo!.altZh}
+                      data-alt-en={product.logo!.altEn}
+                    />
+                    <div class="stage-copy">
+                      <h3>
+                        <a href={product.href}>{label(product)}</a>
+                      </h3>
+                      <p>
+                        <span lang="zh-Hans">{product.summaryZh}</span>
+                        <span lang="en">{product.summaryEn}</span>
+                      </p>
+                      {product.noteZh && (
+                        <p class="stage-note">
+                          <span lang="zh-Hans">{product.noteZh}</span>
+                          <span lang="en">{product.noteEn}</span>
+                        </p>
+                      )}
+                    </div>
+                    <a
+                      class="stage-download"
+                      draggable="false"
+                      data-release
+                      data-repo={file.repo}
+                      data-pattern={file.pattern}
+                      data-pinned={file.href}
+                      href={file.href}
+                    >
+                      <span lang="zh-Hans">下载 macOS</span>
+                      <span lang="en">Download for Mac</span>
+                      <span aria-hidden="true"> ›</span>
+                    </a>
+                  </div>
+                  <div class="stage-scene">
+                      <img
+                      class="stage-shot"
+                      draggable="false"
+                      src={product.shot!.src}
+                      width={product.shot!.width}
+                      height={product.shot!.height}
+                      alt={product.shot!.altZh}
+                      data-alt-zh={product.shot!.altZh}
+                      data-alt-en={product.shot!.altEn}
+                    />
+                    {drawn && (
+                      <img
+                        class="stage-mascot"
+                        draggable="false"
+                        src={drawn.src}
+                        alt={drawn.altZh}
+                        data-alt-zh={drawn.altZh}
+                        data-alt-en={drawn.altEn}
+                      />
+                    )}
+                  </div>
+                </article>
+              );
+            })
+          }
+        </div>
+      </div>
+      <button
+        type="button"
+        class="stage-arrow"
+        data-stage-next
+        data-label-zh="下一款"
+        data-label-en="Next work"
+        aria-label="下一款"
+      >
+        <span aria-hidden="true">›</span>
+      </button>
+    </div>
+
+    <p class="stage-hint">
+      <span lang="zh-Hans">左右箭头或方向键切换。手机可横滑。不自动播放，不锁定页面滚动。</span>
+      <span lang="en">Use the arrows or the arrow keys. Swipe on a phone. Nothing plays by itself, and the page still scrolls.</span>
+    </p>
+    <p class="stage-more">
+      <a href="/projects"><span lang="zh-Hans">其余项目</span><span lang="en">Other projects</span></a>
+      <span lang="zh-Hans">仍在作品页，包括开发中和搁置的。</span>
+      <span lang="en">stay on the projects page, including ones in development or on hold.</span>
+    </p>
+    <p class="visually-hidden" data-stage-live aria-live="polite" aria-atomic="true"></p>
+  </div>
+</section>
+
+<script is:inline>
+  document.documentElement.classList.add('stage-js');
+  document.querySelectorAll('[data-stage-slide]').forEach((slide, index) => {
+    if (index === 0) return;
+    slide.setAttribute('inert', '');
+    slide.setAttribute('aria-hidden', 'true');
+  });
+</script>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-stage]');
+  const track = root?.querySelector<HTMLElement>('[data-stage-track]');
+  const viewport = root?.querySelector<HTMLElement>('[data-stage-viewport]');
+  if (root && track && viewport) {
+    const slides = [...track.querySelectorAll<HTMLElement>(':scope > [data-stage-slide]')];
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[data-stage-tab]')];
+    const live = root.querySelector<HTMLElement>('[data-stage-live]');
+    const pos = root.querySelector<HTMLElement>('[data-stage-pos]');
+    const count = slides.length;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let index = 0;
+    let lock = false;
+    let blockClick = false;
+
+    const clone = slides[0]?.cloneNode(true) as HTMLElement | undefined;
+    if (clone) {
+      clone.setAttribute('inert', '');
+      clone.setAttribute('aria-hidden', 'true');
+      clone.classList.add('is-clone');
+      clone.classList.remove('is-active');
+      clone.removeAttribute('id');
+      clone.querySelectorAll<HTMLElement>('[id]').forEach((node) => node.removeAttribute('id'));
+      track.appendChild(clone);
+    }
+
+    const step = () => {
+      const gap = Number.parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
+      return slides[0].getBoundingClientRect().width + gap;
+    };
+
+    const place = (slot: number, animate: boolean) => {
+      const motion = animate && !reduce.matches;
+      track.style.transition = motion ? '' : 'none';
+      track.style.transform = `translate3d(${-slot * step()}px, 0, 0)`;
+    };
+
+    const sync = (announce: boolean) => {
+      slides.forEach((slide, slot) => {
+        const on = slot === index;
+        slide.classList.toggle('is-active', on);
+        slide.setAttribute('aria-hidden', on ? 'false' : 'true');
+        if (on) slide.removeAttribute('inert');
+        else slide.setAttribute('inert', '');
+      });
+      tabs.forEach((tab, slot) => {
+        const on = slot === index;
+        tab.setAttribute('aria-selected', on ? 'true' : 'false');
+        tab.tabIndex = on ? 0 : -1;
+      });
+      if (pos) pos.textContent = `${index + 1} / ${count}`;
+      if (!announce || !live) return;
+      const english = document.documentElement.dataset.lang === 'en';
+      const name = english ? slides[index].dataset.nameEn : slides[index].dataset.nameZh;
+      live.textContent = english ? `${name}, ${index + 1} of ${count}` : `${name}，第 ${index + 1} 款，共 ${count} 款`;
+    };
+
+    const release = () => {
+      lock = false;
+    };
+
+    let focusTab = false;
+    const settleFocus = () => {
+      if (!focusTab) return;
+      focusTab = false;
+      tabs[index]?.focus();
+    };
+
+    const afterMotion = (done: () => void) => {
+      let settled = false;
+      const finish = () => {
+        if (settled) return;
+        settled = true;
+        track.removeEventListener('transitionend', onEnd);
+        done();
+      };
+      const onEnd = (event: TransitionEvent) => {
+        if (event.propertyName !== 'transform') return;
+        finish();
+      };
+      track.addEventListener('transitionend', onEnd);
+      window.setTimeout(finish, 700);
+    };
+
+    const select = (next: number, announce = true) => {
+      if (lock) return;
+      index = (next + count) % count;
+      place(index, true);
+      sync(announce);
+      settleFocus();
+    };
+
+    const next = () => {
+      if (lock || count < 2) return;
+      if (reduce.matches || index < count - 1) {
+        select(index + 1);
+        return;
+      }
+      lock = true;
+      place(count, true);
+      afterMotion(() => {
+        index = 0;
+        place(0, false);
+        sync(true);
+        release();
+        settleFocus();
+      });
+    };
+
+    const prev = () => {
+      if (lock || count < 2) return;
+      if (reduce.matches || index > 0) {
+        select(index - 1);
+        return;
+      }
+      lock = true;
+      place(count, false);
+      requestAnimationFrame(() => {
+        index = count - 1;
+        place(index, true);
+        sync(true);
+        afterMotion(() => {
+          release();
+          settleFocus();
+        });
+      });
+    };
+
+    root.querySelector('[data-stage-prev]')?.addEventListener('click', prev);
+    root.querySelector('[data-stage-next]')?.addEventListener('click', next);
+    tabs.forEach((tab, slot) => {
+      tab.addEventListener('click', () => select(slot));
+    });
+
+    root.addEventListener('keydown', (event) => {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      if (!root.contains(event.target as Node)) return;
+      event.preventDefault();
+      focusTab = event.target instanceof HTMLElement && event.target.matches('[data-stage-tab]');
+      if (event.key === 'ArrowRight') next();
+      else prev();
+      if (!lock) settleFocus();
+    });
+
+    let tracking = false;
+    let fromPointer = false;
+    let startX = 0;
+    let startY = 0;
+    let delta = 0;
+    let dragging = false;
+
+    const begin = (x: number, y: number) => {
+      tracking = true;
+      dragging = false;
+      startX = x;
+      startY = y;
+      delta = 0;
+    };
+
+    const move = (x: number, y: number) => {
+      if (!tracking) return;
+      const dx = x - startX;
+      const dy = y - startY;
+      if (!dragging) {
+        if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+        if (Math.abs(dy) > Math.abs(dx)) {
+          tracking = false;
+          return;
+        }
+        dragging = true;
+      }
+      delta = dx;
+      if (reduce.matches) return;
+      track.style.transition = 'none';
+      track.style.transform = `translate3d(${-index * step() + dx}px, 0, 0)`;
+    };
+
+    const finish = () => {
+      const swiped = dragging && Math.abs(delta) > 48;
+      const nudged = dragging;
+      tracking = false;
+      dragging = false;
+      if (swiped) {
+        blockClick = true;
+        if (delta < 0) next();
+        else prev();
+      } else if (nudged) {
+        place(index, true);
+      }
+    };
+
+    viewport.addEventListener('pointerdown', (event) => {
+      if (event.pointerType === 'mouse' || !event.isPrimary) return;
+      fromPointer = true;
+      begin(event.clientX, event.clientY);
+    });
+    window.addEventListener('pointermove', (event) => {
+      if (!fromPointer) return;
+      move(event.clientX, event.clientY);
+    });
+    window.addEventListener('pointerup', () => {
+      if (!fromPointer) return;
+      fromPointer = false;
+      finish();
+    });
+    window.addEventListener('pointercancel', () => {
+      if (!fromPointer) return;
+      fromPointer = false;
+      finish();
+    });
+
+    viewport.addEventListener('mousedown', (event) => {
+      if (event.button !== 0 || fromPointer) return;
+      begin(event.clientX, event.clientY);
+    });
+    window.addEventListener('mousemove', (event) => {
+      if (fromPointer || !tracking) return;
+      move(event.clientX, event.clientY);
+    });
+    window.addEventListener('mouseup', () => {
+      if (fromPointer || !tracking) return;
+      finish();
+    });
+    viewport.addEventListener(
+      'click',
+      (event) => {
+        if (!blockClick) return;
+        event.preventDefault();
+        event.stopPropagation();
+        blockClick = false;
+      },
+      true,
+    );
+
+    new ResizeObserver(() => place(index, false)).observe(viewport);
+    reduce.addEventListener('change', () => place(index, false));
+    place(0, false);
+    sync(false);
+  }
+</script>

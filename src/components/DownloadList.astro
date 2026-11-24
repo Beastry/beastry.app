@@ -13,15 +13,15 @@ const listed = products.filter((product) => product.download);
   listed.length > 0 && (
     <div class="download-list">
       <h3 class="status-heading" id="downloads">
-        <span lang="zh-Hans">下载与更新</span>
-        <span lang="en">Downloads</span>
+        <span lang="zh-Hans">安装包</span>
+        <span lang="en">Installers</span>
       </h3>
       <p class="status-lede">
         <span lang="zh-Hans">
-          按钮先指向 {sourcesChecked} 核对过的安装包。浏览器能连上 GitHub 时，会改到该仓库最新 release 里已经上传的对应文件；连不上或对不上，就仍下载原来那一份。
+          链接先指向 {sourcesChecked} 核对过的文件。连得上 GitHub 时，会改到最新 release 里已经上传的对应文件；对不上就仍是这一份。
         </span>
         <span lang="en">
-          Each button starts at the installer checked on {sourcesChecked}. If GitHub can be reached, it moves to the matching file already uploaded on the latest release. If that lookup fails, the original file stays.
+          Each link starts at the file checked on {sourcesChecked}. If GitHub can be reached, it moves to the matching file already uploaded on the latest release. If that check fails, this file stays.
         </span>
       </p>
       <ul class="download-grid">
@@ -59,7 +59,7 @@ const listed = products.filter((product) => product.download);
               </p>
               <p class="download-actions">
                 <a
-                  class="button primary"
+                  class="button ghost"
                   data-release
                   data-repo={file.repo}
                   data-pattern={file.pattern}
